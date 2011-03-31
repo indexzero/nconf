@@ -82,6 +82,14 @@ vows.describe('nconf/stores/redis').addBatch({
         "should respond with the correct value": function (err, value) {
           assert.deepEqual(value, data.obj);
         }
+      },
+      "with a nested Object value": {
+        topic: function (store) {
+          store.get('foo:object:auth', this.callback);
+        },
+        "should respond with the correct value": function (err, value) {
+          assert.deepEqual(value, data.obj.auth);
+        }
       }
     }
   }
