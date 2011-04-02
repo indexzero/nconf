@@ -5,7 +5,7 @@
  *
  */
 
-require.paths.unshift(require('path').join(__dirname, '..', '..', 'lib'));
+require.paths.unshift(require('path').join(__dirname, '..', 'lib'));
 
 var vows = require('vows'),
     assert = require('assert'),

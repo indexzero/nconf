@@ -5,7 +5,7 @@
  *
  */
 
-require.paths.unshift(require('path').join(__dirname, '..', '..', 'lib'));
+require.paths.unshift(require('path').join(__dirname, '..', 'lib'));
 
 var vows = require('vows'),
     assert = require('assert'),
@@ -94,12 +94,79 @@ vows.describe('nconf/stores/redis').addBatch({
     }
   }
 }).addBatch({
-  /*,
-  "the clear() method": {
-    "should respond with the true": function (store) {
-      assert.equal(store.get('foo:bar:bazz'), 'buzz');
-      assert.isTrue(store.clear('foo:bar:bazz'));
-      assert.isTrue(typeof store.get('foo:bar:bazz') === 'undefined');
+  "When using the nconf redis store": {
+    topic: new nconf.stores.Redis(),  
+    "the clear() method": {
+      topic: function (store) {
+        var that = this;
+        store.clear('foo', function (err) {
+          if (err) {
+            return that.callback(err);
+          }
+          
+          store.get('foo', that.callback);
+        });
+      },
+      "should actually remove the value from Redis": function (err, value) {
+        assert.isNull(err);
+        assert.isNull(value);
+      }
     }
-  }*/
+  }
+}).addBatch({
+  "When using the nconf redis store": {
+    topic: new nconf.stores.Redis(),  
+    "the save() method": {
+      topic: function (store) {
+        var that = this;
+        store.save(data, function (err) {
+          if (err) {
+            return that.callback(err);
+          }
+          
+          store.get('obj', that.callback);
+        });
+      },
+      "should set all values correctly": function (err, value) {
+        assert.isNull(err);
+        assert.deepEqual(value, data.obj);
+      }
+    }
+  }
+}).addBatch({
+  "When using the nconf redis store": {
+    topic: new nconf.stores.Redis(),  
+    "the load() method": {
+      topic: function (store) {
+        store.load(this.callback);
+      },
+      "should respond with the correct object": function (err, value) {
+        assert.isNull(err);
+        assert.deepEqual(value, data);
+      }
+    }
+  }
+}).addBatch({
+  "When using the nconf redis store": {
+    topic: new nconf.stores.Redis(),  
+    "the reset() method": {
+      topic: function (store) {
+        var that = this;
+        this.store = store;
+        
+        store.reset(function (err) {
+          if (err) {
+            return that.callback(err);
+          }
+          
+          store.get('obj', that.callback);
+        });
+      },
+      "should remove all keys from redis": function (err, value) {
+        assert.isNull(err);
+        assert.isNull(value);
+        assert.length(Object.keys(this.store.cache.store), 0);
+      }
+    }
+  }
 }).export(module);
