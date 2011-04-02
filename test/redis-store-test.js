@@ -1,5 +1,5 @@
 /*
- * redis-test.js: Tests for the redis nconf storage engine.
+ * redis-store-test.js: Tests for the redis nconf storage engine.
  *
  * (C) 2011, Charlie Robbins
  *
@@ -9,21 +9,8 @@ require.paths.unshift(require('path').join(__dirname, '..', 'lib'));
 
 var vows = require('vows'),
     assert = require('assert'),
-    nconf = require('nconf');
-
-var data = {
-  literal: 'bazz', 
-  arr: ['one', 2, true, { value: 'foo' }],
-  obj: {
-    host: 'localhost',
-    port: 5984,
-    array: ['one', 2, true, { foo: 'bar' }],
-    auth: {
-      username: 'admin',
-      password: 'password'
-    }
-  }
-}
+    nconf = require('nconf'),
+    data = require('./fixtures/data').data;
 
 vows.describe('nconf/stores/redis').addBatch({
   "When using the nconf redis store": {

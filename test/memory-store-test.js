@@ -1,5 +1,5 @@
 /*
- * memory.js: Simple memory storage engine for nconf configuration(s)
+ * memory-store-test.js: Tests for the nconf Memory store.
  *
  * (C) 2011, Charlie Robbins
  *
