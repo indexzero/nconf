@@ -1,0 +1,19 @@
+{
+  "name": "nconf",
+  "description": "A hybrid local / remote configuration storage library for node.js.",
+  "version": "0.1.0",
+  "author": "Charlie Robbins <charlie.robbins@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/indexzero/nconf.git" 
+  },
+  "keywords": ["configuration", "key value store", "redis"],
+  "dependencies": {
+    "async": ">= 0.1.8",
+    "redis": ">= 0.5.9",
+    "vows": ">= 0.5.8"
+  },
+  "main": "./lib/nconf",
+  "scripts": { "test": "vows test/*-test.js --spec" },
+  "engines": { "node": ">= 0.4.5" }
+}
