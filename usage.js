@@ -1,0 +1,27 @@
+require.paths.unshift(require('path').join(__dirname, 'lib'));
+
+var fs    = require('fs'),
+    path  = require('path'),
+    nconf = require('nconf');
+
+//
+// Setup nconf to user the 'file' store and set a couple of values;
+//
+nconf.use('file', { file: path.join(__dirname, 'config.json') });
+nconf.set('database:host', '127.0.0.1');
+nconf.set('database:port', 5984);
+
+//
+// Get the entire database object from nconf
+//
+var database = nconf.get('database');
+console.dir(database);
+
+//
+// Save the configuration object to disk
+//
+nconf.save(function (err) {
+  fs.readFile(path.join(__dirname, 'config.json'), function (err, data) {
+    console.dir(JSON.parse(data.toString()))
+  });
+});
