@@ -29,29 +29,65 @@ vows.describe('nconf').addBatch({
     },
     "the use() method": {
       "should instaniate the correct store": function () {
-        nconf.use('redis');
-        assert.instanceOf(nconf.store, nconf.stores.Redis);
+        nconf.use('memory');
+        assert.instanceOf(nconf.store, nconf.stores.Memory);
       }
     }
   }
-})/*.addBatch({
-  "When using the nconf file store": {
-    "the set() method": {
-      "should respond with true": function () {
-        assert.isTrue(store.set('foo:bar:bazz', 'buzz'));
-      }
-    },
-    "the get() method": {
-      "should respond with the correct value": function () {
-        assert.equal(store.get('foo:bar:bazz'), 'buzz');
-      }
-    },
-    "the clear() method": {
-      "should respond with the true": function () {
-        assert.equal(store.get('foo:bar:bazz'), 'buzz');
-        assert.isTrue(store.clear('foo:bar:bazz'));
-        assert.isTrue(typeof store.get('foo:bar:bazz') === 'undefined');
+}).addBatch({
+  "When using the nconf": {
+    "with the memory store": {
+      "the set() method": {
+        "should respond with true": function () {
+          assert.isTrue(nconf.set('foo:bar:bazz', 'buzz'));
+        }
+      },
+      "the get() method": {
+        "should respond with the correct value": function () {
+          assert.equal(nconf.get('foo:bar:bazz'), 'buzz');
+        }
+      },
+      "the clear() method": {
+        "should respond with the true": function () {
+          assert.equal(nconf.get('foo:bar:bazz'), 'buzz');
+          assert.isTrue(nconf.clear('foo:bar:bazz'));
+          assert.isTrue(typeof nconf.get('foo:bar:bazz') === 'undefined');
+        }
+      },
+      "the load() method": {
+        "without a callback": {
+          "should throw an exception": function () {
+            assert.throws(function () {
+              nconf.load();
+            })
+          }
+        },
+        "with a callback": {
+          topic: function () {
+            nconf.load(this.callback.bind(null, null)); 
+          },
+          "should respond with an error": function (ign, err) {
+            assert.isNotNull(err);
+          }
+        }
+      },
+      "the save() method": {
+        "without a callback": {
+          "should throw an exception": function () {
+            assert.throws(function () {
+              nconf.save();
+            })
+          }
+        },
+        "with a callback": {
+          topic: function () {
+            nconf.save(this.callback.bind(null, null)); 
+          },
+          "should respond with an error": function (ign, err) {
+            assert.isNotNull(err);
+          }
+        }
       }
     }
   }
-})*/.export(module);
+}).export(module);
