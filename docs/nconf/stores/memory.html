@@ -14,6 +14,7 @@ a nested json structure based on key delimiters <code>:</code>.</p>
 
 <p>e.g. <code>my:nested:key</code> ==> <code>{ my: { nested: { key: } } }</code> </p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">Memory</span> <span class="o">=</span> <span class="nx">exports</span><span class="p">.</span><span class="nx">Memory</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">options</span>     <span class="o">=</span> <span class="nx">options</span> <span class="o">||</span> <span class="p">{};</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">type</span>   <span class="o">=</span> <span class="s1">&#39;memory&#39;</span><span class="p">;</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">store</span>  <span class="o">=</span> <span class="p">{};</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">mtimes</span> <span class="o">=</span> <span class="p">{};</span>
 <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <h3>function get (key)</h3>

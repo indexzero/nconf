@@ -20,8 +20,14 @@ around the Memory store that can persist configuration to disk.</p>             
 
   <span class="nx">Memory</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
 
+  <span class="k">this</span><span class="p">.</span><span class="nx">type</span>   <span class="o">=</span> <span class="s1">&#39;file&#39;</span><span class="p">;</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">file</span>   <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">file</span><span class="p">;</span>
-  <span class="k">this</span><span class="p">.</span><span class="nx">format</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">format</span> <span class="o">||</span> <span class="nx">JSON</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">format</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">format</span> <span class="o">||</span> <span class="p">{</span>
+    <span class="nx">stringify</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">},</span>
+    <span class="nx">parse</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span>
+  <span class="p">};</span>
 <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>Inherit from the Memory store</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">util</span><span class="p">.</span><span class="nx">inherits</span><span class="p">(</span><span class="nx">File</span><span class="p">,</span> <span class="nx">Memory</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <h3>function save (value, callback)</h3>
 
 <h4>@value {Object} <em>Ignored</em> Left here for consistency</h4>
