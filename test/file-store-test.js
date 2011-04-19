@@ -19,7 +19,7 @@ vows.describe('nconf/stores/file').addBatch({
   "When using the nconf file store": {
     topic: function () {
       var filePath = path.join(__dirname, 'fixtures', 'store.json');
-      fs.writeFileSync(filePath, JSON.stringify(data));
+      fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
       store = new nconf.stores.File({ file: filePath });
       return null;
     },
@@ -28,6 +28,33 @@ vows.describe('nconf/stores/file').addBatch({
         store.load(this.callback);
       },
       "should load the data correctly": function (err, data) {
+        assert.isNull(err);
+        assert.deepEqual(data, store.store);
+      }
+    }
+  }
+}).addBatch({
+  "When using the nconf file store": {
+    topic: function () {
+      var tmpPath = path.join(__dirname, 'fixtures', 'tmp.json'),
+          tmpStore = new nconf.stores.File({ file: tmpPath });
+      return tmpStore
+    },
+    "the save() method": {
+      topic: function (tmpStore) {
+        var that = this;
+        
+        Object.keys(store.store).forEach(function (key) {
+          tmpStore.set(key, store.store[key]);
+        });
+        
+        tmpStore.save(function () {
+          fs.readFile(tmpStore.file, function (err, data) {
+            return err ? that.callback(err) : that.callback(err, JSON.parse(data.toString()));
+          });
+        });
+      },
+      "should save the data correctly": function (err, data) {
         assert.isNull(err);
         assert.deepEqual(data, store.store);
       }
