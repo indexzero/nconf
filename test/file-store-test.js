@@ -38,7 +38,7 @@ vows.describe('nconf/stores/file').addBatch({
     topic: function () {
       var tmpPath = path.join(__dirname, 'fixtures', 'tmp.json'),
           tmpStore = new nconf.stores.File({ file: tmpPath });
-      return tmpStore
+      return tmpStore;
     },
     "the save() method": {
       topic: function (tmpStore) {
