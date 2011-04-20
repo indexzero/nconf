@@ -48,7 +48,13 @@ specified <code>type</code>.</p>             </td>             <td class="code">
 
 <h4>@callback {function} Continuation to respond to when complete.</h4>
 
-<p>Responds with an Object representing all keys associated in this instance.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">nconf</span><span class="p">.</span><span class="nx">load</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+<p>Responds with an Object representing all keys associated in this instance.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">nconf</span><span class="p">.</span><span class="nx">load</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>If we don't have a callback and the current 
+store is capable of loading synchronously
+then do so.</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">callback</span> <span class="o">&amp;&amp;</span> <span class="nx">nconf</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">loadSync</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">nconf</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">loadSync</span><span class="p">();</span>
+  <span class="p">}</span>
+  
+  
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">nconf</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">load</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">error</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;nconf store &#39;</span> <span class="o">+</span> <span class="nx">nconf</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">type</span> <span class="o">+</span> <span class="s1">&#39; has no load() method&#39;</span><span class="p">);</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
@@ -59,7 +65,7 @@ specified <code>type</code>.</p>             </td>             <td class="code">
   <span class="p">}</span>
   
   <span class="k">return</span> <span class="nx">nconf</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
-<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <h3>function save (value, callback)</h3>
+<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <h3>function save (value, callback)</h3>
 
 <h4>@value {Object} <strong>Optional</strong> Config object to set for this instance</h4>
 
@@ -70,6 +76,11 @@ instance and then adds all key-value pairs in <code>value</code>. </p>          
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">callback</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
     <span class="nx">value</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <p>If we still don't have a callback and the
+current store is capable of saving synchronously
+then do so.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">callback</span> <span class="o">&amp;&amp;</span> <span class="nx">nconf</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">saveSync</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">nconf</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">saveSync</span><span class="p">();</span>
+    <span class="p">}</span>
   <span class="p">}</span>
   
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">nconf</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">save</span><span class="p">)</span> <span class="p">{</span>
@@ -82,22 +93,22 @@ instance and then adds all key-value pairs in <code>value</code>. </p>          
   <span class="p">}</span>
   
   <span class="k">return</span> <span class="nx">nconf</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
-<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <h3>function reset (callback)</h3>
+<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <h3>function reset (callback)</h3>
 
 <h4>@callback {function} <strong>Optional</strong> Continuation to respond to when complete.</h4>
 
 <p>Clears all keys associated with this instance.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">nconf</span><span class="p">.</span><span class="nx">reset</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">nconf</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">reset</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
-<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <h3>function key (arguments)</h3>
+<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <h3>function key (arguments)</h3>
 
 <p>Returns a <code>:</code> joined string from the <code>arguments</code>.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">nconf</span><span class="p">.</span><span class="nx">key</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">);</span>
-<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <h3>function path (key)</h3>
+<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <h3>function path (key)</h3>
 
 <h4>@key {string} The ':' delimited key to split</h4>
 
 <p>Returns a fully-qualified path to a nested nconf key. </p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">nconf</span><span class="p">.</span><span class="nx">path</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">key</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">);</span>
-<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <p>Use the <code>memory</code> engine by default</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">nconf</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;memory&#39;</span><span class="p">);</span>
+<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-15">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-15">&#182;</a>               </div>               <p>Use the <code>memory</code> engine by default</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">nconf</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;memory&#39;</span><span class="p">);</span>
 
 </pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
