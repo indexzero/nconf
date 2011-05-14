@@ -9,8 +9,10 @@
   },
   "keywords": ["configuration", "key value store", "redis"],
   "dependencies": {
-    "async": ">= 0.1.8",
-    "redis": ">= 0.5.9",
+    "async": ">= 0.1.x",
+    "redis": ">= 0.5.x"
+  },
+  "devDependencies": {
     "vows": ">= 0.5.8"
   },
   "main": "./lib/nconf",

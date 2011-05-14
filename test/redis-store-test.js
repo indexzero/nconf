@@ -5,11 +5,9 @@
  *
  */
 
-require.paths.unshift(require('path').join(__dirname, '..', 'lib'));
-
 var vows = require('vows'),
     assert = require('assert'),
-    nconf = require('nconf'),
+    nconf = require('../lib/nconf'),
     data = require('./fixtures/data').data;
 
 vows.describe('nconf/stores/redis').addBatch({

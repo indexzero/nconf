@@ -5,13 +5,11 @@
  *
  */
 
-require.paths.unshift(require('path').join(__dirname, '..', 'lib'));
-
 var fs = require('fs'),
     path = require('path'),
     vows = require('vows'),
     assert = require('assert'),
-    nconf = require('nconf'),
+    nconf = require('../lib/nconf'),
     data = require('./fixtures/data').data, 
     store;
 

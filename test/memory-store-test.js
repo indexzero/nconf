@@ -5,11 +5,9 @@
  *
  */
 
-require.paths.unshift(require('path').join(__dirname, '..', 'lib'));
-
 var vows = require('vows'),
     assert = require('assert'),
-    nconf = require('nconf');
+    nconf = require('../lib/nconf');
     
 vows.describe('nconf/stores/memory').addBatch({
   "When using the nconf memory store": {

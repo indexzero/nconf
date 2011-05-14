@@ -1,8 +1,6 @@
-require.paths.unshift(require('path').join(__dirname, 'lib'));
-
 var fs    = require('fs'),
     path  = require('path'),
-    nconf = require('nconf');
+    nconf = require('./lib/nconf');
 
 //
 // Setup nconf to user the 'file' store and set a couple of values;
