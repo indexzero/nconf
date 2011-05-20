@@ -5,19 +5,19 @@ A hybrid local / remote configuration storage library for node.js.
 ## Installation
 
 ### Installing npm (node package manager)
-<pre>
+```
   curl http://npmjs.org/install.sh | sh
-</pre>
+```
 
 ### Installing nconf
-<pre>
+```
   [sudo] npm install nconf
-</pre>
+```
 
 ## Usage 
 Using nconf is easy; it is designed to be a simple key-value store with support for both local and remote storage. Keys are namespaced and delimited by `:`. Lets dive right into sample usage:
 
-<pre>
+``` js
   var fs    = require('fs'),
       nconf = require('nconf');
   
@@ -41,44 +41,47 @@ Using nconf is easy; it is designed to be a simple key-value store with support 
       console.dir(JSON.parse(data.toString()))
     });
   });
-</pre>
+```
 
 ## Storage Engines
 
 ### Memory
 A simple in-memory storage engine that stores a nested JSON representation of the configuration. To use this engine, just call `.use()` with the appropriate arguments. All calls to `.get()`, `.set()`, `.clear()`, `.reset()` methods are synchronous since we are only dealing with an in-memory object.
-<pre>
+
+``` js 
   nconf.use('memory');
-</pre>
+```
 
 ### File
 Based on the Memory engine, but provides additional methods `.save()` and `.load()` which allow you to read your configuration to and from file. As with the Memory store, all method calls are synchronous with the exception of `.save()` and `.load()` which take callback functions. It is important to note that setting keys in the File engine will not be persisted to disk until a call to `.save()` is made.
 
-<pre>
+``` js
   nconf.use('file', { file: 'path/to/your/config.json' });
-</pre>
+```
 
 The file store is also extensible for multiple file formats, defaulting to `JSON`. To use a custom format, simply pass a format object to the `.use()` method. This object must have `.parse()` and `.stringify()` methods just like the native `JSON` object.
 
 ### Redis
 The Redis engine will persist all of your configuration settings to a Redis server. All calls to `.get()`, `.set()`, `.clear()`, `.reset()` are asynchronous taking an additional callback parameter.
 
-<pre>
+``` js
   nconf.use('redis', { host: 'localhost', port: 6379, ttl: 60 * 60 * 1000 });
-</pre>
+```
 
 The Redis engine also has an in-memory cache with a default TTL of one hour. To change this, just pass the `ttl` option to `.use()`.
 
 ## More Documentation
 There is more documentation available through docco. I haven't gotten around to making a gh-pages branch so in the meantime if you clone the repository you can view the docs:
-<pre>
+
+```
   open docs/nconf.html
-</pre> 
+```
 
 ## Run Tests
 Tests are written in vows and give complete coverage of all APIs and storage engines.
-<pre>
+
+```
   vows test/*-test.js --spec
-</pre>
+```
 
 #### Author: [Charlie Robbins](http://nodejitsu.com)
