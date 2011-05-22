@@ -28,6 +28,16 @@ vows.describe('nconf/stores/memory').addBatch({
         assert.equal(store.get('falsy:string'), '');
         assert.equal(store.get('falsy:boolean'), false);
         assert.equal(store.get('falsy:object'), null);
+      },
+      "should not fail when retrieving non-existent keys": function (store) {
+        assert.doesNotThrow(function() {
+          assert.equal(store.get('this:key:does:not:exist'), undefined);
+        }, TypeError);
+      },
+      "should not fail when drilling into non-objects": function (store) {
+        assert.doesNotThrow(function() {
+          assert.equal(store.get('falsy:number:uh:oh'), undefined);
+        }, TypeError);
       }
     },
     "the clear() method": {
