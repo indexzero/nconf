@@ -37,6 +37,14 @@ vows.describe('nconf/stores/redis').addBatch({
         "should respond without an error": function (err, ok) {
           assert.isNull(err);
         }
+      },
+      "with null": {
+        topic: function (store) {
+          store.set('falsy:object', null, this.callback);
+        },
+        "should respond without an error": function(err, ok) {
+          assert.isNull(err);
+        }
       }
     }
   }
@@ -74,6 +82,14 @@ vows.describe('nconf/stores/redis').addBatch({
         },
         "should respond with the correct value": function (err, value) {
           assert.deepEqual(value, data.obj.auth);
+        }
+      },
+      "with null": {
+        topic: function(store) {
+          store.get('falsy:object', this.callback);
+        },
+        "should respond with the correct value": function(err, value) {
+          assert.equal(value, null);
         }
       }
     }
