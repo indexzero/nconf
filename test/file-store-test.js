@@ -63,11 +63,19 @@ vows.describe('nconf/stores/file').addBatch({
     "the set() method": {
       "should respond with true": function () {
         assert.isTrue(store.set('foo:bar:bazz', 'buzz'));
+        assert.isTrue(store.set('falsy:number', 0));
+        assert.isTrue(store.set('falsy:string', ''));
+        assert.isTrue(store.set('falsy:boolean', false));
+        assert.isTrue(store.set('falsy:object', null));
       }
     },
     "the get() method": {
       "should respond with the correct value": function () {
         assert.equal(store.get('foo:bar:bazz'), 'buzz');
+        assert.equal(store.get('falsy:number'), 0);
+        assert.equal(store.get('falsy:string'), '');
+        assert.equal(store.get('falsy:boolean'), false);
+        assert.equal(store.get('falsy:object'), null);
       }
     },
     "the clear() method": {
