@@ -22,7 +22,7 @@ Using nconf is easy; it is designed to be a simple key-value store with support 
       nconf = require('nconf');
   
   //
-  // Setup nconf to user the 'file' store and set a couple of values;
+  // Setup nconf to use the 'file' store and set a couple of values;
   //
   nconf.use('file', { file: 'path/to/your/config.json' });
   nconf.set('database:host', '127.0.0.1');

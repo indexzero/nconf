@@ -3,7 +3,7 @@ var fs    = require('fs'),
     nconf = require('./lib/nconf');
 
 //
-// Setup nconf to user the 'file' store and set a couple of values;
+// Setup nconf to use the 'file' store and set a couple of values;
 //
 nconf.use('file', { file: path.join(__dirname, 'config.json') });
 nconf.set('database:host', '127.0.0.1');
