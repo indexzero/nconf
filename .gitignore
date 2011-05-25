@@ -1,4 +1,6 @@
 .DS_Store
 config.json
 test/fixtures/*.json
-node_modules
+node_modules/
+node_modules/*
+npm-debug.log
