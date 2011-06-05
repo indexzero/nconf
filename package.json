@@ -1,7 +1,7 @@
 {
   "name": "nconf",
   "description": "A hybrid local / remote configuration storage library for node.js.",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "author": "Charlie Robbins <charlie.robbins@gmail.com>",
   "repository": {
     "type": "git",
