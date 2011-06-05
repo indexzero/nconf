@@ -8,7 +8,8 @@
 var vows = require('vows'),
     assert = require('assert'),
     nconf = require('../lib/nconf'),
-    data = require('./fixtures/data').data;
+    data = require('./fixtures/data').data,
+    merge = require('./fixtures/data').merge;
 
 vows.describe('nconf/stores/redis').addBatch({
   "When using the nconf redis store": {
@@ -144,6 +145,67 @@ vows.describe('nconf/stores/redis').addBatch({
       "should respond with the correct object": function (err, value) {
         assert.isNull(err);
         assert.deepEqual(value, data);
+      }
+    }
+  }
+}).addBatch({
+  "when using the nconf redis store": {
+    topic: new nconf.stores.Redis(),
+    "the merge() method": {
+      "when overriding an existing literal value": {
+        topic: function (store) {
+          var that = this;
+          store.set('merge:literal', 'string-value', function () {
+            store.merge('merge:literal', merge, function () {
+              store.get('merge:literal', that.callback);
+            });
+          });
+        },
+        "should merge correctly": function (err, data) {
+          assert.deepEqual(data, merge);
+        }
+      },
+      "when overriding an existing Array value": {
+        topic: function (store) {
+          var that = this;
+          store.set('merge:array', [1, 2, 3, 4], function () {
+            store.merge('merge:array', merge, function () {
+              store.get('merge:array', that.callback);
+            });
+          });
+        },
+        "should merge correctly": function (err, data) {
+          assert.deepEqual(data, merge);
+        }
+      },
+      "when merging into an existing Object value": {
+        topic: function (store) {
+          var that = this, current;
+          current = {
+            prop1: 2, 
+            prop2: 'prop2',
+            prop3: {
+              bazz: 'bazz'
+            },
+            prop4: ['foo', 'bar']
+          };
+          
+          store.set('merge:object', current, function () {
+            store.merge('merge:object', merge, function () {
+              store.get('merge:object', that.callback);
+            });
+          });
+        },
+        "should merge correctly": function (err, data) {
+          assert.equal(data['prop1'], 1);
+          assert.equal(data['prop2'].length, 3);
+          assert.deepEqual(data['prop3'], {
+            foo: 'bar',
+            bar: 'foo',
+            bazz: 'bazz'
+          });
+          assert.equal(data['prop4'].length, 2);        
+        }
       }
     }
   }
