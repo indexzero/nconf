@@ -30,6 +30,16 @@ vows.describe('nconf').addBatch({
         nconf.use('memory');
         assert.instanceOf(nconf.store, nconf.stores.Memory);
       }
+    },
+    "it should": {
+      topic: function () {
+        fs.readFile(path.join(__dirname, '..', 'package.json'), this.callback);
+      },
+      "have the correct version set": function (err, data) {
+        assert.isNull(err);
+        data = JSON.parse(data.toString());
+        assert.equal(nconf.version, data.version);
+      }
     }
   }
 }).addBatch({
