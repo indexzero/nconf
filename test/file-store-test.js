@@ -30,6 +30,21 @@ vows.describe('nconf/stores/file').addBatch({
         assert.deepEqual(data, store.store);
       }
     }
+  },
+  "When using the nconf file store": {
+    topic: function () {
+      var filePath = path.join(__dirname, 'fixtures', 'malformed.json');
+      store = new nconf.stores.File({ file: filePath });
+      return null;
+    },
+    "the load() method with a malformed JSON config file": {
+      topic: function () {
+        store.load(this.callback.bind(null, null));
+      },
+      "should respond with an error": function (ign, err) {
+        console.dir(err);
+      }
+    }
   }
 }).addBatch({
   "When using the nconf file store": {
