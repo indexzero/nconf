@@ -42,7 +42,7 @@ vows.describe('nconf/stores/file').addBatch({
         store.load(this.callback.bind(null, null));
       },
       "should respond with an error": function (ign, err) {
-        console.dir(err);
+        assert.isTrue(!!err);
       }
     }
   }
