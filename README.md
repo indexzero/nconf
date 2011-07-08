@@ -53,7 +53,7 @@ A simple in-memory storage engine that stores a nested JSON representation of th
 ```
 
 ### File
-Based on the Memory engine, but provides additional methods `.save()` and `.load()` which allow you to read your configuration to and from file. As with the Memory store, all method calls are synchronous with the exception of `.save()` and `.load()` which take callback functions. It is important to note that setting keys in the File engine will not be persisted to disk until a call to `.save()` is made.
+Based on the Memory store, but provides additional methods `.save()` and `.load()` which allow you to read your configuration to and from file. As with the Memory store, all method calls are synchronous with the exception of `.save()` and `.load()` which take callback functions. It is important to note that setting keys in the File engine will not be persisted to disk until a call to `.save()` is made.
 
 ``` js
   nconf.use('file', { file: 'path/to/your/config.json' });
@@ -62,13 +62,26 @@ Based on the Memory engine, but provides additional methods `.save()` and `.load
 The file store is also extensible for multiple file formats, defaulting to `JSON`. To use a custom format, simply pass a format object to the `.use()` method. This object must have `.parse()` and `.stringify()` methods just like the native `JSON` object.
 
 ### Redis
-The Redis engine will persist all of your configuration settings to a Redis server. All calls to `.get()`, `.set()`, `.clear()`, `.reset()` are asynchronous taking an additional callback parameter.
+There is a separate Redis-based store available through [nconf-redis][0]. To install and use this store simply:
 
-``` js
-  nconf.use('redis', { host: 'localhost', port: 6379, ttl: 60 * 60 * 1000 });
+``` bash
+  $ [sudo] npm install nconf
+  $ [sudo] npm install nconf-redis
 ```
 
-The Redis engine also has an in-memory cache with a default TTL of one hour. To change this, just pass the `ttl` option to `.use()`.
+Once installing both `nconf` and `nconf-redis`, you must require both modules to use the Redis store:
+
+``` js
+  var nconf = require('nconf');
+  
+  //
+  // Requiring `nconf-redis` will extend the `nconf`
+  // module.
+  //
+  require('nconf-redis');
+  
+  nconf.use('redis', { host: 'localhost', port: 6379, ttl: 60 * 60 * 1000 });
+```
 
 ## More Documentation
 There is more documentation available through docco. I haven't gotten around to making a gh-pages branch so in the meantime if you clone the repository you can view the docs:
@@ -85,3 +98,5 @@ Tests are written in vows and give complete coverage of all APIs and storage eng
 ```
 
 #### Author: [Charlie Robbins](http://nodejitsu.com)
+
+[0]: http://github.com/indexzero/nconf
