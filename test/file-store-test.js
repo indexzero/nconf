@@ -101,4 +101,36 @@ vows.describe('nconf/stores/file').addBatch({
       }
     }
   }
+}).addBatch({
+  "When using the nconf file store": {
+    "the search() method": {
+      "when the target file exists higher in the directory tree": {
+        topic: function () {
+          var filePath = this.filePath = path.join(process.env.HOME, '.nconf');
+          fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+          return new (nconf.stores.File)({
+            file: '.nconf'
+          })
+        },
+        "should update the file appropriately": function (store) {
+          store.search();
+          assert.equal(store.file, this.filePath);
+          fs.unlinkSync(this.filePath);
+        }
+      },
+      "when the target file doesn't exist higher in the directory tree": {
+        topic: function () {
+          var filePath = this.filePath = path.join(__dirname, 'fixtures', 'search-store.json');
+          return new (nconf.stores.File)({
+            dir: path.dirname(filePath),
+            file: 'search-store.json'
+          })
+        },
+        "should update the file appropriately": function (store) {
+          store.search();
+          assert.equal(store.file, this.filePath);
+        }
+      }
+    }
+  }
 }).export(module);
