@@ -1,0 +1,8 @@
+{
+  "apples": true,
+  "bananas": true,
+  "candy": {
+    "something1": true,
+    "something2": true
+  }
+}
