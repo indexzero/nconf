@@ -65,8 +65,8 @@ The file store is also extensible for multiple file formats, defaulting to `JSON
 There is a separate Redis-based store available through [nconf-redis][0]. To install and use this store simply:
 
 ``` bash
-  $ [sudo] npm install nconf
-  $ [sudo] npm install nconf-redis
+  $ npm install nconf
+  $ npm install nconf-redis
 ```
 
 Once installing both `nconf` and `nconf-redis`, you must require both modules to use the Redis store:
