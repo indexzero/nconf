@@ -1,0 +1,40 @@
+/*
+ * helpers.js: Test helpers for nconf.
+ *
+ * (C) 2011, Charlie Robbins
+ *
+ */
+ 
+var assert = require('assert'),
+    spawn = require('child_process').spawn,
+    nconf = require('../lib/nconf');
+
+exports.assertMerged = function (err, merged) {
+  merged = merged instanceof nconf.Provider 
+    ? merged.store.store
+    : merged;
+    
+  assert.isNull(err);
+  assert.isObject(merged);
+  assert.isTrue(merged.apples);
+  assert.isTrue(merged.bananas);
+  assert.isObject(merged.candy);
+  assert.isTrue(merged.candy.something1);
+  assert.isTrue(merged.candy.something2);
+  assert.isTrue(merged.candy.something3);
+  assert.isTrue(merged.candy.something4);
+  assert.isTrue(merged.dates);
+  assert.isTrue(merged.elderberries);
+};
+
+exports.assertDefaults = function (script) {
+  return {
+    topic: function () {
+      spawn('node', [script, '--something', 'foobar'])
+        .stdout.once('data', this.callback.bind(this, null));
+    },
+    "should respond with the value passed into the script": function (_, data) {
+      assert.equal(data.toString(), 'foobar');
+    }
+  }
+}

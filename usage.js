@@ -2,6 +2,21 @@ var fs    = require('fs'),
     path  = require('path'),
     nconf = require('./lib/nconf');
 
+var single = new nconf.Provider({
+  useEnv: true,
+  useArgv: true,
+  store: {
+    type: 'file',
+    file: path.join(__dirname, 'config.json')
+  }
+});
+
+var multiple = new nconf.Provider({
+  stores: [
+    { type: 'file', }
+  ]
+});
+
 //
 // Setup nconf to use the 'file' store and set a couple of values;
 //
