@@ -2,18 +2,28 @@ var fs    = require('fs'),
     path  = require('path'),
     nconf = require('./lib/nconf');
 
+//
+// Configure the provider with a single store and
+// support for command-line arguments and environment
+// variables.
+//
 var single = new nconf.Provider({
-  useEnv: true,
-  useArgv: true,
+  env: true,
+  argv: true,
   store: {
     type: 'file',
     file: path.join(__dirname, 'config.json')
   }
 });
 
+//
+// Configure the provider with multiple hierarchical stores
+// representing `user` and `global` configuration values. 
+//
 var multiple = new nconf.Provider({
   stores: [
-    { type: 'file', }
+    { name: 'user', type: 'file', file: path.join(__dirname, 'user-config.json') },
+    { name: 'global', type: 'global', file: path.join(__dirname, 'global-config.json') }
   ]
 });
 
