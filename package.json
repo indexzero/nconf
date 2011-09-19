@@ -1,6 +1,6 @@
 {
   "name": "nconf",
-  "description": "A hybrid local / remote configuration storage library for node.js.",
+  "description": "Hierarchical node.js configuration with files, environment variables, command-line arguments, and atomic object merging.",
   "version": "0.3.1",
   "author": "Charlie Robbins <charlie.robbins@gmail.com>",
   "repository": {

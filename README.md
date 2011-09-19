@@ -1,6 +1,6 @@
 # nconf
 
-A hierarchical node.js configuration management library with support for files, environment variables, command-line arguments, and atomic object merging.
+Hierarchical node.js configuration with files, environment variables, command-line arguments, and atomic object merging.
 
 ## Installation
 
