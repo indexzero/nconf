@@ -9,14 +9,14 @@ var fs = require('fs'),
     path = require('path'),
     vows = require('vows'),
     assert = require('assert'),
-    nconf = require('../lib/nconf'),
-    data = require('./fixtures/data').data, 
+    nconf = require('../../lib/nconf'),
+    data = require('../fixtures/data').data, 
     store;
 
 vows.describe('nconf/stores/file').addBatch({
   "When using the nconf file store": {
     topic: function () {
-      var filePath = path.join(__dirname, 'fixtures', 'store.json');
+      var filePath = path.join(__dirname, '..', 'fixtures', 'store.json');
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
       store = new nconf.stores.File({ file: filePath });
       return null;
@@ -33,7 +33,7 @@ vows.describe('nconf/stores/file').addBatch({
   },
   "When using the nconf file store": {
     topic: function () {
-      var filePath = path.join(__dirname, 'fixtures', 'malformed.json');
+      var filePath = path.join(__dirname, '..', 'fixtures', 'malformed.json');
       store = new nconf.stores.File({ file: filePath });
       return null;
     },
@@ -49,7 +49,7 @@ vows.describe('nconf/stores/file').addBatch({
 }).addBatch({
   "When using the nconf file store": {
     topic: function () {
-      var tmpPath = path.join(__dirname, 'fixtures', 'tmp.json'),
+      var tmpPath = path.join(__dirname, '..', 'fixtures', 'tmp.json'),
           tmpStore = new nconf.stores.File({ file: tmpPath });
       return tmpStore;
     },
@@ -120,7 +120,7 @@ vows.describe('nconf/stores/file').addBatch({
       },
       "when the target file doesn't exist higher in the directory tree": {
         topic: function () {
-          var filePath = this.filePath = path.join(__dirname, 'fixtures', 'search-store.json');
+          var filePath = this.filePath = path.join(__dirname, '..', 'fixtures', 'search-store.json');
           return new (nconf.stores.File)({
             dir: path.dirname(filePath),
             file: 'search-store.json'

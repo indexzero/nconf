@@ -27,10 +27,23 @@ exports.assertMerged = function (err, merged) {
   assert.isTrue(merged.elderberries);
 };
 
-exports.assertDefaults = function (script) {
+exports.assertSystemConf = function (options) {
   return {
     topic: function () {
-      spawn('node', [script, '--something', 'foobar'])
+      var env = null;
+      
+      if (options.env) {
+        env = {}
+        Object.keys(process.env).forEach(function (key) {
+          env[key] = process.env[key];
+        });
+        
+        Object.keys(options.env).forEach(function (key) {
+          env[key] = options.env[key];
+        });
+      }
+      
+      spawn('node', [options.script].concat(options.argv), { env: env })
         .stdout.once('data', this.callback.bind(this, null));
     },
     "should respond with the value passed into the script": function (_, data) {

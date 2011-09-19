@@ -7,8 +7,8 @@
 
 var vows = require('vows'),
     assert = require('assert'),
-    nconf = require('../lib/nconf'),
-    merge = require('./fixtures/data').merge;
+    nconf = require('../../lib/nconf'),
+    merge = require('../fixtures/data').merge;
 
 vows.describe('nconf/stores/memory').addBatch({
   "When using the nconf memory store": {

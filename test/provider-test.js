@@ -16,32 +16,45 @@ var assert = require('assert'),
 var fixturesDir = path.join(__dirname, 'fixtures'),
     mergeFixtures = path.join(fixturesDir, 'merge'),
     files = [path.join(mergeFixtures, 'file1.json'), path.join(mergeFixtures, 'file2.json')],
-    override = JSON.parse(fs.readFileSync(files[0]), 'utf8'),
-    first = '/path/to/file1',
-    second = '/path/to/file2';
+    override = JSON.parse(fs.readFileSync(files[0]), 'utf8');
 
 vows.describe('nconf/provider').addBatch({
   "When using nconf": {
     "an instance of 'nconf.Provider'": {
       "calling the use() method with the same store type and different options": {
-        topic: new nconf.Provider().use('file', { file: first }),
+        topic: new nconf.Provider().use('file', { file: files[0] }),
         "should use a new instance of the store type": function (provider) {
           var old = provider.file;
 
-          assert.equal(provider.file.file, first);
-          provider.use('file', { file: second });
+          assert.equal(provider.file.file, files[0]);
+          provider.use('file', { file: files[1] });
 
           assert.notStrictEqual(old, provider.file);
-          assert.equal(provider.file.file, second);
+          assert.equal(provider.file.file, files[1]);
         }
       },
-      //"when 'useArgv' is true": helpers.assertDefaults(path.join(fixturesDir, 'scripts', 'nconf-override.js'))
+      "when 'argv' is true": helpers.assertSystemConf({
+        script: path.join(fixturesDir, 'scripts', 'provider-argv.js'),
+        argv: ['--something', 'foobar']
+      }),
+      "when 'env' is true": helpers.assertSystemConf({
+        script: path.join(fixturesDir, 'scripts', 'provider-env.js'),
+        env: { SOMETHING: 'foobar' }
+      }),
     },
-    /*"the default nconf provider": {
-      "when 'useArgv' is true": helpers.assertDefaults(path.join(fixturesDir, 'scripts', 'default-override.js'))
-    }*/
+    "the default nconf provider": {
+      "when 'argv' is set to true": helpers.assertSystemConf({
+        script: path.join(fixturesDir, 'scripts', 'nconf-argv.js'),
+        argv: ['--something', 'foobar'],
+        env: { SOMETHING: true }
+      }),
+      "when 'env' is set to true": helpers.assertSystemConf({
+        script: path.join(fixturesDir, 'scripts', 'nconf-env.js'),
+        env: { SOMETHING: 'foobar' }
+      })
+    }
   }
-})/*.addBatch({
+}).addBatch({
   "When using nconf": {
     "an instance of 'nconf.Provider'": {
       "the merge() method": {
@@ -49,18 +62,9 @@ vows.describe('nconf/provider').addBatch({
         "should have the result merged in": function (provider) {
           provider.load();
           provider.merge(override);
-          helpers.assertMerged(null, provider);
-        }
-      },
-      "the mergeFiles() method": {
-        topic: function () {
-          var provider = new nconf.Provider().use('memory');
-          provider.mergeFiles(files, this.callback.bind(this, null, provider))
-        },
-        "should have the result merged in": function (_, provider) {
-          helpers.assertMerged(null, provider);
+          helpers.assertMerged(null, provider.file.store);
         }
       }
     }
   }
-})*/.export(module);
+}).export(module);

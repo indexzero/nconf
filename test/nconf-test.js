@@ -51,10 +51,25 @@ vows.describe('nconf').addBatch({
         }
       },
       "the get() method": {
-        "should respond with the correct value": function () {
-          assert.equal(nconf.get('foo:bar:bazz'), 'buzz');
+        "without a callback": {
+          "should respond with the correct value": function () {
+            assert.equal(nconf.get('foo:bar:bazz'), 'buzz');
+          }
+        },
+        "with a callback": {
+          topic: function () {
+            nconf.get('foo:bar:bazz', this.callback);
+          },
+          "should respond with the correct value": function (err, value) {
+            assert.equal(value, 'buzz');
+          }
         }
-      },
+      }
+    }
+  }
+}).addBatch({
+  "When using nconf": {
+    "with the memory store": {
       "the clear() method": {
         "should respond with the true": function () {
           assert.equal(nconf.get('foo:bar:bazz'), 'buzz');
@@ -65,9 +80,7 @@ vows.describe('nconf').addBatch({
       "the load() method": {
         "without a callback": {
           "should throw an exception": function () {
-            assert.throws(function () {
-              nconf.load();
-            })
+            assert.throws(function () { nconf.load() });
           }
         },
         "with a callback": {
@@ -82,9 +95,7 @@ vows.describe('nconf').addBatch({
       "the save() method": {
         "without a callback": {
           "should throw an exception": function () {
-            assert.throws(function () {
-              nconf.save();
-            })
+            assert.throws(function () { nconf.save() });
           }
         },
         "with a callback": {
