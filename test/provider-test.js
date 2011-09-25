@@ -64,6 +64,23 @@ vows.describe('nconf/provider').addBatch({
           provider.merge(override);
           helpers.assertMerged(null, provider.file.store);
         }
+      },
+      "when sources are passed in": {
+        topic: new nconf.Provider({
+          sources: {
+            user: {
+              type: 'file',
+              file: files[0]
+            },
+            global: {
+              type: 'file',
+              file: files[1]
+            }
+          }
+        }),
+        "should have the result merged in": function (provider) {
+          helpers.assertMerged(null, provider.load());
+        }
       }
     }
   }
