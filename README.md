@@ -59,8 +59,8 @@ The top-level of `nconf` is an instance of the `nconf.Provider` abstracts this a
 Adds a new store with the specified `name` and `options`. If `options.type` is not set, then `name` will be used instead:
 
 ``` js
-  nconf.add('global', { type: 'file', filename: '/path/to/globalconf.json' });
-  nconf.add('userconf', { type: 'file', filename: '/path/to/userconf.json' });
+  nconf.add('global', { type: 'file', file: '/path/to/globalconf.json' });
+  nconf.add('userconf', { type: 'file', file: '/path/to/userconf.json' });
 ```
 
 ### nconf.use(name, options) 
@@ -70,12 +70,12 @@ Similar to `nconf.add`, except that it can replace an existing store if new opti
   //
   // Load a file store onto nconf with the specified settings
   //
-  nconf.use('file', { filename: '/path/to/some/config-file.json' });
+  nconf.use('file', { file: '/path/to/some/config-file.json' });
   
   //
   // Replace the file store with new settings
   //
-  nconf.use('file', { filename: 'path/to/a-new/config-file.json' });
+  nconf.use('file', { file: 'path/to/a-new/config-file.json' });
 ```
 
 ### nconf.remove(name)
