@@ -55,6 +55,11 @@ vows.describe('nconf/provider').addBatch({
       "when 'argv' is set to true and process.argv is modified": helpers.assertSystemConf({
         script: path.join(fixturesDir, 'scripts', 'nconf-change-argv.js'),
         argv: ['--something', 'badValue', 'evenWorse', 'OHNOEZ', 'foobar']
+      }),
+      "when hierarchical 'argv' get": helpers.assertSystemConf({
+        script: path.join(fixturesDir, 'scripts', 'nconf-hierarchical-file-argv.js'),
+        argv: ['--something', 'foobar'],
+        env: { SOMETHING: true }
       })
     }
   }
