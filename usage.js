@@ -23,9 +23,11 @@ var single = new nconf.Provider({
 var multiple = new nconf.Provider({
   stores: [
     { name: 'user', type: 'file', file: path.join(__dirname, 'user-config.json') },
-    { name: 'global', type: 'global', file: path.join(__dirname, 'global-config.json') }
+    { name: 'user2', type: 'file', file: path.join(__dirname, 'user-config2.json') },
   ]
 });
+
+multiple.add('literal', {hello: 'that was easy'})
 
 //
 // Setup nconf to use the 'file' store and set a couple of values;
@@ -48,3 +50,4 @@ nconf.save(function (err) {
     console.dir(JSON.parse(data.toString()))
   });
 });
+
