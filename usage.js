@@ -16,6 +16,7 @@ var single = new nconf.Provider({
   }
 });
 
+/*
 var easy = new nconf.Provider()
   .argv()
   .env('NCONF_') // use all envs starting with "NCONF_"
@@ -23,8 +24,18 @@ var easy = new nconf.Provider()
   .literal({
     defaults: 'can be hard coded'
   })
+//*/
 
+var easy = new nconf.Provider()
+  .add('argv')
+  .add('env','NCONF_') // use all envs starting with "NCONF_"
+  .add('file',{file: path.join(__dirname, 'user-config.json')})
+  .add('literal',{
+    defaults: 'can be hard coded'
+  })
+//*/
 console.dir(easy.sources)
+console.dir(easy.get('defaults'))
 
 //
 // Configure the provider with multiple hierarchical stores

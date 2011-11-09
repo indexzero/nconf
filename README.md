@@ -6,17 +6,17 @@ Hierarchical node.js configuration with files, environment variables, command-li
 
 ``` js
 var nconf = require('nconf')
-  .argv()             // allow any config option to be passed as an --argument (uses optimist)
-  .env('NCONF_')      // use all envs starting with "NCONF_"
-  .file({             
+  .add('argv')             // allow any config option to be passed as an --argument (uses optimist)
+  .add('env', 'NCONF_')      // use all envs starting with "NCONF_"
+  .add('file', {             
     search: true,     // search for this file relative to the current directory.
     file: 'user-config.json',
     dir: process.cwd()
   })
-  .file({             // load configuration from this file.
+  .add('file', {             // load configuration from this file.
     file: path.join(__dirname, 'user-config.json')
   })
-  .literal({          // fallback to these defaults if nothing else has set these options.
+  .add('literal', {          // fallback to these defaults if nothing else has set these options.
     defaults: 'can be hard coded'
   });
 
