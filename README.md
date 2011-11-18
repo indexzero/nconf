@@ -1,4 +1,4 @@
-# nconf
+# nconf [![Build Status](https://secure.travis-ci.org/flatiron/nconf.png)](http://travis-ci.org/flatiron/nconf)
 
 Hierarchical node.js configuration with files, environment variables, command-line arguments, and atomic object merging.
 
