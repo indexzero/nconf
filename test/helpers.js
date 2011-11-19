@@ -43,7 +43,7 @@ exports.assertSystemConf = function (options) {
         });
       }
       
-      spawn('node', [options.script].concat(options.argv), { env: env })
+      spawn(process.argv[0], [options.script].concat(options.argv), { env: env })
         .stdout.once('data', this.callback.bind(this, null));
     },
     "should respond with the value passed into the script": function (_, data) {
@@ -51,3 +51,4 @@ exports.assertSystemConf = function (options) {
     }
   }
 }
+
