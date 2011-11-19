@@ -51,6 +51,11 @@ vows.describe('nconf/provider').addBatch({
       "when 'env' is set to true": helpers.assertSystemConf({
         script: path.join(fixturesDir, 'scripts', 'nconf-env.js'),
         env: { SOMETHING: 'foobar' }
+      }),
+      "when hierarchical 'argv' get": helpers.assertSystemConf({
+        script: path.join(fixturesDir, 'scripts', 'nconf-hierarchical-file-argv.js'),
+        argv: ['--something', 'foobar'],
+        env: { SOMETHING: true }
       })
     }
   }
