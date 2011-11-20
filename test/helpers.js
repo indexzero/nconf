@@ -43,8 +43,8 @@ exports.assertSystemConf = function (options) {
         });
       }
       
-      spawn(process.argv[0], [options.script].concat(options.argv), { env: env })
-        .stdout.once('data', this.callback.bind(this, null));
+      var child = spawn('node', [options.script].concat(options.argv), { env: env });
+      child.stdout.once('data', this.callback.bind(this, null));
     },
     "should respond with the value passed into the script": function (_, data) {
       assert.equal(data.toString(), 'foobar');

@@ -5,14 +5,12 @@
  *
  */
  
-var nconf = require('../../../lib/nconf');
-
-nconf.argv = true;
+var nconf = require('../../../lib/nconf').argv();
 
 //
 // Remove 'badValue', 'evenWorse' and 'OHNOEZ'
 //
 process.argv.splice(3, 3);
-nconf.system.loadArgv();
+nconf.sources['argv'].loadArgv();
 process.stdout.write(nconf.get('something'));
 

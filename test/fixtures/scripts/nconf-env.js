@@ -5,7 +5,6 @@
  *
  */
  
-var nconf = require('../../../lib/nconf');
+var nconf = require('../../../lib/nconf').env();
 
-nconf.env = true;
 process.stdout.write(nconf.get('SOMETHING'));

@@ -18,6 +18,6 @@
     "vows": "0.5.x >=0.5.11"
   },
   "main": "./lib/nconf",
-  "scripts": { "test": "vows test/*-test.js --spec" },
+  "scripts": { "test": "vows test/*-test.js test/**/*-test.js --spec" },
   "engines": { "node": ">= 0.4.0" }
 }

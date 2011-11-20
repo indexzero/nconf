@@ -7,6 +7,6 @@
  
 var nconf = require('../../../lib/nconf');
 
-var provider = new (nconf.Provider)({ argv: true });
+var provider = new (nconf.Provider)().argv();
 
 process.stdout.write(provider.get('something'));

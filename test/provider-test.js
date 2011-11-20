@@ -24,13 +24,13 @@ vows.describe('nconf/provider').addBatch({
       "calling the use() method with the same store type and different options": {
         topic: new nconf.Provider().use('file', { file: files[0] }),
         "should use a new instance of the store type": function (provider) {
-          var old = provider.file;
+          var old = provider.sources['file'];
 
-          assert.equal(provider.file.file, files[0]);
+          assert.equal(provider.sources.file.file, files[0]);
           provider.use('file', { file: files[1] });
 
-          assert.notStrictEqual(old, provider.file);
-          assert.equal(provider.file.file, files[1]);
+          assert.notStrictEqual(old, provider.sources.file);
+          assert.equal(provider.sources.file.file, files[1]);
         }
       },
       "when 'argv' is true": helpers.assertSystemConf({
@@ -40,7 +40,7 @@ vows.describe('nconf/provider').addBatch({
       "when 'env' is true": helpers.assertSystemConf({
         script: path.join(fixturesDir, 'scripts', 'provider-env.js'),
         env: { SOMETHING: 'foobar' }
-      }),
+      })
     },
     "the default nconf provider": {
       "when 'argv' is set to true": helpers.assertSystemConf({
@@ -66,27 +66,9 @@ vows.describe('nconf/provider').addBatch({
         "should have the result merged in": function (provider) {
           provider.load();
           provider.merge(override);
-          helpers.assertMerged(null, provider.file.store);
-        }
-      },
-      "when sources are passed in": {
-        topic: new nconf.Provider({
-          sources: {
-            user: {
-              type: 'file',
-              file: files[0]
-            },
-            global: {
-              type: 'file',
-              file: files[1]
-            }
-          }
-        }),
-        "should have the result merged in": function (provider) {
-          helpers.assertMerged(null, provider.load());
+          helpers.assertMerged(null, provider.sources.file.store);
         }
       }
     }
   }
 }).export(module);
-
