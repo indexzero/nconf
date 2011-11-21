@@ -2,18 +2,6 @@
 
 Hierarchical node.js configuration with files, environment variables, command-line arguments, and atomic object merging.
 
-## Installation
-
-### Installing npm (node package manager)
-```
-  curl http://npmjs.org/install.sh | sh
-```
-
-### Installing nconf
-```
-  [sudo] npm install nconf
-```
-
 ## Getting started 
 Using nconf is easy; it is designed to be a simple key-value store with support for both local and remote storage. Keys are namespaced and delimited by `:`. Lets dive right into sample usage:
 
@@ -170,6 +158,18 @@ Once installing both `nconf` and `nconf-redis`, you must require both modules to
   nconf.use('redis', { host: 'localhost', port: 6379, ttl: 60 * 60 * 1000 });
 ```
 
+## Installation
+
+### Installing npm (node package manager)
+```
+  curl http://npmjs.org/install.sh | sh
+```
+
+### Installing nconf
+```
+  [sudo] npm install nconf
+```
+
 ## More Documentation
 There is more documentation available through docco. I haven't gotten around to making a gh-pages branch so in the meantime if you clone the repository you can view the docs:
 
@@ -185,5 +185,6 @@ Tests are written in vows and give complete coverage of all APIs and storage eng
 ```
 
 #### Author: [Charlie Robbins](http://nodejitsu.com)
+#### License: MIT
 
-[0]: http://github.com/indexzero/nconf
+[0]: http://github.com/indexzero/nconf-redis
