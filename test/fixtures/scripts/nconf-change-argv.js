@@ -11,6 +11,6 @@ var nconf = require('../../../lib/nconf').argv();
 // Remove 'badValue', 'evenWorse' and 'OHNOEZ'
 //
 process.argv.splice(3, 3);
-nconf.sources['argv'].loadArgv();
+nconf._stores['argv'].loadArgv();
 process.stdout.write(nconf.get('something'));
 

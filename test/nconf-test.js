@@ -28,7 +28,7 @@ vows.describe('nconf').addBatch({
     "the use() method": {
       "should instaniate the correct store": function () {
         nconf.use('memory');
-        assert.instanceOf(nconf.sources['memory'], nconf.stores.Memory);
+        assert.instanceOf(nconf._stores['memory'], nconf.stores.Memory);
       }
     },
     "it should": {
