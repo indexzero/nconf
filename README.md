@@ -2,6 +2,27 @@
 
 Hierarchical node.js configuration with files, environment variables, command-line arguments, and atomic object merging.
 
+## Example
+
+``` js
+var nconf = require('nconf')
+  .add('argv')             // allow any config option to be passed as an --argument (uses optimist)
+  .add('env', 'NCONF_')      // use all envs starting with "NCONF_"
+  .add('file', {             
+    search: true,     // search for this file relative to the current directory.
+    file: 'user-config.json',
+    dir: process.cwd()
+  })
+  .add('file', {             // load configuration from this file.
+    file: path.join(__dirname, 'user-config.json')
+  })
+  .add('literal', {          // fallback to these defaults if nothing else has set these options.
+    defaults: 'can be hard coded'
+  });
+
+nconf.get('defaults'); // 'can be hard coded'
+```// search for this file relative to the current directory.
+
 ## Installation
 
 ### Installing npm (node package manager)

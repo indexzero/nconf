@@ -16,16 +16,41 @@ var single = new nconf.Provider({
   }
 });
 
+/*
+var easy = new nconf.Provider()
+  .argv()
+  .env('NCONF_') // use all envs starting with "NCONF_"
+  .file({file: path.join(__dirname, 'user-config.json')})
+  .literal({
+    defaults: 'can be hard coded'
+  })
+//*/
+
+var easy = new nconf.Provider()
+  .add('argv')
+  .add('env','NCONF_') // use all envs starting with "NCONF_"
+  .add('file',{file: path.join(__dirname, 'user-config.json')})
+  .add('literal',{
+    defaults: 'can be hard coded'
+  })
+//*/
+console.dir(easy.sources)
+console.dir(easy.get('defaults'))
+
 //
 // Configure the provider with multiple hierarchical stores
 // representing `user` and `global` configuration values. 
 //
 var multiple = new nconf.Provider({
   stores: [
+    { type: 'argv' },
     { name: 'user', type: 'file', file: path.join(__dirname, 'user-config.json') },
-    { name: 'global', type: 'global', file: path.join(__dirname, 'global-config.json') }
+    { name: 'user2', type: 'file', file: path.join(__dirname, 'user-config2.json') },
   ]
 });
+
+multiple.add('literal', {hello: 'that was easy'})
+multiple.add('env', 'NCONF_')
 
 //
 // Setup nconf to use the 'file' store and set a couple of values;
@@ -48,3 +73,4 @@ nconf.save(function (err) {
     console.dir(JSON.parse(data.toString()))
   });
 });
+
