@@ -11,8 +11,8 @@ var vows = require('vows'),
     nconf = require('../../lib/nconf');
 
 vows.describe('nconf/stores/literal').addBatch({
-  "An instance of nconf.stores.Literal": {
-    topic: new nconf.stores.Literal({
+  "An instance of nconf.Literal": {
+    topic: new nconf.Literal({
       foo: 'bar',
       one: 2
     }),

@@ -12,7 +12,7 @@ var vows = require('vows'),
 
 vows.describe('nconf/stores/memory').addBatch({
   "When using the nconf memory store": {
-    topic: new nconf.stores.Memory(),
+    topic: new nconf.Memory(),
     "the set() method": {
       "should respond with true": function (store) {
         assert.isTrue(store.set('foo:bar:bazz', 'buzz'));

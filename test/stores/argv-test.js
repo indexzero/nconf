@@ -11,8 +11,8 @@ var vows = require('vows'),
     nconf = require('../../lib/nconf');
 
 vows.describe('nconf/stores/argv').addBatch({
-  "An instance of nconf.stores.Argv": {
-    topic: new nconf.stores.Argv(),
+  "An instance of nconf.Argv": {
+    topic: new nconf.Argv(),
     "should have the correct methods defined": function (argv) {
       assert.isFunction(argv.loadSync);
       assert.isFunction(argv.loadArgv);

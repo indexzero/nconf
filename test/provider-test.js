@@ -24,13 +24,13 @@ vows.describe('nconf/provider').addBatch({
       "calling the use() method with the same store type and different options": {
         topic: new nconf.Provider().use('file', { file: files[0] }),
         "should use a new instance of the store type": function (provider) {
-          var old = provider._stores['file'];
+          var old = provider.stores['file'];
 
-          assert.equal(provider._stores.file.file, files[0]);
+          assert.equal(provider.stores.file.file, files[0]);
           provider.use('file', { file: files[1] });
 
-          assert.notStrictEqual(old, provider._stores.file);
-          assert.equal(provider._stores.file.file, files[1]);
+          assert.notStrictEqual(old, provider.stores.file);
+          assert.equal(provider.stores.file.file, files[1]);
         }
       },
       "when 'argv' is true": helpers.assertSystemConf({
@@ -71,7 +71,7 @@ vows.describe('nconf/provider').addBatch({
         "should have the result merged in": function (provider) {
           provider.load();
           provider.merge(override);
-          helpers.assertMerged(null, provider._stores.file.store);
+          helpers.assertMerged(null, provider.stores.file.store);
         }
       }
     }

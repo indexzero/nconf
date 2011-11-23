@@ -11,8 +11,8 @@ var vows = require('vows'),
     nconf = require('../../lib/nconf');
 
 vows.describe('nconf/stores/env').addBatch({
-  "An instance of nconf.stores.Env": {
-    topic: new nconf.stores.Env(),
+  "An instance of nconf.Env": {
+    topic: new nconf.Env(),
     "should have the correct methods defined": function (env) {
       assert.isFunction(env.loadSync);
       assert.isFunction(env.loadEnv);

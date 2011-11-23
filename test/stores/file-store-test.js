@@ -18,7 +18,7 @@ vows.describe('nconf/stores/file').addBatch({
     topic: function () {
       var filePath = path.join(__dirname, '..', 'fixtures', 'store.json');
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-      store = new nconf.stores.File({ file: filePath });
+      store = new nconf.File({ file: filePath });
       return null;
     },
     "the load() method": {
@@ -34,7 +34,7 @@ vows.describe('nconf/stores/file').addBatch({
   "When using the nconf file store": {
     topic: function () {
       var filePath = path.join(__dirname, '..', 'fixtures', 'malformed.json');
-      store = new nconf.stores.File({ file: filePath });
+      store = new nconf.File({ file: filePath });
       return null;
     },
     "the load() method with a malformed JSON config file": {
@@ -50,7 +50,7 @@ vows.describe('nconf/stores/file').addBatch({
   "When using the nconf file store": {
     topic: function () {
       var tmpPath = path.join(__dirname, '..', 'fixtures', 'tmp.json'),
-          tmpStore = new nconf.stores.File({ file: tmpPath });
+          tmpStore = new nconf.File({ file: tmpPath });
       return tmpStore;
     },
     "the save() method": {
@@ -108,7 +108,7 @@ vows.describe('nconf/stores/file').addBatch({
         topic: function () {
           var filePath = this.filePath = path.join(process.env.HOME, '.nconf');
           fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-          return new (nconf.stores.File)({
+          return new (nconf.File)({
             file: '.nconf'
           })
         },
@@ -121,7 +121,7 @@ vows.describe('nconf/stores/file').addBatch({
       "when the target file doesn't exist higher in the directory tree": {
         topic: function () {
           var filePath = this.filePath = path.join(__dirname, '..', 'fixtures', 'search-store.json');
-          return new (nconf.stores.File)({
+          return new (nconf.File)({
             dir: path.dirname(filePath),
             file: 'search-store.json'
           })
