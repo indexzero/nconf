@@ -11,7 +11,7 @@ var path = require('path'),
 
 nconf.argv();
 nconf.add('file', {
-  file: path.join(__dirname, 'hierarchical.json')
+  file: path.join(__dirname, '../hierarchy/hierarchical.json')
 });
 
 process.stdout.write(nconf.get('something') || 'undefined');
