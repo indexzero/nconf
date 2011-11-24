@@ -10,39 +10,41 @@ var fs = require('fs'),
     vows = require('vows'),
     assert = require('assert'),
     nconf = require('../../lib/nconf'),
-    data = require('../fixtures/data').data, 
+    data = require('../fixtures/data').data,
     store;
 
 vows.describe('nconf/stores/file').addBatch({
   "When using the nconf file store": {
-    topic: function () {
-      var filePath = path.join(__dirname, '..', 'fixtures', 'store.json');
-      fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-      store = new nconf.File({ file: filePath });
-      return null;
-    },
-    "the load() method": {
+    "with a valid JSON file": {
       topic: function () {
-        store.load(this.callback);
+        var filePath = path.join(__dirname, '..', 'fixtures', 'store.json');
+        fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+        this.store = store = new nconf.File({ file: filePath });
+        return null;
       },
-      "should load the data correctly": function (err, data) {
-        assert.isNull(err);
-        assert.deepEqual(data, store.store);
+      "the load() method": {
+        topic: function () {
+          this.store.load(this.callback);
+        },
+        "should load the data correctly": function (err, data) {
+          assert.isNull(err);
+          assert.deepEqual(data, this.store.store);
+        }
       }
-    }
-  },
-  "When using the nconf file store": {
-    topic: function () {
-      var filePath = path.join(__dirname, '..', 'fixtures', 'malformed.json');
-      store = new nconf.File({ file: filePath });
-      return null;
     },
-    "the load() method with a malformed JSON config file": {
+    "with a malformed JSON file": {
       topic: function () {
-        store.load(this.callback.bind(null, null));
+        var filePath = path.join(__dirname, '..', 'fixtures', 'malformed.json');
+        this.store = new nconf.File({ file: filePath });
+        return null;
       },
-      "should respond with an error": function (ign, err) {
-        assert.isTrue(!!err);
+      "the load() method with a malformed JSON config file": {
+        topic: function () {
+          this.store.load(this.callback.bind(null, null));
+        },
+        "should respond with an error": function (_, err) {
+          assert.isTrue(!!err);
+        }
       }
     }
   }
@@ -57,19 +59,19 @@ vows.describe('nconf/stores/file').addBatch({
       topic: function (tmpStore) {
         var that = this;
         
-        Object.keys(store.store).forEach(function (key) {
-          tmpStore.set(key, store.store[key]);
-        });
+        Object.keys(data).forEach(function (key) {
+          tmpStore.set(key, data[key]);
+        });        
         
         tmpStore.save(function () {
-          fs.readFile(tmpStore.file, function (err, data) {
-            return err ? that.callback(err) : that.callback(err, JSON.parse(data.toString()));
+          fs.readFile(tmpStore.file, function (err, d) {
+            return err ? that.callback(err) : that.callback(err, JSON.parse(d.toString()));
           });
         });
       },
-      "should save the data correctly": function (err, data) {
+      "should save the data correctly": function (err, read) {
         assert.isNull(err);
-        assert.deepEqual(data, store.store);
+        assert.deepEqual(read, data);
       }
     }
   }
