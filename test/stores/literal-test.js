@@ -13,10 +13,8 @@ var vows = require('vows'),
 vows.describe('nconf/stores/literal').addBatch({
   "An instance of nconf.Literal": {
     topic: new nconf.Literal({
-      store: {
-        foo: 'bar',
-        one: 2
-      }
+      foo: 'bar',
+      one: 2
     }),
     "should have the correct methods defined": function (literal) {
       assert.equal(literal.type, 'literal');
