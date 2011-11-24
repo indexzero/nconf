@@ -1,7 +1,7 @@
 /*
  * nconf-hierarchical-file-argv.js: Test fixture for using optimist defaults and a file store with nconf.
  *
- * (C) 2011, Charlie Robbins
+ * (C) 2011, Nodejitsu Inc.
  * (C) 2011, Sander Tolsma
  *
  */

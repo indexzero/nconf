@@ -1,7 +1,7 @@
 /*
  * hierarchy-test.js: Basic tests for hierarchical file stores.
  *
- * (C) 2011, Charlie Robbins
+ * (C) 2011, Nodejitsu Inc.
  *
  */
 

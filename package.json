@@ -2,7 +2,10 @@
   "name": "nconf",
   "description": "Hierarchical node.js configuration with files, environment variables, command-line arguments, and atomic object merging.",
   "version": "0.4.6",
-  "author": "Charlie Robbins <charlie.robbins@gmail.com>",
+  "author": "Nodejitsu Inc. <info@nodejitsu.com>",
+  "contributors": [
+    { "name": "Charlie Robbins", "email": "charlie@nodejitsu.com" }
+  ],
   "repository": {
     "type": "git",
     "url": "http://github.com/flatiron/nconf.git"

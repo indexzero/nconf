@@ -1,7 +1,7 @@
 /*
  * memory-store-test.js: Tests for the nconf Memory store.
  *
- * (C) 2011, Charlie Robbins
+ * (C) 2011, Nodejitsu Inc.
  *
  */
 

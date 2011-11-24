@@ -1,7 +1,7 @@
 /*
  * data.js: Simple data fixture for configuration test.
  *
- * (C) 2011, Charlie Robbins
+ * (C) 2011, Nodejitsu Inc.
  *
  */
  

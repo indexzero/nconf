@@ -1,7 +1,7 @@
 /*
  * common.js: Tests for common utility function in nconf.
  *
- * (C) 2011, Charlie Robbins
+ * (C) 2011, Nodejitsu Inc.
  *
  */
 
