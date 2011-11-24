@@ -6,7 +6,9 @@
  */
 
 var assert = require('assert'),
+    fs = require('fs'),
     path = require('path'),
+    spawn = require('child_process').spawn,
     vows = require('vows'),
     nconf = require('../lib/nconf');
 
@@ -27,6 +29,38 @@ vows.describe('nconf/hierarchy').addBatch({
         assert.equal(nconf.get('title'), 'My specific title');
         assert.equal(nconf.get('color'), 'green');
         assert.equal(nconf.get('movie'), 'Kill Bill');
+      }
+    },
+    "configured with .argv(), .env() and .file()": {
+      topic: function () {
+        var configFile = path.join(__dirname, 'fixtures', 'load-save.json'),
+            script = path.join(__dirname, 'fixtures', 'scripts', 'nconf-hierarchical-load-save.js'),
+            argv = ['--foo', 'foo', '--bar', 'bar'],
+            that = this,
+            data = '',
+            child;
+        
+        try { fs.unlinkSync(configFile) }
+        catch (ex) { }
+        
+        child = spawn('node', [script].concat(argv));
+        
+        child.stdout.on('data', function (d) {
+          data += d;
+        });
+        
+        child.on('exit', function () {
+          fs.readFile(configFile, 'utf8', that.callback.bind(null, null, data));
+        });
+      },
+      "should not persist information passed in to process.env and process.argv to disk ": function (_, data, _, ondisk){
+        assert.equal(data, 'foo');
+        assert.deepEqual(JSON.parse(ondisk), {
+          database: {
+            host: '127.0.0.1',
+            port: 5984
+          }
+        });
       }
     }
   }
