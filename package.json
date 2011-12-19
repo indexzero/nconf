@@ -14,7 +14,7 @@
   "dependencies": {
     "async": "0.1.x",
     "ini": "1.x.x",
-    "optimist": "0.2.x",
+    "optimist": "0.3.x",
     "pkginfo": "0.2.x"
   },
   "devDependencies": {
