@@ -18,7 +18,8 @@
     "pkginfo": "0.2.x"
   },
   "devDependencies": {
-    "vows": "0.6.x"
+    "vows": "0.6.x",
+    "eyes": "0.1.7"
   },
   "main": "./lib/nconf",
   "scripts": { "test": "vows test/*-test.js test/**/*-test.js --spec" },

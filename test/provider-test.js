@@ -11,7 +11,8 @@ var assert = require('assert'),
     spawn = require('child_process').spawn,
     vows = require('vows'),
     helpers = require('./helpers'),
-    nconf = require('../lib/nconf');
+    nconf = require('../lib/nconf'),
+    eyes = require('eyes');
     
 var fixturesDir = path.join(__dirname, 'fixtures'),
     mergeFixtures = path.join(fixturesDir, 'merge'),
@@ -72,23 +73,47 @@ vows.describe('nconf/provider').addBatch({
           provider.load();
           provider.merge(override);
           helpers.assertMerged(null, provider.stores.file.store);
+          assert.equal(provider.stores.file.store.candy.something, 'file1');
         }
-      },
-      "when sources are passed in": {
-        topic: new nconf.Provider({
-          sources: {
-            user: {
-              type: 'file',
-              file: files[0]
-            },
-            global: {
-              type: 'file',
-              file: files[1]
+      }
+    }
+  }
+}).addBatch({
+  "When using nconf": {
+    "an instance of 'nconf.Provider'": {
+      "the load() method": {
+        "when sources are passed in": {
+          topic: new nconf.Provider({
+            sources: {
+              user: {
+                type: 'file',
+                file: files[0]
+              },
+              global: {
+                type: 'file',
+                file: files[1]
+              }
             }
+          }),
+          "should respect the hierarchy ": function (provider) {
+            var merged = provider.load();
+
+            helpers.assertMerged(null, merged);
+            assert.equal(merged.candy.something, 'file1');
+            console.log(provider.sources);
           }
-        }),
-        "should have the result merged in": function (provider) {
-          helpers.assertMerged(null, provider.load());
+        },
+        "when multiple stores are used": {
+          topic: new nconf.Provider().overrides({foo: {bar: 'baz'}})
+            .add('file1', {type: 'file', file: files[0]})
+            .add('file2', {type: 'file', file: files[1]}),
+          "should respect the hierarchy": function(provider) {
+            var merged = provider.load();
+            
+            helpers.assertMerged(null, merged);
+            assert.equal(merged.foo.bar, 'baz');
+            assert.equal(merged.candy.something, 'file1');
+          }
         }
       }
     }
