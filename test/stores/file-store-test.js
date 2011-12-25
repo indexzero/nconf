@@ -94,19 +94,20 @@ vows.describe('nconf/stores/file').addBatch({
           tmpStore.set(key, data[key]);
         });
 
-        tmpStore.saveSync();
+        var saved = tmpStore.saveSync();
 
         fs.readFile(tmpStore.file, function (err, d) {
           fs.unlinkSync(tmpStore.file);
 
           return err
             ? that.callback(err)
-            : that.callback(err, JSON.parse(d.toString()));
+            : that.callback(err, JSON.parse(d.toString()), saved);
         });
       },
-      "should save the data correctly": function (err, read) {
+      "should save the data correctly": function (err, read, saved) {
         assert.isNull(err);
         assert.deepEqual(read, data);
+        assert.deepEqual(read, saved);
       }
     }
   }
