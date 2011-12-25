@@ -65,8 +65,43 @@ vows.describe('nconf/stores/file').addBatch({
         
         tmpStore.save(function () {
           fs.readFile(tmpStore.file, function (err, d) {
-            return err ? that.callback(err) : that.callback(err, JSON.parse(d.toString()));
+            fs.unlinkSync(tmpStore.file);
+
+            return err
+              ? that.callback(err)
+              : that.callback(err, JSON.parse(d.toString()));
           });
+        });
+      },
+      "should save the data correctly": function (err, read) {
+        assert.isNull(err);
+        assert.deepEqual(read, data);
+      }
+    }
+  }
+}).addBatch({
+  "When using the nconf file store": {
+    topic: function () {
+      var tmpPath = path.join(__dirname, '..', 'fixtures', 'tmp.json'),
+          tmpStore = new nconf.File({ file: tmpPath });
+      return tmpStore;
+    },
+    "the saveSync() method": {
+      topic: function (tmpStore) {
+        var that = this;
+
+        Object.keys(data).forEach(function (key) {
+          tmpStore.set(key, data[key]);
+        });
+
+        tmpStore.saveSync();
+
+        fs.readFile(tmpStore.file, function (err, d) {
+          fs.unlinkSync(tmpStore.file);
+
+          return err
+            ? that.callback(err)
+            : that.callback(err, JSON.parse(d.toString()));
         });
       },
       "should save the data correctly": function (err, read) {
@@ -136,3 +171,4 @@ vows.describe('nconf/stores/file').addBatch({
     }
   }
 }).export(module);
+
