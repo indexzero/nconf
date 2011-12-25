@@ -1,7 +1,11 @@
 {
   "apples": true,
   "bananas": true,
+  "foo": {
+  	"bar": "boo"
+  },
   "candy": {
+  	"something": "file1",
     "something1": true,
     "something2": true
   }
