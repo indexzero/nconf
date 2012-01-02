@@ -81,7 +81,11 @@ vows.describe('nconf').addBatch({
       "the load() method": {
         "without a callback": {
           "should respond with the merged store": function () {
-            assert.deepEqual(nconf.load(), { foo: { bar: {} } });
+            assert.deepEqual(nconf.load(), {
+              title: 'My specific title', 
+              color: 'green',
+              movie: 'Kill Bill' 
+            });
           }
         },
         "with a callback": {
@@ -90,7 +94,11 @@ vows.describe('nconf').addBatch({
           },
           "should respond with the merged store": function (ign, err, store) {
             assert.isNull(err);
-            assert.deepEqual(store, { foo: { bar: {} } });
+            assert.deepEqual(store, {
+              title: 'My specific title', 
+              color: 'green',
+              movie: 'Kill Bill' 
+            });
           }
         }
       },
