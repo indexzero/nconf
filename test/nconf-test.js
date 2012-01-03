@@ -28,6 +28,7 @@ vows.describe('nconf').addBatch({
     "the use() method": {
       "should instaniate the correct store": function () {
         nconf.use('memory');
+        nconf.load();
         assert.instanceOf(nconf.stores['memory'], nconf.Memory);
       }
     },
@@ -79,16 +80,25 @@ vows.describe('nconf').addBatch({
       },
       "the load() method": {
         "without a callback": {
-          "should throw an exception": function () {
-            assert.throws(function () { nconf.load() });
+          "should respond with the merged store": function () {
+            assert.deepEqual(nconf.load(), {
+              title: 'My specific title', 
+              color: 'green',
+              movie: 'Kill Bill' 
+            });
           }
         },
         "with a callback": {
           topic: function () {
             nconf.load(this.callback.bind(null, null)); 
           },
-          "should respond with an error": function (ign, err) {
-            assert.isNotNull(err);
+          "should respond with the merged store": function (ign, err, store) {
+            assert.isNull(err);
+            assert.deepEqual(store, {
+              title: 'My specific title', 
+              color: 'green',
+              movie: 'Kill Bill' 
+            });
           }
         }
       },
