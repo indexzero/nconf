@@ -22,6 +22,16 @@ vows.describe('nconf/stores/memory').addBatch({
         assert.isTrue(store.set('falsy:object', null));
       }
     },
+    "the dump() method": {
+      "should respond with the correct value": function (store) {
+        var result = store.dump();
+        assert.equal(result.foo.bar.bazz, 'buzz');
+        assert.equal(result.falsy.number, 0);
+        assert.equal(result.falsy.string, '');
+        assert.equal(result.falsy['boolean'], false);
+        assert.equal(result.falsy.object, null);
+      }
+    },
     "the get() method": {
       "should respond with the correct value": function (store) {
         assert.equal(store.get('foo:bar:bazz'), 'buzz');
@@ -61,7 +71,7 @@ vows.describe('nconf/stores/memory').addBatch({
       },
       "when merging into an existing Object value": function (store) {
         store.set('merge:object', {
-          prop1: 2, 
+          prop1: 2,
           prop2: 'prop2',
           prop3: {
             bazz: 'bazz'
@@ -77,7 +87,7 @@ vows.describe('nconf/stores/memory').addBatch({
           bar: 'foo',
           bazz: 'bazz'
         });
-        assert.equal(store.get('merge:object:prop4').length, 2);        
+        assert.equal(store.get('merge:object:prop4').length, 2);
       }
     }
   }

@@ -18,6 +18,7 @@ vows.describe('nconf').addBatch({
       assert.isFunction(nconf.key);
       assert.isFunction(nconf.path);
       assert.isFunction(nconf.use);
+      assert.isFunction(nconf.dump);
       assert.isFunction(nconf.get);
       assert.isFunction(nconf.set);
       assert.isFunction(nconf.clear);
@@ -51,6 +52,26 @@ vows.describe('nconf').addBatch({
           assert.isTrue(nconf.set('foo:bar:bazz', 'buzz'));
         }
       },
+      "the dump() method": {
+        "without a callback": {
+          "should respond with the correct value": function () {
+            var result = nconf.dump();
+            assert.equal(result.title, 'My specific title');
+            assert.equal(result.foo.bar.bazz, 'buzz');
+            assert.equal(result.color, 'green');
+          }
+        },
+        "with a callback": {
+          topic: function () {
+            nconf.dump(this.callback);
+          },
+          "should respond with the correct value": function (err, value) {
+            assert.equal(value.title, 'My specific title');
+            assert.equal(value.foo.bar.bazz, 'buzz');
+            assert.equal(value.color, 'green');
+          }
+        }
+      },
       "the get() method": {
         "without a callback": {
           "should respond with the correct value": function () {
@@ -82,22 +103,22 @@ vows.describe('nconf').addBatch({
         "without a callback": {
           "should respond with the merged store": function () {
             assert.deepEqual(nconf.load(), {
-              title: 'My specific title', 
+              title: 'My specific title',
               color: 'green',
-              movie: 'Kill Bill' 
+              movie: 'Kill Bill'
             });
           }
         },
         "with a callback": {
           topic: function () {
-            nconf.load(this.callback.bind(null, null)); 
+            nconf.load(this.callback.bind(null, null));
           },
           "should respond with the merged store": function (ign, err, store) {
             assert.isNull(err);
             assert.deepEqual(store, {
-              title: 'My specific title', 
+              title: 'My specific title',
               color: 'green',
-              movie: 'Kill Bill' 
+              movie: 'Kill Bill'
             });
           }
         }
@@ -110,7 +131,7 @@ vows.describe('nconf').addBatch({
         },
         "with a callback": {
           topic: function () {
-            nconf.save(this.callback.bind(null, null)); 
+            nconf.save(this.callback.bind(null, null));
           },
           "should respond with an error": function (ign, err) {
             assert.isNotNull(err);
