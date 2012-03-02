@@ -174,7 +174,10 @@ Loads a given object literal into the configuration hierarchy. Both `nconf.defau
 Based on the Memory store, but provides additional methods `.save()` and `.load()` which allow you to read your configuration to and from file. As with the Memory store, all method calls are synchronous with the exception of `.save()` and `.load()` which take callback functions. It is important to note that setting keys in the File engine will not be persisted to disk until a call to `.save()` is made.
 
 ``` js
-  nconf.file({ file: 'path/to/your/config.json' });
+  nconf.file('path/to/your/config.json');
+  // add multiple files, hierarchically. notice the unique key for each file
+  nconf.file('user', 'path/to/your/user.json');
+  nconf.file('global', 'path/to/your/global.json');
 ```
 
 The file store is also extensible for multiple file formats, defaulting to `JSON`. To use a custom format, simply pass a format object to the `.use()` method. This object must have `.parse()` and `.stringify()` methods just like the native `JSON` object.
