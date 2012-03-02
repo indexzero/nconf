@@ -20,8 +20,21 @@ vows.describe('nconf/hierarchy').addBatch({
   "When using nconf": {
     "configured with two file stores": {
       topic: function () {
-        nconf.add('user', { type: 'file', file: userConfig })
-        nconf.add('global', { type: 'file', file: globalConfig })
+        nconf.add('user', { type: 'file', file: userConfig });
+        nconf.add('global', { type: 'file', file: globalConfig });
+        nconf.load();
+        return nconf;
+      },
+      "should have the appropriate keys present": function () {
+        assert.equal(nconf.get('title'), 'My specific title');
+        assert.equal(nconf.get('color'), 'green');
+        assert.equal(nconf.get('movie'), 'Kill Bill');
+      }
+    },
+    "configured with two file stores using `file`": {
+      topic: function () {
+        nconf.file('user', userConfig);
+        nconf.file('global', globalConfig);
         nconf.load();
         return nconf;
       },
