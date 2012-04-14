@@ -18,7 +18,7 @@ var single = new nconf.Provider({
 
 //
 // Configure the provider with multiple hierarchical stores
-// representing `user` and `global` configuration values. 
+// representing `user` and `global` configuration values.
 //
 var multiple = new nconf.Provider({
   stores: [
