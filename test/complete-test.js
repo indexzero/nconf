@@ -80,6 +80,10 @@ vows.describe('nconf').addBatch({
           assert.equal(nconf.get('weebls'), 'stuff');
         }
       }
+    },
+    teardown: function () {
+      // remove the file so that we can test saving it async
+      fs.unlinkSync(completeTest);
     }
   }
 }).addBatch({
@@ -116,6 +120,7 @@ vows.describe('nconf').addBatch({
     },
 
     teardown: function () {
+      fs.unlinkSync(completeTest);
       nconf.remove('file');
       nconf.remove('memory');
       nconf.remove('argv');
