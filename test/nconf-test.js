@@ -101,21 +101,6 @@ vows.describe('nconf').addBatch({
             });
           }
         }
-      },
-      "the save() method": {
-        "without a callback": {
-          "should throw an exception": function () {
-            assert.throws(function () { nconf.save() });
-          }
-        },
-        "with a callback": {
-          topic: function () {
-            nconf.save(this.callback.bind(null, null)); 
-          },
-          "should respond with an error": function (ign, err) {
-            assert.isNotNull(err);
-          }
-        }
       }
     }
   }

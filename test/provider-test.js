@@ -99,7 +99,6 @@ vows.describe('nconf/provider').addBatch({
 
             helpers.assertMerged(null, merged);
             assert.equal(merged.candy.something, 'file1');
-            console.log(provider.sources);
           }
         },
         "when multiple stores are used": {

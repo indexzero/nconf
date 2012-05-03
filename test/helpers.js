@@ -7,6 +7,9 @@
  
 var assert = require('assert'),
     spawn = require('child_process').spawn,
+    util = require('util'),
+    fs = require('fs'),
+    path = require('path'),
     nconf = require('../lib/nconf');
 
 exports.assertMerged = function (err, merged) {
@@ -52,3 +55,16 @@ exports.assertSystemConf = function (options) {
   }
 }
 
+// copy a file
+exports.cp = function (from, to, callback) {
+  fs.readFile(from, function (err, data) {
+    if (err) return callback(err);
+    fs.writeFile(to, data, callback);
+  });
+};
+
+exports.fixture = function (file) {
+  return require('path').join(__dirname, 'fixtures', file);
+};
+
+// vim: ts=2 shiftwidth=2 softtabstop=2
