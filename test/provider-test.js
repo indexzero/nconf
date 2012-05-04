@@ -11,7 +11,8 @@ var assert = require('assert'),
     spawn = require('child_process').spawn,
     vows = require('vows'),
     helpers = require('./helpers'),
-    nconf = require('../lib/nconf');
+    nconf = require('../lib/nconf'),
+    eyes = require('eyes');
     
 var fixturesDir = path.join(__dirname, 'fixtures'),
     mergeFixtures = path.join(fixturesDir, 'merge'),
