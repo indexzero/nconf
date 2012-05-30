@@ -15,8 +15,9 @@ var assert = require('assert'),
     
 var fixturesDir = path.join(__dirname, 'fixtures'),
     mergeFixtures = path.join(fixturesDir, 'merge'),
+    hierarchyFixtures = path.join(fixturesDir, 'hierarchy'),
     files = [path.join(mergeFixtures, 'file1.json'), path.join(mergeFixtures, 'file2.json')],
-    getFirstFixture = path.join(fixturesDir, 'get-first.json'),
+    getFirstFixture = path.join(hierarchyFixtures, 'get-first.json'),
     override = JSON.parse(fs.readFileSync(files[0]), 'utf8');
 
 vows.describe('nconf/provider').addBatch({
