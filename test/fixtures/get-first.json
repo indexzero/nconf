@@ -1,0 +1,8 @@
+{
+  "ports": ["VCAP_APP_PORT", "PORT", "devPort"],
+  "VCAP_APP_PORT": null,
+  "PORT": true,
+  "devPort": 8000,
+  "monPort": 8001
+}
+
