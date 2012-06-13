@@ -76,10 +76,10 @@ vows.describe('nconf/hierarchy').addBatch({
         });
       }
     },
-    "configured with .argv(), .file() and invoked with command line options": {
+    "configured with .argv(), .file() and invoked with nested command line options": {
       topic: function () {
         var script = path.join(__dirname, 'fixtures', 'scripts', 'nconf-hierarchical-load-merge.js'),
-            argv = ['--obj:host', 'foo', '--obj:array', 'bar', '--obj:auth:password', 'stuff'],
+            argv = ['--candy:something', 'foo', '--candy:something5:second', 'bar'],
             that = this,
             data = '',
             child;
@@ -96,14 +96,14 @@ vows.describe('nconf/hierarchy').addBatch({
       },
       "should merge nested objects ": function (err, data) {
         assert.deepEqual(JSON.parse(data), {
-          literal: 'bazz',
-          obj: {
-            host: 'foo',
-            port: 5984,
-            array: 'bar',
-            auth: {
-              username: 'admin',
-              password: 'stuff'
+          apples: true,
+          candy: {
+            something: 'foo',
+            something1: true,
+            something2: true,
+            something5: {
+              first: 1,
+              second: 'bar'
             }
           }
         });
