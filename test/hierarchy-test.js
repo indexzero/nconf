@@ -75,6 +75,36 @@ vows.describe('nconf/hierarchy').addBatch({
           }
         });
       }
+    },
+    "configured with .argv(), .file() and invoked with command line options": {
+      topic: function () {
+        var script = path.join(__dirname, 'fixtures', 'scripts', 'nconf-hierarchical-load-merge.js'),
+            argv = ['--obj:host', 'foo', '--obj:array', 'bar', '--obj:auth:password', 'stuff'],
+            that = this,
+            data = '',
+            child;
+
+        child = spawn('node', [script].concat(argv));
+
+        child.stdout.on('data', function (d) {
+          data += d;
+        });
+
+        child.on('exit', function() {
+          that.callback(null, data);
+        });
+      },
+      "should merge nested objects ": function (err, data) {
+        assert.deepEqual(JSON.parse(data), {
+          host: 'foo',
+          port: 5984,
+          array: 'bar',
+          auth: {
+            username: 'admin',
+            password: 'stuff'
+          }
+        });
+      }
     }
   }
 }).export(module);
