@@ -50,7 +50,7 @@ vows.describe('nconf').addBatch({
     "literal vars": {
       "are present": function () {
         Object.keys(data).forEach(function (key) {
-          assert.equal(nconf.get(key), data[key]);
+          assert.deepEqual(nconf.get(key), data[key]);
         });
       }
     },
