@@ -11,7 +11,10 @@ var path = require('path'),
 
 nconf.argv();
 nconf.add('file', {
-  file: path.join(__dirname, '../store.json')
+  file: path.join(__dirname, '..', 'store.json')
 });
 
-process.stdout.write(JSON.stringify(nconf.get('obj')));
+process.stdout.write(JSON.stringify({
+  literal: nconf.get('literal'),
+  obj: nconf.get('obj')
+}));

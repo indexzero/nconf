@@ -96,12 +96,15 @@ vows.describe('nconf/hierarchy').addBatch({
       },
       "should merge nested objects ": function (err, data) {
         assert.deepEqual(JSON.parse(data), {
-          host: 'foo',
-          port: 5984,
-          array: 'bar',
-          auth: {
-            username: 'admin',
-            password: 'stuff'
+          literal: 'bazz',
+          obj: {
+            host: 'foo',
+            port: 5984,
+            array: 'bar',
+            auth: {
+              username: 'admin',
+              password: 'stuff'
+            }
           }
         });
       }
