@@ -165,14 +165,14 @@ Responsible for loading the values parsed from `process.env` into the configurat
   //
   nconf.env('__');
   // Get the value of the env variable 'database__host'
-  var dbHost = nconf.get('database:host'); 
+  var dbHost = nconf.get('database:host');
 
   //
   // Or use both options
   //
   nconf.env({
     separator: '__',
-    filter: ['database__host', 'only', 'load', 'these', 'values']
+    whitelist: ['database__host', 'only', 'load', 'these', 'values']
   });
   var dbHost = nconf.get('database:host');
 ```

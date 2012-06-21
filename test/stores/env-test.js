@@ -16,8 +16,8 @@ vows.describe('nconf/stores/env').addBatch({
     "should have the correct methods defined": function (env) {
       assert.isFunction(env.loadSync);
       assert.isFunction(env.loadEnv);
-      assert.isArray(env.filter);
-      assert.lengthOf(env.filter, 0);
+      assert.isArray(env.whitelist);
+      assert.lengthOf(env.whitelist, 0);
       assert.equal(env.separator, '');
     }
   }
