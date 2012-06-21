@@ -60,6 +60,10 @@ vows.describe('nconf/provider').addBatch({
         script: path.join(fixturesDir, 'scripts', 'nconf-hierarchical-file-argv.js'),
         argv: ['--something', 'foobar'],
         env: { SOMETHING: true }
+      }),
+      "when 'env' is set to true with a nested separator": helpers.assertSystemConf({
+        script: path.join(fixturesDir, 'scripts', 'nconf-nested-env.js'),
+        env: { SOME_THING: 'foobar' }
       })
     }
   }
