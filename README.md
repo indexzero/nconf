@@ -159,6 +159,14 @@ Responsible for loading the values parsed from `process.env` into the configurat
   // Can optionally also be an Array of values to limit process.env to.
   //
   nconf.env(['only', 'load', 'these', 'values', 'from', 'process.env']);  
+
+  //
+  // Can also specify a separator for nested keys (instead of the default ':')
+  //
+  nconf.env({
+    separator: '__',
+    filter: ['database__host', 'only', 'load', 'these', 'values', 'from', 'process.env']
+  });  
 ```
 
 ### Literal
