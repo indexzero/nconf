@@ -163,10 +163,18 @@ Responsible for loading the values parsed from `process.env` into the configurat
   //
   // Can also specify a separator for nested keys (instead of the default ':')
   //
+  nconf.env('__');
+  // Get the value of the env variable 'database__host'
+  var dbHost = nconf.get('database:host'); 
+
+  //
+  // Or use both options
+  //
   nconf.env({
     separator: '__',
-    filter: ['database__host', 'only', 'load', 'these', 'values', 'from', 'process.env']
-  });  
+    filter: ['database__host', 'only', 'load', 'these', 'values']
+  });
+  var dbHost = nconf.get('database:host');
 ```
 
 ### Literal

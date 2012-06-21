@@ -6,6 +6,6 @@
  *
  */
  
-var nconf = require('../../../lib/nconf').env({separator: '_'});
+var nconf = require('../../../lib/nconf').env('_');
 
 process.stdout.write(nconf.get('SOME:THING'));
