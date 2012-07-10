@@ -88,7 +88,11 @@ A sane default for this could be:
   //
   // 4. Values in `config.json` 
   //
-  nconf.file({ file: 'config.json' });
+  nconf.file({ 
+    file: 'config.json', 
+    dir: 'search/from/here', 
+    search: true
+  });
   
   //
   // 5. Any default values

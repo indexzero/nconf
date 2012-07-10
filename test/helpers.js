@@ -66,5 +66,3 @@ exports.cp = function (from, to, callback) {
 exports.fixture = function (file) {
   return require('path').join(__dirname, 'fixtures', file);
 };
-
-// vim: ts=2 shiftwidth=2 softtabstop=2
