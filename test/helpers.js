@@ -64,5 +64,5 @@ exports.cp = function (from, to, callback) {
 };
 
 exports.fixture = function (file) {
-  return require('path').join(__dirname, 'fixtures', file);
+  return path.join(__dirname, 'fixtures', file);
 };
