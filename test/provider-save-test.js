@@ -14,7 +14,7 @@ var assert = require('assert'),
 //
 require('./mocks/mock-store');
     
-vows.describe('nconf/provider').addBatch({
+vows.describe('nconf/provider/save').addBatch({
   "When using nconf": {
     "an instance of 'nconf.Provider'": {
       "with a Mock store": {
