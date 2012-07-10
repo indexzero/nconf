@@ -18,6 +18,13 @@ var fixturesDir = path.join(__dirname, 'fixtures'),
     files = [path.join(mergeFixtures, 'file1.json'), path.join(mergeFixtures, 'file2.json')],
     override = JSON.parse(fs.readFileSync(files[0]), 'utf8');
 
+function assertProvider(test) {
+  return {
+    topic: new nconf.Provider(),
+    "should use the correct File store": test
+  };
+}
+
 vows.describe('nconf/provider').addBatch({
   "When using nconf": {
     "an instance of 'nconf.Provider'": {
@@ -117,6 +124,41 @@ vows.describe('nconf/provider').addBatch({
             assert.equal(merged.candy.something, 'file1');
           }
         }
+      }
+    }
+  }
+}).addBatch({
+  "When using nconf": {
+    "an instance of 'nconf.Provider'": {
+      "the .file() method": {
+        "with a single filepath": assertProvider(function (provider) {
+          provider.file(helpers.fixture('store.json'));
+          assert.isObject(provider.stores.file);
+        }),
+        "with a name and a filepath": assertProvider(function (provider) {
+          provider.file('custom', helpers.fixture('store.json'));
+          assert.isObject(provider.stores.custom);
+        }),
+        "with a single object": assertProvider(function (provider) {
+          provider.file({
+            dir: helpers.fixture('hierarchy'),
+            file: 'store.json',
+            search: true
+          });
+
+          assert.isObject(provider.stores.file);
+          assert.equal(provider.stores.file.file, helpers.fixture('store.json'));
+        }),
+        "with a name and an object": assertProvider(function (provider) {
+          provider.file('custom', {
+            dir: helpers.fixture('hierarchy'),
+            file: 'store.json',
+            search: true
+          });
+
+          assert.isObject(provider.stores.custom);
+          assert.equal(provider.stores.custom.file, helpers.fixture('store.json'));
+        })
       }
     }
   }

@@ -86,10 +86,21 @@ A sane default for this could be:
   nconf.env().argv();
   
   //
-  // 4. Values in `config.json` 
+  // 4. Values in `config.json`
   //
-  nconf.file({ 
-    file: 'config.json', 
+  nconf.file('/path/to/config.json');
+
+  //
+  // Or with a custom name
+  //
+  nconf.file('custom', '/path/to/config.json');
+
+  //
+  // Or searching from a base directory.
+  // Note: `name` is optional.
+  //
+  nconf.file(name, {
+    file: 'config.json',
     dir: 'search/from/here', 
     search: true
   });
