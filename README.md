@@ -61,7 +61,7 @@ The output will be:
 
 Configuration management can get complicated very quickly for even trivial applications running in production. `nconf` addresses this problem by enabling you to setup a hierarchy for different sources of configuration with no defaults. **The order in which you attach these configuration sources determines their priority in the hierarchy.** Lets take a look at the options available to you
 
-  1. **nconf.argv(options)** Loads `process.argv` using optimist. If `options` is supplied it is passed along to optimist.
+  1. **nconf.argv(options)** Loads `process.argv` using [optimist](https://github.com/substack/node-optimist#optimist). If `options` is supplied it is passed along to optimist.
   2. **nconf.env(options)** Loads `process.env` into the hierarchy.
   3. **nconf.file(options)** Loads the configuration data at options.file into the hierarchy.
   4. **nconf.defaults(options)** Loads the data in options.store into the hierarchy.
