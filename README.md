@@ -2,7 +2,7 @@
 
 Hierarchical node.js configuration with files, environment variables, command-line arguments, and atomic object merging.
 
-## Example
+## Example 1
 Using nconf is easy; it is designed to be a simple key-value store with support for both local and remote storage. Keys are namespaced and delimited by `:`. Lets dive right into sample usage:
 
 ``` js
@@ -25,6 +25,7 @@ Using nconf is easy; it is designed to be a simple key-value store with support 
   nconf.set('database:host', '127.0.0.1');
   nconf.set('database:port', 5984);
   
+
   //
   // Get the entire database object from nconf. This will output
   // { host: '127.0.0.1', port: 5984 }
@@ -32,6 +33,25 @@ Using nconf is easy; it is designed to be a simple key-value store with support 
   console.log('foo: ' + nconf.get('foo'));
   console.log('NODE_ENV: ' + nconf.get('NODE_ENV'));
   console.log('database: ' + nconf.get('database'));
+  
+
+	//
+	// create an array of key:value pairs and add it to nconf
+	//
+	var serverConf = []
+
+	serverConf.push({
+		"server:Limit": 10,
+		"server:Size": 1
+	});
+
+	nconf.Set(serverConf);
+
+  //
+  // Get the server configurations. This will output
+  // { Limit: 10, Size: 1 }
+  //
+  console.log('server: ' + nconf.get('server'));
   
   //
   // Save the configuration object to disk
@@ -55,6 +75,11 @@ The output will be:
   foo: bar
   NODE_ENV: production
   database: { host: '127.0.0.1', port: 5984 }
+```
+
+## Example 2
+
+```
 ```
 
 ## Hierarchical configuration
