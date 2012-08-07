@@ -8,9 +8,9 @@ Using nconf is easy; it is designed to be a simple key-value store with support 
 ``` js
   var fs    = require('fs'),
       nconf = require('nconf');
-  
+
   //
-  // Setup nconf to use (in-order): 
+  // Setup nconf to use (in-order):
   //   1. Command-line arguments
   //   2. Environment variables
   //   3. A file located at 'path/to/config.json'
@@ -18,13 +18,13 @@ Using nconf is easy; it is designed to be a simple key-value store with support 
   nconf.argv()
        .env()
        .file({ file: 'path/to/config.json' });
-  
+
   //
   // Set a few variables on `nconf`.
   //
   nconf.set('database:host', '127.0.0.1');
   nconf.set('database:port', 5984);
-  
+
   //
   // Get the entire database object from nconf. This will output
   // { host: '127.0.0.1', port: 5984 }
@@ -32,7 +32,7 @@ Using nconf is easy; it is designed to be a simple key-value store with support 
   console.log('foo: ' + nconf.get('foo'));
   console.log('NODE_ENV: ' + nconf.get('NODE_ENV'));
   console.log('database: ' + nconf.get('database'));
-  
+
   //
   // Save the configuration object to disk
   //
@@ -46,7 +46,7 @@ Using nconf is easy; it is designed to be a simple key-value store with support 
 If you run the above script:
 
 ``` bash
-  $ NODE_ENV=production sample.js --foo bar 
+  $ NODE_ENV=production sample.js --foo bar
 ```
 
 The output will be:
@@ -71,20 +71,20 @@ A sane default for this could be:
 
 ``` js
   var nconf = require('nconf');
-  
+
   //
   // 1. any overrides
   //
   nconf.overrides({
     'always': 'be this value'
   });
-  
+
   //
   // 2. `process.env`
   // 3. `process.argv`
   //
   nconf.env().argv();
-  
+
   //
   // 4. Values in `config.json`
   //
@@ -101,10 +101,10 @@ A sane default for this could be:
   //
   nconf.file(name, {
     file: 'config.json',
-    dir: 'search/from/here', 
+    dir: 'search/from/here',
     search: true
   });
-  
+
   //
   // 5. Any default values
   //
@@ -125,7 +125,7 @@ Adds a new store with the specified `name` and `options`. If `options.type` is n
   nconf.add('global', { type: 'file', file: '/path/to/globalconf.json' });
 ```
 
-### nconf.use(name, options) 
+### nconf.use(name, options)
 Similar to `nconf.add`, except that it can replace an existing store if new options are provided
 
 ``` js
@@ -133,7 +133,7 @@ Similar to `nconf.add`, except that it can replace an existing store if new opti
   // Load a file store onto nconf with the specified settings
   //
   nconf.use('file', { file: '/path/to/some/config-file.json' });
-  
+
   //
   // Replace the file store with new settings
   //
@@ -152,18 +152,25 @@ Removes the store with the specified `name.` The configuration stored at that le
 ### Memory
 A simple in-memory storage engine that stores a nested JSON representation of the configuration. To use this engine, just call `.use()` with the appropriate arguments. All calls to `.get()`, `.set()`, `.clear()`, `.reset()` methods are synchronous since we are only dealing with an in-memory object.
 
-``` js 
+``` js
   nconf.use('memory');
 ```
 
 ### Argv
-Responsible for loading the values parsed from `process.argv` by `optimist` into the configuration hierarchy.
+Responsible for loading the values parsed from `process.argv` by `optimist` into the configuration hierarchy. See the [optimist option docs](https://github.com/substack/node-optimist/#optionskey-opt) for more on the option format.
 
 ``` js
   //
   // Can optionally also be an object literal to pass to `optimist`.
   //
-  nconf.argv(options);  
+  nconf.argv({
+    "x": {
+      alias: 'example',
+      describe: 'Example description for usage generation',
+      demand: true,
+      default: 'some-value'
+    }
+  });
 ```
 
 ### Env
@@ -173,7 +180,7 @@ Responsible for loading the values parsed from `process.env` into the configurat
   //
   // Can optionally also be an Array of values to limit process.env to.
   //
-  nconf.env(['only', 'load', 'these', 'values', 'from', 'process.env']);  
+  nconf.env(['only', 'load', 'these', 'values', 'from', 'process.env']);
 
   //
   // Can also specify a separator for nested keys (instead of the default ':')
@@ -225,13 +232,13 @@ Once installing both `nconf` and `nconf-redis`, you must require both modules to
 
 ``` js
   var nconf = require('nconf');
-  
+
   //
   // Requiring `nconf-redis` will extend the `nconf`
   // module.
   //
   require('nconf-redis');
-  
+
   nconf.use('redis', { host: 'localhost', port: 6379, ttl: 60 * 60 * 1000 });
 ```
 
