@@ -141,7 +141,7 @@ vows.describe('nconf/provider').addBatch({
         }),
         "with a single object": assertProvider(function (provider) {
           provider.file({
-            dir: helpers.fixture('hierarchy'),
+            dir: helpers.fixture(''),
             file: 'store.json',
             search: true
           });
@@ -151,7 +151,7 @@ vows.describe('nconf/provider').addBatch({
         }),
         "with a name and an object": assertProvider(function (provider) {
           provider.file('custom', {
-            dir: helpers.fixture('hierarchy'),
+            dir: helpers.fixture(''),
             file: 'store.json',
             search: true
           });
