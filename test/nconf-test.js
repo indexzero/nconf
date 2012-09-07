@@ -69,6 +69,31 @@ vows.describe('nconf').addBatch({
     }
   }
 }).addBatch({
+  "When using the nconf": {
+    "with the memory store": {
+      "the get() method": {
+        "should respond allow access to the root": function () {
+          assert(nconf.get(null));
+          assert(nconf.get(undefined));
+          assert(nconf.get());
+        }
+      },
+      "the set() method": {
+        "should respond allow access to the root and complain about non-objects": function () {
+          assert(!nconf.set(null, null));
+          assert(!nconf.set(null, undefined));
+          assert(!nconf.set(null));
+          assert(!nconf.set(null, ''));
+          assert(!nconf.set(null, 1));
+          var original = nconf.get();
+          assert(nconf.set(null, nconf.get()));
+          assert.notEqual(nconf.get(), original);
+          assert.deepEqual(nconf.get(), original)
+        }
+      }
+    }
+  }
+}).addBatch({
   "When using nconf": {
     "with the memory store": {
       "the clear() method": {
