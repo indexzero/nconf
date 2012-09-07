@@ -138,6 +138,11 @@ vows.describe('nconf/provider').addBatch({
         "with a name and a filepath": assertProvider(function (provider) {
           provider.file('custom', helpers.fixture('store.json'));
           assert.isObject(provider.stores.custom);
+
+          // we save this file, so it can be found by search below
+
+          provider.set('attrib', "value");
+          provider.save();
         }),
         "with a single object": assertProvider(function (provider) {
           provider.file({
