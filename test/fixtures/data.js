@@ -6,6 +6,7 @@
  */
  
 exports.data = {
+  isNull: null,
   literal: 'bazz', 
   arr: ['one', 2, true, { value: 'foo' }],
   obj: {
