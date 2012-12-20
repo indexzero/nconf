@@ -17,7 +17,8 @@ vows.describe('nconf/stores/memory').addBatch({
       "should respond with true": function (store) {
         assert.isTrue(store.set('foo:bar:bazz', 'buzz'));
         assert.isTrue(store.set('falsy:number', 0));
-        assert.isTrue(store.set('falsy:string', ''));
+        assert.isTrue(store.set('falsy:string:empty', ''));
+        assert.isTrue(store.set('falsy:string:value', 'value'));
         assert.isTrue(store.set('falsy:boolean', false));
         assert.isTrue(store.set('falsy:object', null));
       }
@@ -26,19 +27,42 @@ vows.describe('nconf/stores/memory').addBatch({
       "should respond with the correct value": function (store) {
         assert.equal(store.get('foo:bar:bazz'), 'buzz');
         assert.equal(store.get('falsy:number'), 0);
-        assert.equal(store.get('falsy:string'), '');
+        assert.equal(store.get('falsy:string:empty'), '');
+        assert.equal(store.get('falsy:string:value'), 'value');
         assert.equal(store.get('falsy:boolean'), false);
         assert.equal(store.get('falsy:object'), null);
       },
-      "should not fail when retrieving non-existent keys": function (store) {
-        assert.doesNotThrow(function() {
-          assert.equal(store.get('this:key:does:not:exist'), undefined);
-        }, TypeError);
-      },
-      "should not fail when drilling into non-objects": function (store) {
-        assert.doesNotThrow(function() {
-          assert.equal(store.get('falsy:number:uh:oh'), undefined);
-        }, TypeError);
+      "should not fail when retrieving non-existent keys": {
+        "at the root level": function (store) {
+          assert.doesNotThrow(function() {
+            assert.equal(store.get('this:key:does:not:exist'), undefined);
+          }, TypeError);
+        },
+        "within numbers": function (store) {
+          assert.doesNotThrow(function() {
+            assert.equal(store.get('falsy:number:not:exist'), undefined);
+          }, TypeError);
+        },
+        "within booleans": function (store) {
+          assert.doesNotThrow(function() {
+            assert.equal(store.get('falsy:boolean:not:exist'), undefined);
+          }, TypeError);
+        },
+        "within objects": function (store) {
+          assert.doesNotThrow(function() {
+            assert.equal(store.get('falsy:object:not:exist'), undefined);
+          }, TypeError);
+        },
+        "within empty strings": function (store) {
+          assert.doesNotThrow(function() {
+            assert.equal(store.get('falsy:string:empty:not:exist'), undefined);
+          }, TypeError);
+        },
+        "within non-empty strings": function (store) {
+          assert.doesNotThrow(function() {
+            assert.equal(store.get('falsy:string:value:not:exist'), undefined);
+          }, TypeError);
+        }
       }
     },
     "the clear() method": {
