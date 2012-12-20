@@ -58,7 +58,7 @@ vows.describe('nconf/stores/memory').addBatch({
             assert.equal(store.get('falsy:string:empty:not:exist'), undefined);
           }, TypeError);
         },
-        "within empty strings": function (store) {
+        "within non-empty strings": function (store) {
           assert.doesNotThrow(function() {
             assert.equal(store.get('falsy:string:value:not:exist'), undefined);
           }, TypeError);
