@@ -25,6 +25,7 @@ vows.describe('nconf/stores/memory').addBatch({
     "the get() method": {
       "should respond with the correct value": function (store) {
         assert.equal(store.get('foo:bar:bazz'), 'buzz');
+        assert.isUndefined(store.get('foo:bar:bazz:buzz:bizz'));
         assert.equal(store.get('falsy:number'), 0);
         assert.equal(store.get('falsy:string'), '');
         assert.equal(store.get('falsy:boolean'), false);
