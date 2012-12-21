@@ -12,5 +12,8 @@
       "first": 1,
       "second": 2
     }
+  },
+  "unicorn": {
+    "exists": true
   }
 }
