@@ -84,6 +84,11 @@ vows.describe('nconf/provider').addBatch({
           provider.merge(override);
           helpers.assertMerged(null, provider.stores.file.store);
           assert.equal(provider.stores.file.store.candy.something, 'file1');
+        },
+        "should merge Objects over null": function (provider) {
+          provider.load();
+          provider.merge(override);
+          assert.equal(provider.stores.file.store.unicorn.exists, true);
         }
       }
     }
