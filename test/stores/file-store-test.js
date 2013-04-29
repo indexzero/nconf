@@ -42,8 +42,9 @@ vows.describe('nconf/stores/file').addBatch({
         topic: function () {
           this.store.load(this.callback.bind(null, null));
         },
-        "should respond with an error": function (_, err) {
+        "should respond with an error and indicate file name": function (_, err) {
           assert.isTrue(!!err);
+          assert.match(err, /malformed\.json/);
         }
       }
     }
