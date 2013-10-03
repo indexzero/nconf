@@ -47,6 +47,54 @@ vows.describe('nconf/stores/file').addBatch({
           assert.match(err, /malformed\.json/);
         }
       }
+    },
+    "with a valid UTF8 JSON file that contains a BOM": {
+        topic: function () {
+            var filePath = path.join(__dirname, '..', 'fixtures', 'bom.json');
+            this.store = store = new nconf.File({ file: filePath });
+            return null;
+        },
+        "the load() method": {
+            topic: function () {
+                this.store.load(this.callback);
+            },
+            "should load the data correctly": function (err, data) {
+                assert.isNull(err);
+            }
+        },
+        "the loadSync() method": {
+            topic: function () {
+                this.store.loadSync();
+                return null;
+            },
+            "should load the data correctly": function (result) {
+                assert.isNull(result);
+            }
+        }
+    },
+    "with a valid UTF8 JSON file that contains no BOM": {
+        topic: function () {
+            var filePath = path.join(__dirname, '..', 'fixtures', 'no-bom.json');
+            this.store = store = new nconf.File({ file: filePath });
+            return null;
+        },
+        "the load() method": {
+            topic: function () {
+                this.store.load(this.callback);
+            },
+            "should load the data correctly": function (err, data) {
+                assert.isNull(err);
+            }
+        },
+        "the loadSync() method": {
+            topic: function () {
+                this.store.loadSync();
+                return null;
+            },
+            "should load the data correctly": function (result) {
+                assert.isNull(result);
+            }
+        }
     }
   }
 }).addBatch({
