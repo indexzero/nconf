@@ -60,15 +60,16 @@ vows.describe('nconf/stores/file').addBatch({
             },
             "should load the data correctly": function (err, data) {
                 assert.isNull(err);
+				assert.deepEqual(data, this.store.store);
             }
         },
         "the loadSync() method": {
             topic: function () {
-                this.store.loadSync();
-                return null;
+                var data = this.store.loadSync();
+                return data;
             },
             "should load the data correctly": function (result) {
-                assert.isNull(result);
+                assert.deepEqual(result, this.store.store);
             }
         }
     },
