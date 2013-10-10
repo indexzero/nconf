@@ -22,7 +22,7 @@
     "pkginfo": "0.2.x"
   },
   "devDependencies": {
-    "vows": "0.6.x"
+    "vows": "0.7.x"
   },
   "main": "./lib/nconf",
   "scripts": {
