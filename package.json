@@ -16,7 +16,7 @@
     "plugabble"
   ],
   "dependencies": {
-    "async": "0.1.x",
+    "async": "0.2.9",
     "ini": "1.x.x",
     "optimist": "0.3.x",
     "pkginfo": "0.2.x"
