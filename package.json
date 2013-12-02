@@ -18,7 +18,7 @@
   "dependencies": {
     "async": "0.2.9",
     "ini": "1.x.x",
-    "optimist": "0.3.x"
+    "optimist": "0.6.0"
   },
   "devDependencies": {
     "vows": "0.7.x"
