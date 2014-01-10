@@ -190,11 +190,12 @@ Responsible for loading the values parsed from `process.env` into the configurat
   var dbHost = nconf.get('database:host');
 
   //
-  // Or use both options
+  // Or use all options
   //
   nconf.env({
     separator: '__',
-    whitelist: ['database__host', 'only', 'load', 'these', 'values']
+    match: /^whatever_matches_this_will_be_whitelisted/
+    whitelist: ['database__host', 'only', 'load', 'these', 'values', 'if', 'whatever_doesnt_match_but_is_whitelisted_gets_loaded_too']
   });
   var dbHost = nconf.get('database:host');
 ```
