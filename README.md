@@ -220,6 +220,8 @@ Based on the Memory store, but provides additional methods `.save()` and `.load(
 
 The file store is also extensible for multiple file formats, defaulting to `JSON`. To use a custom format, simply pass a format object to the `.use()` method. This object must have `.parse()` and `.stringify()` methods just like the native `JSON` object.
 
+If the file does not exist at the provided path, the store will simply be empty.
+
 ### Redis
 There is a separate Redis-based store available through [nconf-redis][0]. To install and use this store simply:
 
