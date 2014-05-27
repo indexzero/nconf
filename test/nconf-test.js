@@ -107,22 +107,24 @@ vows.describe('nconf').addBatch({
         "without a callback": {
           "should respond with the merged store": function () {
             assert.deepEqual(nconf.load(), {
-              title: 'My specific title', 
-              color: 'green',
-              movie: 'Kill Bill' 
+              title: 'My generic title',
+              color: 'red',
+              weebls: 'crap',
+              movie: 'Kill Bill'
             });
           }
         },
         "with a callback": {
           topic: function () {
-            nconf.load(this.callback.bind(null, null)); 
+            nconf.load(this.callback.bind(null, null));
           },
           "should respond with the merged store": function (ign, err, store) {
             assert.isNull(err);
             assert.deepEqual(store, {
-              title: 'My specific title', 
-              color: 'green',
-              movie: 'Kill Bill' 
+              title: 'My generic title',
+              color: 'red',
+              weebls: 'crap',
+              movie: 'Kill Bill'
             });
           }
         }
