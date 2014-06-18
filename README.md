@@ -92,6 +92,7 @@ A sane default for this could be:
 
   //
   // Or with a custom name
+  // Note: A custom key must be supplied for hierarchy to work if multiple files are used.
   //
   nconf.file('custom', '/path/to/config.json');
 
@@ -209,7 +210,7 @@ Loads a given object literal into the configuration hierarchy. Both `nconf.defau
 ```
 
 ### File
-Based on the Memory store, but provides additional methods `.save()` and `.load()` which allow you to read your configuration to and from file. As with the Memory store, all method calls are synchronous with the exception of `.save()` and `.load()` which take callback functions. It is important to note that setting keys in the File engine will not be persisted to disk until a call to `.save()` is made.
+Based on the Memory store, but provides additional methods `.save()` and `.load()` which allow you to read your configuration to and from file. As with the Memory store, all method calls are synchronous with the exception of `.save()` and `.load()` which take callback functions. It is important to note that setting keys in the File engine will not be persisted to disk until a call to `.save()` is made. Note a custom key must be supplied as the first parameter for hierarchy to work if multiple files are used.
 
 ``` js
   nconf.file('path/to/your/config.json');
