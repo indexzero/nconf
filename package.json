@@ -16,9 +16,9 @@
     "plugabble"
   ],
   "dependencies": {
-    "async": "0.2.9",
+    "async": "~0.2.9",
     "ini": "1.x.x",
-    "optimist": "0.6.0"
+    "optimist": "~0.6.0"
   },
   "devDependencies": {
     "vows": "0.7.x"
