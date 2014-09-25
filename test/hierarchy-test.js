@@ -20,8 +20,8 @@ vows.describe('nconf/hierarchy').addBatch({
   "When using nconf": {
     "configured with two file stores": {
       topic: function () {
-        nconf.add('user', { type: 'file', file: userConfig });
         nconf.add('global', { type: 'file', file: globalConfig });
+        nconf.add('user', { type: 'file', file: userConfig });
         nconf.load();
         return nconf;
       },
@@ -98,12 +98,12 @@ vows.describe('nconf/hierarchy').addBatch({
         assert.deepEqual(JSON.parse(data), {
           apples: true,
           candy: {
-            something: 'foo',
+            something: 'file1',
             something1: true,
             something2: true,
             something5: {
               first: 1,
-              second: 'bar'
+              second: 2
             }
           }
         });
