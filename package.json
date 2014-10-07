@@ -18,7 +18,8 @@
   "dependencies": {
     "async": "~0.2.9",
     "ini": "1.x.x",
-    "optimist": "~0.6.0"
+    "optimist": "~0.6.0",
+    "js-yaml": "3.x.x"
   },
   "devDependencies": {
     "vows": "0.7.x"
