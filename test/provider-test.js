@@ -12,7 +12,7 @@ var assert = require('assert'),
     vows = require('vows'),
     helpers = require('./helpers'),
     nconf = require('../lib/nconf');
-    
+
 var fixturesDir = path.join(__dirname, 'fixtures'),
     mergeFixtures = path.join(fixturesDir, 'merge'),
     files = [path.join(mergeFixtures, 'file1.json'), path.join(mergeFixtures, 'file2.json')],
@@ -123,7 +123,7 @@ vows.describe('nconf/provider').addBatch({
             .add('file2', {type: 'file', file: files[1]}),
           "should respect the hierarchy": function(provider) {
             var merged = provider.load();
-            
+
             helpers.assertMerged(null, merged);
             assert.equal(merged.foo.bar, 'baz');
             assert.equal(merged.candy.something, 'file1');
