@@ -122,6 +122,7 @@ The top-level of `nconf` is an instance of the `nconf.Provider` abstracts this a
 Adds a new store with the specified `name` and `options`. If `options.type` is not set, then `name` will be used instead:
 
 ``` js
+  nconf.add('supplied', { type: 'literal', store: { 'some': 'config' });
   nconf.add('user', { type: 'file', file: '/path/to/userconf.json' });
   nconf.add('global', { type: 'file', file: '/path/to/globalconf.json' });
 ```
@@ -221,6 +222,8 @@ Based on the Memory store, but provides additional methods `.save()` and `.load(
 ```
 
 The file store is also extensible for multiple file formats, defaulting to `JSON`. To use a custom format, simply pass a format object to the `.use()` method. This object must have `.parse()` and `.stringify()` methods just like the native `JSON` object.
+
+If the file does not exist at the provided path, the store will simply be empty.
 
 ### Redis
 There is a separate Redis-based store available through [nconf-redis][0]. To install and use this store simply:
