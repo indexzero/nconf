@@ -13,6 +13,8 @@ var assert = require('assert'),
     nconf = require('../lib/nconf');
 
 exports.assertMerged = function (err, merged) {
+  console.log(merged);
+  
   merged = merged instanceof nconf.Provider 
     ? merged.store.store
     : merged;
