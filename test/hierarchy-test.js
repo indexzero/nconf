@@ -1,7 +1,7 @@
 /*
  * hierarchy-test.js: Basic tests for hierarchical file stores.
  *
- * (C) 2011, Nodejitsu Inc.
+ * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
 
@@ -52,16 +52,16 @@ vows.describe('nconf/hierarchy').addBatch({
             that = this,
             data = '',
             child;
-        
+
         try { fs.unlinkSync(configFile) }
         catch (ex) { }
-        
+
         child = spawn('node', [script].concat(argv));
-        
+
         child.stdout.on('data', function (d) {
           data += d;
         });
-        
+
         child.on('exit', function () {
           fs.readFile(configFile, 'utf8', that.callback.bind(null, null, data));
         });

@@ -1,7 +1,7 @@
 /*
  * argv-test.js: Tests for the nconf argv store.
  *
- * (C) 2011, Nodejitsu Inc.
+ * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
 

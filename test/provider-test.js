@@ -1,7 +1,7 @@
 /*
  * provider-test.js: Tests for the nconf Provider object.
  *
- * (C) 2011, Nodejitsu Inc.
+ * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
 

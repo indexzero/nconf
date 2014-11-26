@@ -1,7 +1,7 @@
 /*
  * literal-test.js: Tests for the nconf literal store.
  *
- * (C) 2011, Nodejitsu Inc.
+ * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
 

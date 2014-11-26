@@ -1,7 +1,7 @@
 /*
  * complete-test.js: Complete test for multiple stores.
  *
- * (C) 2011, Nodejitsu Inc.
+ * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
 

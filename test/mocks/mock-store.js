@@ -1,7 +1,7 @@
 /*
  * mock-store.js: Mock store for ensuring certain operations are actually called.
  *
- * (C) 2011, Nodejitsu Inc.
+ * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
 
@@ -28,9 +28,9 @@ Mock.prototype.save = function (value, callback) {
     callback = value;
     value = null;
   }
-  
+
   var self = this;
-  
+
   setTimeout(function () {
     self.emit('save');
     callback();

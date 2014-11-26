@@ -1,16 +1,16 @@
 /*
  * nconf-hierarchical-load-save.js: Test fixture for using optimist, envvars and a file store with nconf.
  *
- * (C) 2011, Nodejitsu Inc.
+ * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
- 
+
 var fs = require('fs'),
     path = require('path'),
     nconf = require('../../../lib/nconf');
 
 //
-// Setup nconf to use (in-order): 
+// Setup nconf to use (in-order):
 //   1. Command-line arguments
 //   2. Environment variables
 //   3. A file located at 'path/to/config.json'

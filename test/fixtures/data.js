@@ -1,13 +1,13 @@
 /*
  * data.js: Simple data fixture for configuration test.
  *
- * (C) 2011, Nodejitsu Inc.
+ * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
- 
+
 exports.data = {
   isNull: null,
-  literal: 'bazz', 
+  literal: 'bazz',
   arr: ['one', 2, true, { value: 'foo' }],
   obj: {
     host: 'localhost',

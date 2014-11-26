@@ -1,7 +1,7 @@
 /*
  * file-store-test.js: Tests for the nconf File store.
  *
- * (C) 2011, Nodejitsu Inc.
+ * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
 

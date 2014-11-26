@@ -1,7 +1,7 @@
 /*
  * file-store-test.js: Tests for the nconf File store.
  *
- * (C) 2011, Nodejitsu Inc.
+ * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
 
@@ -109,11 +109,11 @@ vows.describe('nconf/stores/file').addBatch({
     "the save() method": {
       topic: function (tmpStore) {
         var that = this;
-        
+
         Object.keys(data).forEach(function (key) {
           tmpStore.set(key, data[key]);
-        });        
-        
+        });
+
         tmpStore.save(function () {
           fs.readFile(tmpStore.file, function (err, d) {
             fs.unlinkSync(tmpStore.file);

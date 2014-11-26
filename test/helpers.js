@@ -1,7 +1,7 @@
 /*
  * helpers.js: Test helpers for nconf.
  *
- * (C) 2011, Nodejitsu Inc.
+ * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
 

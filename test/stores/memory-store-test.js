@@ -1,7 +1,7 @@
 /*
  * memory-store-test.js: Tests for the nconf Memory store.
  *
- * (C) 2011, Nodejitsu Inc.
+ * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
 
@@ -85,7 +85,7 @@ vows.describe('nconf/stores/memory').addBatch({
       },
       "when merging into an existing Object value": function (store) {
         store.set('merge:object', {
-          prop1: 2, 
+          prop1: 2,
           prop2: 'prop2',
           prop3: {
             bazz: 'bazz'
@@ -101,7 +101,7 @@ vows.describe('nconf/stores/memory').addBatch({
           bar: 'foo',
           bazz: 'bazz'
         });
-        assert.equal(store.get('merge:object:prop4').length, 2);        
+        assert.equal(store.get('merge:object:prop4').length, 2);
       }
     }
   },

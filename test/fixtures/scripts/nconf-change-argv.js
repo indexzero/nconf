@@ -1,10 +1,10 @@
 /*
  * nconf-change-argv.js: Test fixture for changing argv on the fly
  *
- * (C) 2011, Nodejitsu Inc.
+ * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
- 
+
 var nconf = require('../../../lib/nconf').argv();
 
 //

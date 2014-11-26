@@ -1,19 +1,19 @@
 /*
  * provider-save-test.js: Ensures consistency for Provider `save` operations.
  *
- * (C) 2011, Nodejitsu Inc.
+ * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
 
 var assert = require('assert'),
     vows = require('vows'),
     nconf = require('../lib/nconf');
-    
+
 //
 // Expose `nconf.Mock`
 //
 require('./mocks/mock-store');
-    
+
 vows.describe('nconf/provider/save').addBatch({
   "When using nconf": {
     "an instance of 'nconf.Provider'": {
@@ -25,7 +25,7 @@ vows.describe('nconf/provider/save').addBatch({
           topic: function () {
             var mock = nconf.stores.mock,
                 that = this;
-                
+
             mock.on('save', function () { that.saved = true });
             nconf.save(this.callback);
           },
