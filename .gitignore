@@ -2,6 +2,7 @@
 config.json
 test/fixtures/*.json
 test/fixtures/*.yaml
+test/fixtures/foo.bar
 !test/fixtures/complete.json
 !test/fixtures/malformed.json
 !test/fixtures/malformed.yaml
