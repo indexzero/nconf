@@ -222,5 +222,40 @@ vows.describe('nconf/stores/file').addBatch({
       }
     }
   }
+}).addBatch({
+  "When using the nconf file store": {
+    "with custom stringify and parse options": {
+      topic: function () {
+        function stringify(obj) {
+          return 'foobar';
+        }
+        function parse(str) {
+          return { foo: 'bar' };
+        }
+        this.filePath = path.join(__dirname, '..', 'fixtures', 'foo.bar');
+        fs.writeFileSync(this.filePath, 'foobar');
+        var format = { stringify: stringify, parse: parse };
+        this.store = store = new nconf.File({ file: this.filePath, format: format });
+        return null;
+      },
+      "the load() method": {
+        topic: function () {
+          this.store.load(this.callback);
+        },
+        "should call the parse method": function (err, data) {
+          assert.isNull(err);
+          assert.deepEqual(data, { foo: 'bar' });
+        }
+      },
+      "the save method()": {
+        topic: function () {
+          this.store.save(this.callback);
+        },
+        "should call the stringify method": function (store) {
+          assert.equal(fs.readFileSync(this.filePath, 'utf8'), 'foobar');
+        }
+      }
+    }
+  }
 }).export(module);
 
