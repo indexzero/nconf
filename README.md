@@ -3,7 +3,7 @@
 Hierarchical node.js configuration with files, environment variables, command-line arguments, and atomic object merging.
 
 ## Example
-Using nconf is easy; it is designed to be a simple key-value store with support for both local and remote storage. Keys are namespaced and delimited by `:`. Lets dive right into sample usage:
+Using nconf is easy; it is designed to be a simple key-value store with support for both local and remote storage. Keys are namespaced and delimited by `:`. Let's dive right into sample usage:
 
 ``` js
   var fs    = require('fs'),
