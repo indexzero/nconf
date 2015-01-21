@@ -14,11 +14,12 @@
   ],
   "dependencies": {
     "async": "~0.9.0",
-    "ini": "1.x.x",
     "optimist": "~0.6.0"
   },
   "devDependencies": {
-    "vows": "0.8.x"
+    "vows": "0.8.x",
+    "nconf-yaml": "1.x.x",
+    "js-yaml": "3.x.x"
   },
   "main": "./lib/nconf",
   "scripts": {
