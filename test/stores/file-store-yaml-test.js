@@ -1,7 +1,7 @@
 /*
- * file-store-test.js: Tests for the nconf File store.
+ * format-yaml-test.js: Tests YAML file format.
  *
- * (C) 2011, Charlie Robbins and the Contributors.
+ * (C) 2011, Nodejitsu Inc.
  *
  */
 
@@ -11,14 +11,15 @@ var fs = require('fs'),
     assert = require('assert'),
     nconf = require('../../lib/nconf'),
     data = require('../fixtures/data').data,
+    YAML = require('js-yaml'),
     store;
 
-vows.describe('nconf/stores/file').addBatch({
+vows.describe('nconf/formats yaml').addBatch({
   "When using the nconf file store": {
-    "with a valid JSON file": {
+    "with a valid YAML file": {
       topic: function () {
-        var filePath = path.join(__dirname, '..', 'fixtures', 'store.json');
-        fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+        var filePath = path.join(__dirname, '..', 'fixtures', 'store.yaml');
+        fs.writeFileSync(filePath, YAML.safeDump(data));
         this.store = store = new nconf.File({ file: filePath });
         return null;
       },
@@ -32,69 +33,19 @@ vows.describe('nconf/stores/file').addBatch({
         }
       }
     },
-    "with a malformed JSON file": {
+    "with a malformed YAML file": {
       topic: function () {
-        var filePath = path.join(__dirname, '..', 'fixtures', 'malformed.json');
+        var filePath = path.join(__dirname, '..', 'fixtures', 'malformed.yaml');
         this.store = new nconf.File({ file: filePath });
         return null;
       },
-      "the load() method with a malformed JSON config file": {
+      "the load() method with a malformed YAML config file": {
         topic: function () {
           this.store.load(this.callback.bind(null, null));
         },
         "should respond with an error and indicate file name": function (_, err) {
           assert.isTrue(!!err);
-          assert.match(err, /malformed\.json/);
-        }
-      }
-    },
-    "with a valid UTF8 JSON file that contains a BOM": {
-      topic: function () {
-        var filePath = path.join(__dirname, '..', 'fixtures', 'bom.json');
-        this.store = store = new nconf.File({ file: filePath });
-        return null;
-      },
-      "the load() method": {
-        topic: function () {
-          this.store.load(this.callback);
-        },
-        "should load the data correctly": function (err, data) {
-          assert.isNull(err);
-		      assert.deepEqual(data, this.store.store);
-        }
-      },
-      "the loadSync() method": {
-        topic: function () {
-          var data = this.store.loadSync();
-          return data;
-        },
-        "should load the data correctly": function (result) {
-          assert.deepEqual(result, this.store.store);
-        }
-      }
-    },
-    "with a valid UTF8 JSON file that contains no BOM": {
-      topic: function () {
-        var filePath = path.join(__dirname, '..', 'fixtures', 'no-bom.json');
-        this.store = store = new nconf.File({ file: filePath });
-        return null;
-      },
-      "the load() method": {
-        topic: function () {
-          this.store.load(this.callback);
-        },
-        "should load the data correctly": function (err, data) {
-          assert.isNull(err);
-          assert.deepEqual(data, this.store.store);
-        }
-      },
-      "the loadSync() method": {
-        topic: function () {
-          var data = this.store.loadSync();
-          return data;
-        },
-        "should load the data correctly": function (result) {
-          assert.deepEqual(result, this.store.store);
+          assert.match(err, /malformed\.yaml/);
         }
       }
     }
@@ -102,7 +53,7 @@ vows.describe('nconf/stores/file').addBatch({
 }).addBatch({
   "When using the nconf file store": {
     topic: function () {
-      var tmpPath = path.join(__dirname, '..', 'fixtures', 'tmp.json'),
+      var tmpPath = path.join(__dirname, '..', 'fixtures', 'tmp.yaml'),
           tmpStore = new nconf.File({ file: tmpPath });
       return tmpStore;
     },
@@ -120,7 +71,7 @@ vows.describe('nconf/stores/file').addBatch({
 
             return err
               ? that.callback(err)
-              : that.callback(err, JSON.parse(d.toString()));
+              : that.callback(err, YAML.safeLoad(d.toString()));
           });
         });
       },
@@ -133,7 +84,7 @@ vows.describe('nconf/stores/file').addBatch({
 }).addBatch({
   "When using the nconf file store": {
     topic: function () {
-      var tmpPath = path.join(__dirname, '..', 'fixtures', 'tmp.json'),
+      var tmpPath = path.join(__dirname, '..', 'fixtures', 'tmp.yaml'),
           tmpStore = new nconf.File({ file: tmpPath });
       return tmpStore;
     },
@@ -152,7 +103,7 @@ vows.describe('nconf/stores/file').addBatch({
 
           return err
             ? that.callback(err)
-            : that.callback(err, JSON.parse(d.toString()), saved);
+            : that.callback(err, YAML.safeLoad(d.toString()), saved);
         });
       },
       "should save the data correctly": function (err, read, saved) {
@@ -209,10 +160,10 @@ vows.describe('nconf/stores/file').addBatch({
       },
       "when the target file doesn't exist higher in the directory tree": {
         topic: function () {
-          var filePath = this.filePath = path.join(__dirname, '..', 'fixtures', 'search-store.json');
+          var filePath = this.filePath = path.join(__dirname, '..', 'fixtures', 'search-store.yaml');
           return new (nconf.File)({
             dir: path.dirname(filePath),
-            file: 'search-store.json'
+            file: 'search-store.yaml'
           })
         },
         "should update the file appropriately": function (store) {
@@ -222,40 +173,4 @@ vows.describe('nconf/stores/file').addBatch({
       }
     }
   }
-}).addBatch({
-  "When using the nconf file store": {
-    "with custom stringify and parse options": {
-      topic: function () {
-        function stringify(obj) {
-          return 'foobar';
-        }
-        function parse(str) {
-          return { foo: 'bar' };
-        }
-        this.filePath = path.join(__dirname, '..', 'fixtures', 'foo.bar');
-        fs.writeFileSync(this.filePath, 'foobar');
-        var format = { stringify: stringify, parse: parse };
-        this.store = store = new nconf.File({ file: this.filePath, format: format });
-        return null;
-      },
-      "the load() method": {
-        topic: function () {
-          this.store.load(this.callback);
-        },
-        "should call the parse method": function (err, data) {
-          assert.isNull(err);
-          assert.deepEqual(data, { foo: 'bar' });
-        }
-      },
-      "the save method()": {
-        topic: function () {
-          this.store.save(this.callback);
-        },
-        "should call the stringify method": function (store) {
-          assert.equal(fs.readFileSync(this.filePath, 'utf8'), 'foobar');
-        }
-      }
-    }
-  }
 }).export(module);
-
