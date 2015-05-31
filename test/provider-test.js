@@ -167,4 +167,25 @@ vows.describe('nconf/provider').addBatch({
       }
     }
   }
+}).addBatch({
+  "When using nconf": {
+    "an instance of 'nconf.Provider'": {
+      "the .fileValid() method": {
+        "with an invalid file": {
+          "should respond with false": function () {
+            var file = path.join(__dirname, 'fixtures', 'malformed.json');
+            assert.isFalse(nconf.fileValid(file));
+            assert.isFalse(nconf.stores.hasOwnProperty('__nconf_verify__'));
+          }
+        },
+        "with a valid file": {
+          "should respond with true": function () {
+            var file = path.join(__dirname, 'fixtures', 'complete.json');
+            assert.isTrue(nconf.fileValid(file));
+            assert.isFalse(nconf.stores.hasOwnProperty('__nconf_verify__'));
+          }
+        }
+      }
+    }
+  }
 }).export(module);
