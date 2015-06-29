@@ -39,12 +39,3 @@ nconf.set('database:port', 5984);
 //
 var database = nconf.get('database');
 console.dir(database);
-
-//
-// Save the configuration object to disk
-//
-nconf.save(function (err) {
-  fs.readFile(path.join(__dirname, 'config.json'), function (err, data) {
-    console.dir(JSON.parse(data.toString()))
-  });
-});

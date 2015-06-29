@@ -1,9 +1,9 @@
-# nconf [![Build Status](https://secure.travis-ci.org/flatiron/nconf.png)](http://travis-ci.org/flatiron/nconf)
+# nconf [![Build Status](https://secure.travis-ci.org/indexzero/nconf.png)](http://travis-ci.org/indexzero/nconf)
 
-Hierarchical node.js configuration with files, environment variables, command-line arguments, and atomic object merging.
+Hierarchical node.js configuration merging supporting files, environment variables, command-line arguments, and deep object merging.
 
 ## Example
-Using nconf is easy; it is designed to be a simple key-value store with support for both local and remote storage. Keys are namespaced and delimited by `:`. Let's dive right into sample usage:
+Using nconf is easy; it is designed to be a simple in-memory key-value store with support syncing with local and remote storage. Keys are namespaced and delimited by `.`. Let's dive right into sample usage:
 
 ``` js
   var fs    = require('fs'),
@@ -16,14 +16,15 @@ Using nconf is easy; it is designed to be a simple key-value store with support 
   //   3. A file located at 'path/to/config.json'
   //
   nconf.argv()
-       .env()
-       .file({ file: 'path/to/config.json' });
+    .env()
+    .file({ file: 'path/to/config.json' });
 
   //
   // Set a few variables on `nconf`.
   //
   nconf.set('database:host', '127.0.0.1');
   nconf.set('database:port', 5984);
+  nconf.set('another', 'override-cli');
 
   //
   // Get the entire database object from nconf. This will output
@@ -32,21 +33,12 @@ Using nconf is easy; it is designed to be a simple key-value store with support 
   console.log('foo: ' + nconf.get('foo'));
   console.log('NODE_ENV: ' + nconf.get('NODE_ENV'));
   console.log('database: ' + nconf.get('database'));
-
-  //
-  // Save the configuration object to disk
-  //
-  nconf.save(function (err) {
-    fs.readFile('path/to/your/config.json', function (err, data) {
-      console.dir(JSON.parse(data.toString()))
-    });
-  });
 ```
 
 If you run the above script:
 
 ``` bash
-  $ NODE_ENV=production sample.js --foo bar
+  $ NODE_ENV=production sample.js --foo bar --another ok
 ```
 
 The output will be:
@@ -55,6 +47,7 @@ The output will be:
   foo: bar
   NODE_ENV: production
   database: { host: '127.0.0.1', port: 5984 }
+  another: override-cli
 ```
 
 ## Hierarchical configuration
@@ -177,6 +170,7 @@ Responsible for loading the values parsed from `process.env` into the configurat
     match: /^whatever_matches_this_will_be_whitelisted/
     whitelist: ['database__host', 'only', 'load', 'these', 'values', 'if', 'whatever_doesnt_match_but_is_whitelisted_gets_loaded_too']
   });
+
   var dbHost = nconf.get('database:host');
 ```
 
@@ -223,25 +217,6 @@ Once installing both `nconf` and `nconf-redis`, you must require both modules to
   require('nconf-redis');
 
   nconf.add('redis', { host: 'localhost', port: 6379, ttl: 60 * 60 * 1000 });
-```
-
-## Installation
-
-### Installing npm (node package manager)
-```
-  curl http://npmjs.org/install.sh | sh
-```
-
-### Installing nconf
-```
-  [sudo] npm install nconf
-```
-
-## More Documentation
-There is more documentation available through docco. I haven't gotten around to making a gh-pages branch so in the meantime if you clone the repository you can view the docs:
-
-```
-  open docs/nconf.html
 ```
 
 ## Run Tests
