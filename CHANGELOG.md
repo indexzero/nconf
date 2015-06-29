@@ -1,4 +1,12 @@
 
+v1.0.0
+
+## Breaking Changes
+
+`.use` has been removed.
+`Memory` store has been removed.
+
+
 v0.6.7 / Thu, 20 Dec 2012
 =========================
   * [d77c55d](https://github.com/flatiron/nconf/commit/d77c55d) [dist] Version bump. 0.6.7 (`indexzero`)

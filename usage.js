@@ -30,7 +30,7 @@ var multiple = new nconf.Provider({
 //
 // Setup nconf to use the 'file' store and set a couple of values;
 //
-nconf.use('file', { file: path.join(__dirname, 'config.json') });
+nconf.add('file', { file: path.join(__dirname, 'config.json') });
 nconf.set('database:host', '127.0.0.1');
 nconf.set('database:port', 5984);
 

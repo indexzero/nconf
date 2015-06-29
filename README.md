@@ -127,21 +127,6 @@ Adds a new store with the specified `name` and `options`. If `options.type` is n
   nconf.add('global', { type: 'file', file: '/path/to/globalconf.json' });
 ```
 
-### nconf.use(name, options)
-Similar to `nconf.add`, except that it can replace an existing store if new options are provided
-
-``` js
-  //
-  // Load a file store onto nconf with the specified settings
-  //
-  nconf.use('file', { file: '/path/to/some/config-file.json' });
-
-  //
-  // Replace the file store with new settings
-  //
-  nconf.use('file', { file: 'path/to/a-new/config-file.json' });
-```
-
 ### nconf.remove(name)
 Removes the store with the specified `name.` The configuration stored at that level will no longer be used for lookup(s).
 
@@ -150,13 +135,6 @@ Removes the store with the specified `name.` The configuration stored at that le
 ```
 
 ## Storage Engines
-
-### Memory
-A simple in-memory storage engine that stores a nested JSON representation of the configuration. To use this engine, just call `.use()` with the appropriate arguments. All calls to `.get()`, `.set()`, `.clear()`, `.reset()` methods are synchronous since we are only dealing with an in-memory object.
-
-``` js
-  nconf.use('memory');
-```
 
 ### Argv
 Responsible for loading the values parsed from `process.argv` by `optimist` into the configuration hierarchy. See the [optimist option docs](https://github.com/substack/node-optimist/#optionskey-opt) for more on the option format.
@@ -244,7 +222,7 @@ Once installing both `nconf` and `nconf-redis`, you must require both modules to
   //
   require('nconf-redis');
 
-  nconf.use('redis', { host: 'localhost', port: 6379, ttl: 60 * 60 * 1000 });
+  nconf.add('redis', { host: 'localhost', port: 6379, ttl: 60 * 60 * 1000 });
 ```
 
 ## Installation
