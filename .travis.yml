@@ -6,6 +6,7 @@ node_js:
   - 0.10
   - 0.11
   - 0.12
+  - iojs
 notifications:
   email:
     - travis@nodejitsu.com
