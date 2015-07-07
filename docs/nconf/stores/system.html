@@ -5,7 +5,7 @@
 <span class="cm"> * (C) 2011, Charlie Robbins</span>
 <span class="cm"> *</span>
 <span class="cm"> */</span>
- 
+
 <span class="kd">var</span> <span class="nx">util</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;util&#39;</span><span class="p">),</span>
     <span class="nx">Memory</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./memory&#39;</span><span class="p">).</span><span class="nx">Memory</span><span class="p">;</span>
  </pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <h3>function System (options)</h3>
@@ -28,15 +28,15 @@ and command-line arguments.</p>             </td>             <td class="code"> 
   <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">env</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">loadEnv</span><span class="p">();</span>
   <span class="p">}</span>
-  
+
   <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">argv</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">loadArgv</span><span class="p">();</span>
   <span class="p">}</span>
-  
+
   <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">overrides</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">loadOverrides</span><span class="p">();</span>
   <span class="p">}</span>
-  
+
   <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">;</span>
 <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <h3>function loadOverrides ()</h3>
 
@@ -45,54 +45,54 @@ the underlying managed <code>Memory</code> store.</p>             </td>         
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">overrides</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span><span class="p">;</span>
   <span class="p">}</span>
-  
+
   <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
       <span class="nx">keys</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">overrides</span><span class="p">);</span>
-  
+
   <span class="nx">keys</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">self</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">overrides</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
   <span class="p">});</span>
-  
+
   <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">;</span>
 <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <h3>function loadArgv ()</h3>
 
-<p>Loads the data passed in from the command-line arguments 
+<p>Loads the data passed in from the command-line arguments
 into this instance.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">System</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">loadArgv</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span> 
+  <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
       <span class="nx">argv</span><span class="p">;</span>
-  
+
   <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">argv</span> <span class="o">===</span> <span class="s1">&#39;object&#39;</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">argv</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;optimist&#39;</span><span class="p">).</span><span class="nx">options</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">argv</span><span class="p">).</span><span class="nx">argv</span><span class="p">;</span>
+    <span class="nx">argv</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;yargs&#39;</span><span class="p">).</span><span class="nx">options</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">argv</span><span class="p">).</span><span class="nx">argv</span><span class="p">;</span>
   <span class="p">}</span>
   <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">argv</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">argv</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;optimist&#39;</span><span class="p">).</span><span class="nx">argv</span><span class="p">;</span>
+    <span class="nx">argv</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;yargs&#39;</span><span class="p">).</span><span class="nx">argv</span><span class="p">;</span>
   <span class="p">}</span>
-  
+
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">argv</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span><span class="p">;</span>
   <span class="p">}</span>
-  
+
   <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">argv</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">self</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">argv</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
   <span class="p">});</span>
-  
+
   <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">;</span>
 <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <h3>function loadEnv ()</h3>
 
 <p>Loads the data passed in from <code>process.env</code> into this instance.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">System</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">loadEnv</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
-  
+
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">env</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span><span class="p">;</span>
   <span class="p">}</span>
-  
+
   <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="o">!</span><span class="nx">self</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">length</span> <span class="o">||</span> <span class="nx">self</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
   <span class="p">}).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">self</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
   <span class="p">});</span>
-    
+
   <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">;</span>
 <span class="p">};</span>
 
-</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html>
