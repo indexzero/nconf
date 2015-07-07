@@ -1,4 +1,5 @@
 language: node_js
+sudo: false
 before_install:
   - "npm i -g npm@1.4.28"
 node_js:
@@ -9,4 +10,3 @@ notifications:
   email:
     - travis@nodejitsu.com
   irc: "irc.freenode.org#nodejitsu"
-
