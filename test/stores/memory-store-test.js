@@ -4,6 +4,7 @@
  * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
+'use strict';
 
 var vows = require('vows'),
     assert = require('assert'),
@@ -11,10 +12,10 @@ var vows = require('vows'),
     merge = require('../fixtures/data').merge;
 
 vows.describe('nconf/stores/memory').addBatch({
-  "When using the nconf memory store": {
+  'When using the nconf memory store': {
     topic: new nconf.Memory(),
-    "the set() method": {
-      "should respond with true": function (store) {
+    'the set() method': {
+      'should respond with true': function (store) {
         assert.isTrue(store.set('foo:bar:bazz', 'buzz'));
         assert.isTrue(store.set('falsy:number', 0));
         assert.isTrue(store.set('falsy:string:empty', ''));
@@ -23,8 +24,8 @@ vows.describe('nconf/stores/memory').addBatch({
         assert.isTrue(store.set('falsy:object', null));
       }
     },
-    "the get() method": {
-      "should respond with the correct value": function (store) {
+    'the get() method': {
+      'should respond with the correct value': function (store) {
         assert.equal(store.get('foo:bar:bazz'), 'buzz');
         assert.equal(store.get('falsy:number'), 0);
         assert.equal(store.get('falsy:string:empty'), '');
@@ -32,58 +33,58 @@ vows.describe('nconf/stores/memory').addBatch({
         assert.equal(store.get('falsy:boolean'), false);
         assert.equal(store.get('falsy:object'), null);
       },
-      "should not fail when retrieving non-existent keys": {
-        "at the root level": function (store) {
+      'should not fail when retrieving non-existent keys': {
+        'at the root level': function (store) {
           assert.doesNotThrow(function() {
             assert.equal(store.get('this:key:does:not:exist'), undefined);
           }, TypeError);
         },
-        "within numbers": function (store) {
+        'within numbers': function (store) {
           assert.doesNotThrow(function() {
             assert.equal(store.get('falsy:number:not:exist'), undefined);
           }, TypeError);
         },
-        "within booleans": function (store) {
+        'within booleans': function (store) {
           assert.doesNotThrow(function() {
             assert.equal(store.get('falsy:boolean:not:exist'), undefined);
           }, TypeError);
         },
-        "within objects": function (store) {
+        'within objects': function (store) {
           assert.doesNotThrow(function() {
             assert.equal(store.get('falsy:object:not:exist'), undefined);
           }, TypeError);
         },
-        "within empty strings": function (store) {
+        'within empty strings': function (store) {
           assert.doesNotThrow(function() {
             assert.equal(store.get('falsy:string:empty:not:exist'), undefined);
           }, TypeError);
         },
-        "within non-empty strings": function (store) {
+        'within non-empty strings': function (store) {
           assert.doesNotThrow(function() {
             assert.equal(store.get('falsy:string:value:not:exist'), undefined);
           }, TypeError);
         }
       }
     },
-    "the clear() method": {
-      "should respond with the true": function (store) {
+    'the clear() method': {
+      'should respond with the true': function (store) {
         assert.equal(store.get('foo:bar:bazz'), 'buzz');
         assert.isTrue(store.clear('foo:bar:bazz'));
         assert.isTrue(typeof store.get('foo:bar:bazz') === 'undefined');
       }
     },
-    "the merge() method": {
-      "when overriding an existing literal value": function (store) {
+    'the merge() method': {
+      'when overriding an existing literal value': function (store) {
         store.set('merge:literal', 'string-value');
         store.merge('merge:literal', merge);
         assert.deepEqual(store.get('merge:literal'), merge);
       },
-      "when overriding an existing Array value": function (store) {
-        store.set('merge:array', [1,2,3,4]);
+      'when overriding an existing Array value': function (store) {
+        store.set('merge:array', [1, 2, 3, 4]);
         store.merge('merge:array', merge);
         assert.deepEqual(store.get('merge:literal'), merge);
       },
-      "when merging into an existing Object value": function (store) {
+      'when merging into an existing Object value': function (store) {
         store.set('merge:object', {
           prop1: 2,
           prop2: 'prop2',
@@ -105,17 +106,17 @@ vows.describe('nconf/stores/memory').addBatch({
       }
     }
   },
-  "When using the nconf memory store with different logical separator": {
+  'When using the nconf memory store with different logical separator': {
     topic: new nconf.Memory({logicalSeparator: '||' }),
-    "when storing with : (colon)": {
-      "should store the config atomicly": function (store) {
+    'when storing with : (colon)': {
+      'should store the config atomicly': function (store) {
         store.set('foo:bar:bazz', 'buzz');
         assert.isTrue(typeof store.get('foo:bar') === 'undefined');
         assert.equal(store.get('foo:bar:bazz'), 'buzz');
       }
     },
-    "when storing with separator": {
-      "should be able to read the object": function (store) {
+    'when storing with separator': {
+      'should be able to read the object': function (store) {
         store.set('foo||bar||bazz', 'buzz');
         assert.equal(store.get('foo||bar').bazz, 'buzz');
         assert.equal(store.get('foo').bar.bazz, 'buzz');

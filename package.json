@@ -18,14 +18,15 @@
     "optimist": "~0.6.0"
   },
   "devDependencies": {
+    "eslint": "~0.24.0",
     "vows": "0.8.x"
   },
   "main": "./lib/nconf",
   "scripts": {
+    "pretest": "eslint .",
     "test": "vows test/*-test.js test/**/*-test.js --spec"
   },
   "engines": {
     "node": ">= 0.4.0"
   }
 }
-

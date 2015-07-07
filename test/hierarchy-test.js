@@ -4,6 +4,7 @@
  * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
+'use strict';
 
 var assert = require('assert'),
     fs = require('fs'),
@@ -17,34 +18,34 @@ var configDir = path.join(__dirname, 'fixtures', 'hierarchy'),
     userConfig = path.join(configDir, 'user.json');
 
 vows.describe('nconf/hierarchy').addBatch({
-  "When using nconf": {
-    "configured with two file stores": {
+  'When using nconf': {
+    'configured with two file stores': {
       topic: function () {
         nconf.add('user', { type: 'file', file: userConfig });
         nconf.add('global', { type: 'file', file: globalConfig });
         nconf.load();
         return nconf;
       },
-      "should have the appropriate keys present": function () {
+      'should have the appropriate keys present': function () {
         assert.equal(nconf.get('title'), 'My specific title');
         assert.equal(nconf.get('color'), 'green');
         assert.equal(nconf.get('movie'), 'Kill Bill');
       }
     },
-    "configured with two file stores using `file`": {
+    'configured with two file stores using `file`': {
       topic: function () {
         nconf.file('user', userConfig);
         nconf.file('global', globalConfig);
         nconf.load();
         return nconf;
       },
-      "should have the appropriate keys present": function () {
+      'should have the appropriate keys present': function () {
         assert.equal(nconf.get('title'), 'My specific title');
         assert.equal(nconf.get('color'), 'green');
         assert.equal(nconf.get('movie'), 'Kill Bill');
       }
     },
-    "configured with .argv(), .env() and .file()": {
+    'configured with .argv(), .env() and .file()': {
       topic: function () {
         var configFile = path.join(__dirname, 'fixtures', 'load-save.json'),
             script = path.join(__dirname, 'fixtures', 'scripts', 'nconf-hierarchical-load-save.js'),
@@ -53,8 +54,8 @@ vows.describe('nconf/hierarchy').addBatch({
             data = '',
             child;
 
-        try { fs.unlinkSync(configFile) }
-        catch (ex) { }
+        try { fs.unlinkSync(configFile); }
+        catch (ex) { console.log(ex); }
 
         child = spawn('node', [script].concat(argv));
 
@@ -66,7 +67,7 @@ vows.describe('nconf/hierarchy').addBatch({
           fs.readFile(configFile, 'utf8', that.callback.bind(null, null, data));
         });
       },
-      "should not persist information passed in to process.env and process.argv to disk ": function (_, data, _, ondisk){
+      'should not persist information passed in to process.env and process.argv to disk ': function (ignore, data, ignore2, ondisk){
         assert.equal(data, 'foo');
         assert.deepEqual(JSON.parse(ondisk), {
           database: {
@@ -76,7 +77,7 @@ vows.describe('nconf/hierarchy').addBatch({
         });
       }
     },
-    "configured with .argv(), .file() and invoked with nested command line options": {
+    'configured with .argv(), .file() and invoked with nested command line options': {
       topic: function () {
         var script = path.join(__dirname, 'fixtures', 'scripts', 'nconf-hierarchical-load-merge.js'),
             argv = ['--candy:something', 'foo', '--candy:something5:second', 'bar'],
@@ -94,7 +95,8 @@ vows.describe('nconf/hierarchy').addBatch({
           that.callback(null, data);
         });
       },
-      "should merge nested objects ": function (err, data) {
+      'should merge nested objects ': function (err, data) {
+        if (err) { console.log(err); }
         assert.deepEqual(JSON.parse(data), {
           apples: true,
           candy: {

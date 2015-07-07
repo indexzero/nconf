@@ -4,6 +4,7 @@
  * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
+'use strict';
 
 var util = require('util'),
     events = require('events'),

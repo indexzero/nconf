@@ -4,9 +4,9 @@
  * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
+'use strict';
 
-var fs = require('fs'),
-    path = require('path'),
+var path = require('path'),
     nconf = require('../../../lib/nconf');
 
 //

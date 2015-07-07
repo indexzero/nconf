@@ -1,0 +1,10 @@
+env:
+  node: true
+
+rules:
+  quotes: [2, "single"]
+  no-use-before-define: [2, "nofunc"]
+  strict: [2, "global"]
+  no-multi-spaces: 0
+  no-underscore-dangle: 0
+  camelcase: 0

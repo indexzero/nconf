@@ -5,6 +5,7 @@
  * (C) 2012, Michael Hart
  *
  */
+'use strict';
 
 var path = require('path'),
     nconf = require('../../../lib/nconf');

@@ -5,6 +5,7 @@
  * (C) 2012, Michael Hart
  *
  */
+'use strict';
 
 var nconf = require('../../../lib/nconf').env('_');
 
