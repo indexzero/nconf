@@ -59,7 +59,7 @@ The output will be:
 
 ## Hierarchical configuration
 
-Configuration management can get complicated very quickly for even trivial applications running in production. `nconf` addresses this problem by enabling you to setup a hierarchy for different sources of configuration with no defaults. **The order in which you attach these configuration sources determines their priority in the hierarchy.** Lets take a look at the options available to you
+Configuration management can get complicated very quickly for even trivial applications running in production. `nconf` addresses this problem by enabling you to setup a hierarchy for different sources of configuration with no defaults. **The order in which you attach these configuration sources determines their priority in the hierarchy.** Let's take a look at the options available to you
 
   1. **nconf.argv(options)** Loads `process.argv` using optimist. If `options` is supplied it is passed along to optimist.
   2. **nconf.env(options)** Loads `process.env` into the hierarchy.
