@@ -1,5 +1,5 @@
 /*
- * provider-argv.js: Test fixture for using optimist defaults with nconf.
+ * provider-argv.js: Test fixture for using yargs defaults with nconf.
  *
  * (C) 2011, Charlie Robbins and the Contributors.
  *
