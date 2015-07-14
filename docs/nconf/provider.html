@@ -13,7 +13,7 @@
 
 <p>Constructor function for the Provider object responsible
 for exposing the pluggable storage features of <code>nconf</code>.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">Provider</span> <span class="o">=</span> <span class="nx">exports</span><span class="p">.</span><span class="nx">Provider</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>  
+  <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
   </pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>Setup default options for working with <code>stores</code>,
 <code>overrides</code>, <code>process.env</code> and <code>process.argv</code>.</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nx">options</span>         <span class="o">=</span> <span class="nx">options</span>           <span class="o">||</span> <span class="p">{};</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">_overrides</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">overrides</span> <span class="o">||</span> <span class="kc">null</span><span class="p">;</span>
@@ -24,7 +24,7 @@ for exposing the pluggable storage features of <code>nconf</code>.</p>          
   </pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>Add the default <code>system</code> store for working with
 <code>overrides</code>, <code>process.env</code>, <code>process.argv</code> and
 a simple in-memory objects.</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="k">this</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
-  
+
   <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">type</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
   <span class="p">}</span>
@@ -42,8 +42,8 @@ a simple in-memory objects.</p>             </td>             <td class="code"> 
 
 <h4>@options {Object} Options for the store instance.</h4>
 
-<p>Adds (or replaces) a new store with the specified <code>name</code> 
-and <code>options</code>. If <code>options.type</code> is not set, then <code>name</code> 
+<p>Adds (or replaces) a new store with the specified <code>name</code>
+and <code>options</code>. If <code>options.type</code> is not set, then <code>name</code>
 will be used instead:</p>
 
 <p>provider.use('file');
@@ -54,7 +54,7 @@ will be used instead:</p>
   <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_reserved</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Cannot use reserved name: &#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
   <span class="p">}</span>
-  
+
   <span class="nx">options</span>  <span class="o">=</span> <span class="nx">options</span>      <span class="o">||</span> <span class="p">{};</span>
   <span class="kd">var</span> <span class="nx">type</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">type</span> <span class="o">||</span> <span class="nx">name</span><span class="p">;</span>
 
@@ -63,18 +63,18 @@ will be used instead:</p>
       <span class="k">return</span> <span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">===</span> <span class="nx">store</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
     <span class="p">});</span>
   <span class="p">}</span>
-  
+
   <span class="kd">var</span> <span class="nx">store</span> <span class="o">=</span> <span class="k">this</span><span class="p">[</span><span class="nx">name</span><span class="p">],</span>
       <span class="nx">update</span> <span class="o">=</span> <span class="nx">store</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">sameOptions</span><span class="p">(</span><span class="nx">store</span><span class="p">);</span>
-  
+
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">store</span> <span class="o">||</span> <span class="nx">update</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">update</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
     <span class="p">}</span>
-    
+
     <span class="k">this</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
   <span class="p">}</span>
-  
+
   <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
 <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <h3>function add (name, options)</h3>
 
@@ -90,17 +90,17 @@ is not set, then <code>name</code> will be used instead:</p>
   <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_reserved</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Cannot use reserved name: &#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
   <span class="p">}</span>
-  
+
   <span class="nx">options</span>  <span class="o">=</span> <span class="nx">options</span>      <span class="o">||</span> <span class="p">{};</span>
   <span class="kd">var</span> <span class="nx">type</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">type</span> <span class="o">||</span> <span class="nx">name</span><span class="p">;</span>
-  
+
   <span class="k">if</span> <span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">stores</span><span class="p">).</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">common</span><span class="p">.</span><span class="nx">capitalize</span><span class="p">(</span><span class="nx">type</span><span class="p">))</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Cannot add store with unknown type: &#39;</span> <span class="o">+</span> <span class="nx">type</span><span class="p">);</span>
   <span class="p">}</span>
-  
+
   <span class="k">this</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">_stores</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-  
+
   <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">loadSync</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">loadSync</span><span class="p">();</span>
   <span class="p">}</span>
@@ -117,7 +117,7 @@ this was used in the call to <code>.add()</code>.</p>             </td>         
   <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">[</span><span class="nx">name</span><span class="p">])</span> <span class="p">{</span>
     <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Cannot remove store that does not exist: &#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
   <span class="p">}</span>
-  
+
   <span class="k">delete</span> <span class="k">this</span><span class="p">[</span><span class="nx">name</span><span class="p">];</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">_stores</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_stores</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">name</span><span class="p">),</span> <span class="mi">1</span><span class="p">);</span>
 <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <h3>function create (type, options)</h3>
@@ -126,7 +126,7 @@ this was used in the call to <code>.add()</code>.</p>             </td>         
 
 <h4>@options {Object} Options for the store instance.</h4>
 
-<p>Creates a store of the specified <code>type</code> using the 
+<p>Creates a store of the specified <code>type</code> using the
 specified <code>options</code>.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">Provider</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">create</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nx">stores</span><span class="p">[</span><span class="nx">common</span><span class="p">.</span><span class="nx">capitalize</span><span class="p">(</span><span class="nx">type</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">())](</span><span class="nx">options</span><span class="p">);</span>
 <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <h3>function get (key, callback)</h3>
@@ -139,29 +139,29 @@ specified <code>options</code>.</p>             </td>             <td class="cod
 logic for traversing stores.</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_execute</span><span class="p">(</span><span class="s1">&#39;get&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
   <span class="p">}</span>
-  </pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <p>Otherwise the asynchronous, hierarchical <code>get</code> is 
+  </pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <p>Otherwise the asynchronous, hierarchical <code>get</code> is
 slightly more complicated because we do not need to traverse
 the entire set of stores, but up until there is a defined value.</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="kd">var</span> <span class="nx">current</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
       <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
       <span class="nx">response</span><span class="p">;</span>
-      
+
   <span class="nx">async</span><span class="p">.</span><span class="nx">whilst</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">typeof</span> <span class="nx">response</span> <span class="o">===</span> <span class="s1">&#39;undefined&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">current</span> <span class="o">&lt;</span> <span class="nx">self</span><span class="p">.</span><span class="nx">_stores</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
   <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">self</span><span class="p">[</span><span class="nx">self</span><span class="p">.</span><span class="nx">_stores</span><span class="p">[</span><span class="nx">current</span><span class="p">]];</span>
     <span class="nx">current</span><span class="o">++</span><span class="p">;</span>
-    
+
     <span class="k">if</span> <span class="p">(</span><span class="nx">store</span><span class="p">.</span><span class="nx">get</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">return</span> <span class="nx">store</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
           <span class="k">return</span> <span class="nx">next</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
         <span class="p">}</span>
-        
+
         <span class="nx">response</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
         <span class="nx">next</span><span class="p">();</span>
       <span class="p">});</span>
     <span class="p">}</span>
-    
+
     <span class="nx">response</span> <span class="o">=</span> <span class="nx">store</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
     <span class="nx">next</span><span class="p">();</span>
   <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
@@ -182,7 +182,7 @@ the entire set of stores, but up until there is a defined value.</p>            
 <h4>@callback {function} <strong>Optional</strong> Continuation to respond to when complete.</h4>
 
 <p>Clears all keys associated with this instance.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">Provider</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">reset</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_execute</span><span class="p">(</span><span class="s1">&#39;reset&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>  
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_execute</span><span class="p">(</span><span class="s1">&#39;reset&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
 <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <h3>function clear (key, callback)</h3>
 
 <h4>@key {string} Key to remove from this instance</h4>
@@ -210,19 +210,19 @@ the entire set of stores, but up until there is a defined value.</p>            
       <span class="nx">callback</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">args</span><span class="p">[</span><span class="nx">args</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">args</span><span class="p">.</span><span class="nx">pop</span><span class="p">(),</span>
       <span class="nx">value</span> <span class="o">=</span> <span class="nx">args</span><span class="p">.</span><span class="nx">pop</span><span class="p">(),</span>
       <span class="nx">key</span> <span class="o">=</span> <span class="nx">args</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
-      
+
   <span class="kd">function</span> <span class="nx">mergeProperty</span> <span class="p">(</span><span class="nx">prop</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">_execute</span><span class="p">(</span><span class="s1">&#39;merge&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">prop</span><span class="p">,</span> <span class="nx">value</span><span class="p">[</span><span class="nx">prop</span><span class="p">],</span> <span class="nx">next</span><span class="p">);</span>
   <span class="p">}</span>
-      
+
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">||</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">!==</span> <span class="s1">&#39;object&#39;</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">return</span> <span class="nx">onError</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Cannot merge non-Object into top-level.&#39;</span><span class="p">),</span> <span class="nx">callback</span><span class="p">);</span>
     <span class="p">}</span>
-    
+
     <span class="k">return</span> <span class="nx">async</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">value</span><span class="p">),</span> <span class="nx">mergeProperty</span><span class="p">,</span> <span class="nx">callback</span> <span class="o">||</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="p">})</span>
   <span class="p">}</span>
-  
+
   <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_execute</span><span class="p">(</span><span class="s1">&#39;merge&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
 <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-16">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-16">&#182;</a>               </div>               <h3>function load (callback)</h3>
 
@@ -230,34 +230,34 @@ the entire set of stores, but up until there is a defined value.</p>            
 
 <p>Responds with an Object representing all keys associated in this instance.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">Provider</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">load</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
-  
+
   <span class="kd">function</span> <span class="nx">loadStoreSync</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">self</span><span class="p">[</span><span class="nx">name</span><span class="p">];</span>
-    
+
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">store</span><span class="p">.</span><span class="nx">loadSync</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;nconf store &#39;</span> <span class="o">+</span> <span class="nx">store</span><span class="p">.</span><span class="nx">type</span> <span class="o">+</span> <span class="s1">&#39; has no loadSync() method&#39;</span><span class="p">);</span>
     <span class="p">}</span>
-    
+
     <span class="k">return</span> <span class="nx">store</span><span class="p">.</span><span class="nx">loadSync</span><span class="p">();</span>
   <span class="p">}</span>
-  
+
   <span class="kd">function</span> <span class="nx">loadStore</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">self</span><span class="p">[</span><span class="nx">name</span><span class="p">];</span>
-    
+
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">store</span><span class="p">.</span><span class="nx">load</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">store</span><span class="p">.</span><span class="nx">loadSync</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">return</span> <span class="nx">next</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;nconf store &#39;</span> <span class="o">+</span> <span class="nx">store</span><span class="p">.</span><span class="nx">type</span> <span class="o">+</span> <span class="s1">&#39; has no load() method&#39;</span><span class="p">));</span>
     <span class="p">}</span>
-    
+
     <span class="k">return</span> <span class="nx">store</span><span class="p">.</span><span class="nx">loadSync</span>
       <span class="o">?</span> <span class="nx">next</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">store</span><span class="p">.</span><span class="nx">loadSync</span><span class="p">())</span>
       <span class="o">:</span> <span class="nx">store</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">next</span><span class="p">);</span>
   <span class="p">}</span>
-  </pre></div>             </td>           </tr>                               <tr id="section-17">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-17">&#182;</a>               </div>               <p>If we don't have a callback and the current 
+  </pre></div>             </td>           </tr>                               <tr id="section-17">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-17">&#182;</a>               </div>               <p>If we don't have a callback and the current
 store is capable of loading synchronously
 then do so.</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">common</span><span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_stores</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">loadStoreSync</span><span class="p">));</span>
   <span class="p">}</span>
-  
+
   <span class="nx">async</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_stores</span><span class="p">,</span> <span class="nx">loadStore</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">objs</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">err</span> <span class="o">?</span> <span class="nx">callback</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">:</span> <span class="nx">callback</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">common</span><span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">objs</span><span class="p">));</span>
   <span class="p">});</span>
@@ -273,39 +273,39 @@ instance and then adds all key-value pairs in <code>value</code>. </p>          
     <span class="nx">callback</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
     <span class="nx">value</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
   <span class="p">}</span>
-  
+
   <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
-  
+
   <span class="kd">function</span> <span class="nx">saveStoreSync</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">self</span><span class="p">[</span><span class="nx">name</span><span class="p">];</span>
-    
+
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">store</span><span class="p">.</span><span class="nx">saveSync</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;nconf store &#39;</span> <span class="o">+</span> <span class="nx">store</span><span class="p">.</span><span class="nx">type</span> <span class="o">+</span> <span class="s1">&#39; has no saveSync() method&#39;</span><span class="p">);</span>
     <span class="p">}</span>
-    
+
     <span class="k">return</span> <span class="nx">store</span><span class="p">.</span><span class="nx">saveSync</span><span class="p">();</span>
   <span class="p">}</span>
-  
+
   <span class="kd">function</span> <span class="nx">saveStore</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">self</span><span class="p">[</span><span class="nx">name</span><span class="p">];</span>
-    
+
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">store</span><span class="p">.</span><span class="nx">save</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">store</span><span class="p">.</span><span class="nx">saveSync</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">return</span> <span class="nx">next</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;nconf store &#39;</span> <span class="o">+</span> <span class="nx">store</span><span class="p">.</span><span class="nx">type</span> <span class="o">+</span> <span class="s1">&#39; has no save() method&#39;</span><span class="p">));</span>
     <span class="p">}</span>
-    
+
     <span class="k">return</span> <span class="nx">store</span><span class="p">.</span><span class="nx">saveSync</span>
       <span class="o">?</span> <span class="nx">next</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">store</span><span class="p">.</span><span class="nx">saveSync</span><span class="p">())</span>
       <span class="o">:</span> <span class="nx">store</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">next</span><span class="p">);</span>
   <span class="p">}</span>
-  </pre></div>             </td>           </tr>                               <tr id="section-19">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-19">&#182;</a>               </div>               <p>If we don't have a callback and the current 
+  </pre></div>             </td>           </tr>                               <tr id="section-19">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-19">&#182;</a>               </div>               <p>If we don't have a callback and the current
 store is capable of saving synchronously
 then do so.</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">common</span><span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_stores</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">saveStoreSync</span><span class="p">));</span>
   <span class="p">}</span>
-  
+
   <span class="nx">async</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_stores</span><span class="p">,</span> <span class="nx">saveStore</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">objs</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">err</span> <span class="o">?</span> <span class="nx">callback</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">:</span> <span class="nx">callback</span><span class="p">();</span>
-  <span class="p">});</span>  
+  <span class="p">});</span>
 <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-20">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-20">&#182;</a>               </div>               <h3>@private function _execute (action, syncLength, [arguments])</h3>
 
 <h4>@action {string} Action to execute on <code>this.store</code>.</h4>
@@ -320,15 +320,15 @@ to a synchronous store function is still invoked.</p>             </td>         
       <span class="nx">callback</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">args</span><span class="p">[</span><span class="nx">args</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">args</span><span class="p">.</span><span class="nx">pop</span><span class="p">(),</span>
       <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
       <span class="nx">response</span><span class="p">;</span>
-  
+
   <span class="kd">function</span> <span class="nx">runAction</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">self</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    
+
     <span class="k">return</span> <span class="nx">store</span><span class="p">[</span><span class="nx">action</span><span class="p">].</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="nx">syncLength</span>
       <span class="o">?</span> <span class="nx">store</span><span class="p">[</span><span class="nx">action</span><span class="p">].</span><span class="nx">apply</span><span class="p">(</span><span class="nx">store</span><span class="p">,</span> <span class="nx">args</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">next</span><span class="p">))</span>
       <span class="o">:</span> <span class="nx">next</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">store</span><span class="p">[</span><span class="nx">action</span><span class="p">].</span><span class="nx">apply</span><span class="p">(</span><span class="nx">store</span><span class="p">,</span> <span class="nx">args</span><span class="p">));</span>
   <span class="p">}</span>
-  
+
   <span class="k">if</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">async</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">_stores</span><span class="p">,</span> <span class="nx">runAction</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">return</span> <span class="nx">err</span> <span class="o">?</span> <span class="nx">callback</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">:</span> <span class="nx">callback</span><span class="p">();</span>
@@ -339,40 +339,40 @@ to a synchronous store function is still invoked.</p>             </td>         
     <span class="kd">var</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">self</span><span class="p">[</span><span class="nx">name</span><span class="p">];</span>
     <span class="nx">response</span> <span class="o">=</span> <span class="nx">store</span><span class="p">[</span><span class="nx">action</span><span class="p">].</span><span class="nx">apply</span><span class="p">(</span><span class="nx">store</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
   <span class="p">});</span>
-    
+
   <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
 <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-21">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-21">&#182;</a>               </div>               <h3>@argv {boolean}</h3>
 
-<p>Gets or sets a property representing overrides which supercede all 
+<p>Gets or sets a property representing overrides which supercede all
 other values for this instance.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">Provider</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">__defineSetter__</span><span class="p">(</span><span class="s1">&#39;overrides&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span> <span class="nx">updateSystem</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;overrides&#39;</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="p">});</span>
 <span class="nx">Provider</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">__defineGetter__</span><span class="p">(</span><span class="s1">&#39;overrides&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_argv</span> <span class="p">});</span></pre></div>             </td>           </tr>                               <tr id="section-22">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-22">&#182;</a>               </div>               <h3>@argv {boolean}</h3>
 
-<p>Gets or sets a property indicating if we should wrap calls to <code>.get</code> 
-by checking <code>optimist.argv</code>. Can be a boolean or the pass-thru
-options for <code>optimist</code>.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">Provider</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">__defineSetter__</span><span class="p">(</span><span class="s1">&#39;argv&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span> <span class="nx">updateSystem</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;argv&#39;</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="p">});</span>
+<p>Gets or sets a property indicating if we should wrap calls to <code>.get</code>
+by checking <code>yargs.argv</code>. Can be a boolean or the pass-thru
+options for <code>yargs</code>.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">Provider</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">__defineSetter__</span><span class="p">(</span><span class="s1">&#39;argv&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span> <span class="nx">updateSystem</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;argv&#39;</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="p">});</span>
 <span class="nx">Provider</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">__defineGetter__</span><span class="p">(</span><span class="s1">&#39;argv&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_argv</span> <span class="p">});</span></pre></div>             </td>           </tr>                               <tr id="section-23">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-23">&#182;</a>               </div>               <h3>@env {boolean}</h3>
 
-<p>Gets or sets a property indicating if we should wrap calls to <code>.get</code> 
-by checking <code>process.env</code>. Can be a boolean or an Array of 
+<p>Gets or sets a property indicating if we should wrap calls to <code>.get</code>
+by checking <code>process.env</code>. Can be a boolean or an Array of
 environment variables to extract.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">Provider</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">__defineSetter__</span><span class="p">(</span><span class="s1">&#39;env&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span> <span class="nx">updateSystem</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;env&#39;</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="p">});</span>
 <span class="nx">Provider</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">__defineGetter__</span><span class="p">(</span><span class="s1">&#39;env&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_env</span> <span class="p">});</span></pre></div>             </td>           </tr>                               <tr id="section-24">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-24">&#182;</a>               </div>               <p>Throw the <code>err</code> if a callback is not supplied</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">callback</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
   <span class="p">}</span>
-  
+
   <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
 <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-25">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-25">&#182;</a>               </div>               <p>Helper function for working with the
 default <code>system</code> store for providers.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">function</span> <span class="nx">updateSystem</span><span class="p">(</span><span class="nx">prop</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">system</span> <span class="o">=</span> <span class="k">this</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">];</span>
-  
+
   <span class="k">if</span> <span class="p">(</span><span class="nx">system</span><span class="p">[</span><span class="nx">prop</span><span class="p">]</span> <span class="o">===</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span><span class="p">;</span>
   <span class="p">}</span>
-  
+
   <span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span> <span class="o">||</span> <span class="kc">false</span><span class="p">;</span>
   <span class="k">this</span><span class="p">[</span><span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nx">prop</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
   <span class="nx">system</span><span class="p">[</span><span class="nx">prop</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
   <span class="nx">system</span><span class="p">.</span><span class="nx">loadSync</span><span class="p">();</span>
 <span class="p">}</span>
 
-</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html>
