@@ -13,19 +13,20 @@
     "plugabble"
   ],
   "dependencies": {
-    "async": "~0.9.0",
+    "async": "^1.4.0",
     "ini": "1.x.x",
     "yargs": "~0.6.0"
   },
   "devDependencies": {
+    "stylezero": "^2.2.0",
     "vows": "0.8.0"
   },
   "main": "./lib/nconf",
   "scripts": {
+    "pretest": "stylezero lib/",
     "test": "vows test/*-test.js test/**/*-test.js --spec"
   },
   "engines": {
     "node": ">= 0.8.0"
   }
 }
-
