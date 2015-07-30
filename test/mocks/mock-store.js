@@ -9,7 +9,7 @@ var util = require('util'),
     events = require('events'),
     nconf = require('../../lib/nconf');
 
-var Mock = nconf.Mock = function () {
+var Mock = module.exports = function () {
   events.EventEmitter.call(this);
   this.type = 'mock';
 };

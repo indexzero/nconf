@@ -15,11 +15,14 @@
   "dependencies": {
     "async": "^1.4.0",
     "ini": "1.x.x",
-    "yargs": "~0.6.0"
+    "yargs": "^3.15.0"
   },
   "devDependencies": {
-    "stylezero": "^2.2.0",
-    "vows": "0.8.0"
+    "assume": "^1.2.5",
+    "istanbul": "^0.3.17",
+    "mocha": "^2.2.5",
+    "mocha-istanbul": "^0.2.0",
+    "stylezero": "^2.2.0"
   },
   "main": "./lib/nconf",
   "scripts": {
