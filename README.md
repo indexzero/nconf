@@ -1,4 +1,8 @@
-# nconf [![Build Status](https://secure.travis-ci.org/flatiron/nconf.png)](http://travis-ci.org/flatiron/nconf)
+# nconf
+
+[![Version npm](https://img.shields.io/npm/v/nconf.svg?style=flat-square)](https://www.npmjs.com/package/nconf)[![npm Downloads](https://img.shields.io/npm/dm/nconf.svg?style=flat-square)](https://www.npmjs.com/package/nconf)[![Build Status](https://img.shields.io/travis/indexzero/nconf/master.svg?style=flat-square)](https://travis-ci.org/indexzero/nconf)[![Dependencies](https://img.shields.io/david/indexzero/nconf.svg?style=flat-square)](https://david-dm.org/indexzero/nconf)
+
+[![NPM](https://nodei.co/npm/nconf.png?downloads=true&downloadRank=true)](https://nodei.co/npm/nconf/)
 
 Hierarchical node.js configuration with files, environment variables, command-line arguments, and atomic object merging.
 
