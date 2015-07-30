@@ -5,6 +5,8 @@ v1.0.0
 
 `.use` has been removed.
 `Memory` store has been removed.
+`json_spacing` is now `spacing` on File store
+All stores now have `.data` instead of `.store`. This removes `store.store` silly-ness.
 
 
 v0.6.7 / Thu, 20 Dec 2012

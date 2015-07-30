@@ -5,27 +5,26 @@
  *
  */
 
-var vows = require('vows'),
-    assert = require('assert'),
-    helpers = require('../helpers'),
-    nconf = require('../../lib/nconf');
+var assume = require('assume'),
+    nconf = require('../../lib/nconf'),
+    Literal = require('../../lib/nconf/stores/literal');
 
-vows.describe('nconf/stores/literal').addBatch({
-  "An instance of nconf.Literal": {
-    topic: new nconf.Literal({
-      foo: 'bar',
-      one: 2
-    }),
-    "should have the correct methods defined": function (literal) {
-      assert.equal(literal.type, 'literal');
-      assert.isFunction(literal.get);
-      assert.isFunction(literal.set);
-      assert.isFunction(literal.merge);
-      assert.isFunction(literal.loadSync);
-    },
-    "should have the correct values in the store": function (literal) {
-      assert.equal(literal.store.foo, 'bar');
-      assert.equal(literal.store.one, 2);
-    }
-  }
-}).export(module);
+describe('nconf/stores/literal', function () {
+  it('should be exposed correctly on nconf', function () {
+    assume(Literal).equals(nconf.Literal);
+  })
+
+  it('should have the correct methods defined', function () {
+    var store = nconf.Literal({ foo: 'bar' });
+    var props = Object.keys(store);
+    ['type', 'readOnly', 'data'].forEach(function (key) {
+        assume(props).includes(key);
+      });
+
+    assume(store.readOnly).equals(true);
+    assume(store.type).equals('literal');
+    assume(store.data).deep.equals({ foo: 'bar' });
+  });
+
+  it('loadSync()');
+});

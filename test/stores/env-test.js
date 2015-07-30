@@ -1,5 +1,5 @@
 /*
- * argv-test.js: Tests for the nconf argv store.
+ * env-test.js: Tests for the nconf env store.
  *
  * (C) 2011, Charlie Robbins and the Contributors.
  *
