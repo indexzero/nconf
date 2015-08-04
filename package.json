@@ -1,7 +1,7 @@
 {
   "name": "nconf",
   "description": "Hierarchical node.js configuration with files, environment variables, command-line arguments, and atomic object merging.",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "author": "Charlie Robbins <charlie.robbins@gmail.com>",
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
     "yargs": "~3.15.0"
   },
   "devDependencies": {
-    "eslint": "~0.24.0",
+    "eslint": "1.0.0",
     "vows": "0.8.x"
   },
   "main": "./lib/nconf",
