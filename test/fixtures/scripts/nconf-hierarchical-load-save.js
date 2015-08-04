@@ -1,5 +1,5 @@
 /*
- * nconf-hierarchical-load-save.js: Test fixture for using optimist, envvars and a file store with nconf.
+ * nconf-hierarchical-load-save.js: Test fixture for using yargs, envvars and a file store with nconf.
  *
  * (C) 2011, Charlie Robbins and the Contributors.
  *
