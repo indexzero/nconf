@@ -16,12 +16,23 @@ var fs = require('fs'),
 var completeTest = helpers.fixture('complete-test.json'),
     complete = helpers.fixture('complete.json');
 
+// prime the process.env
+process.env['NCONF_foo'] = 'bar';
+process.env.FOO = 'bar';
+process.env.BAR = 'zalgo';
+process.env.NODE_ENV = 'debug';
+process.env.FOOBAR = 'should not load';
+
 vows.describe('nconf/multiple-stores').addBatch({
   "When using the nconf with multiple providers": {
     topic: function () {
       var that = this;
       helpers.cp(complete, completeTest, function () {
-        nconf.env();
+        nconf.env({
+          // separator: '__',
+          match: /^NCONF_/,
+          whitelist: ['NODE_ENV', 'FOO', 'BAR']
+        });
         nconf.file({ file: completeTest });
         nconf.use('argv', { type: 'literal', store: data });
         that.callback();
@@ -34,7 +45,7 @@ vows.describe('nconf/multiple-stores').addBatch({
     },
     "env vars": {
       "are present": function () {
-        Object.keys(process.env).forEach(function (key) {
+        ['NODE_ENV', 'FOO', 'BAR', 'NCONF_foo'].forEach(function (key) {
           assert.equal(nconf.get(key), process.env[key]);
         });
       }
