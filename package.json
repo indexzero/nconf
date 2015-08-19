@@ -15,7 +15,7 @@
   "dependencies": {
     "async": "~0.9.0",
     "ini": "1.x.x",
-    "yargs": "~3.18.0"
+    "yargs": "~3.19.0"
   },
   "devDependencies": {
     "vows": "0.8.x"
