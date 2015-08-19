@@ -1,4 +1,8 @@
-# nconf [![Build Status](https://secure.travis-ci.org/flatiron/nconf.png)](http://travis-ci.org/flatiron/nconf)
+# nconf
+
+[![Version npm](https://img.shields.io/npm/v/nconf.svg?style=flat-square)](https://www.npmjs.com/package/nconf)[![npm Downloads](https://img.shields.io/npm/dm/nconf.svg?style=flat-square)](https://www.npmjs.com/package/nconf)[![Build Status](https://img.shields.io/travis/indexzero/nconf/master.svg?style=flat-square)](https://travis-ci.org/indexzero/nconf)[![Dependencies](https://img.shields.io/david/indexzero/nconf.svg?style=flat-square)](https://david-dm.org/indexzero/nconf)
+
+[![NPM](https://nodei.co/npm/nconf.png?downloads=true&downloadRank=true)](https://nodei.co/npm/nconf/)
 
 Hierarchical node.js configuration with files, environment variables, command-line arguments, and atomic object merging.
 
@@ -61,7 +65,7 @@ The output will be:
 
 Configuration management can get complicated very quickly for even trivial applications running in production. `nconf` addresses this problem by enabling you to setup a hierarchy for different sources of configuration with no defaults. **The order in which you attach these configuration sources determines their priority in the hierarchy.** Lets take a look at the options available to you
 
-  1. **nconf.argv(options)** Loads `process.argv` using optimist. If `options` is supplied it is passed along to optimist.
+  1. **nconf.argv(options)** Loads `process.argv` using yargs. If `options` is supplied it is passed along to yargs.
   2. **nconf.env(options)** Loads `process.env` into the hierarchy.
   3. **nconf.file(options)** Loads the configuration data at options.file into the hierarchy.
   4. **nconf.defaults(options)** Loads the data in options.store into the hierarchy.
@@ -159,11 +163,11 @@ A simple in-memory storage engine that stores a nested JSON representation of th
 ```
 
 ### Argv
-Responsible for loading the values parsed from `process.argv` by `optimist` into the configuration hierarchy. See the [optimist option docs](https://github.com/substack/node-optimist/#optionskey-opt) for more on the option format.
+Responsible for loading the values parsed from `process.argv` by `yargs` into the configuration hierarchy. See the [yargs option docs](https://github.com/bcoe/yargs#optionskey-opt) for more on the option format.
 
 ``` js
   //
-  // Can optionally also be an object literal to pass to `optimist`.
+  // Can optionally also be an object literal to pass to `yargs`.
   //
   nconf.argv({
     "x": {
