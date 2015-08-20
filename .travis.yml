@@ -1,12 +1,15 @@
 language: node_js
+sudo: false
 before_install:
-  - "npm i -g npm@1.4.28"
+  - '[ "${TRAVIS_NODE_VERSION}" != "0.8" ] || npm install -g npm@1.4.28'
+  - npm install -g npm@latest
 node_js:
-  - 0.8
-  - 0.10
-  - 0.11
+  - "0.8"
+  - "0.10"
+  - "0.11"
+  - "0.12"
+  - "iojs"
 notifications:
   email:
     - travis@nodejitsu.com
   irc: "irc.freenode.org#nodejitsu"
-
