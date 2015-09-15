@@ -5,6 +5,7 @@
  * (C) 2011, Sander Tolsma
  *
  */
+'use strict';
 
 var path = require('path'),
     nconf = require('../../../lib/nconf');

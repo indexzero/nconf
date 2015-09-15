@@ -4,10 +4,10 @@
  * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
+'use strict';
 
 var assert = require('assert'),
     spawn = require('child_process').spawn,
-    util = require('util'),
     fs = require('fs'),
     path = require('path'),
     nconf = require('../lib/nconf');
@@ -36,7 +36,7 @@ exports.assertSystemConf = function (options) {
       var env = null;
 
       if (options.env) {
-        env = {}
+        env = {};
         Object.keys(process.env).forEach(function (key) {
           env[key] = process.env[key];
         });
@@ -49,16 +49,16 @@ exports.assertSystemConf = function (options) {
       var child = spawn('node', [options.script].concat(options.argv), { env: env });
       child.stdout.once('data', this.callback.bind(this, null));
     },
-    "should respond with the value passed into the script": function (_, data) {
+    'should respond with the value passed into the script': function (_, data) {
       assert.equal(data.toString(), 'foobar');
     }
-  }
-}
+  };
+};
 
 // copy a file
 exports.cp = function (from, to, callback) {
   fs.readFile(from, function (err, data) {
-    if (err) return callback(err);
+    if (err) { return callback(err); }
     fs.writeFile(to, data, callback);
   });
 };

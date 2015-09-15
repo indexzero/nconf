@@ -4,9 +4,10 @@
  * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
+ /* eslint no-shadow: 0 */
+'use strict';
 
 var fs = require('fs'),
-    path = require('path'),
     vows = require('vows'),
     assert = require('assert'),
     nconf = require('../lib/nconf'),
@@ -24,7 +25,7 @@ process.env.NODE_ENV = 'debug';
 process.env.FOOBAR = 'should not load';
 
 vows.describe('nconf/multiple-stores').addBatch({
-  "When using the nconf with multiple providers": {
+  'When using the nconf with multiple providers': {
     topic: function () {
       var that = this;
       helpers.cp(complete, completeTest, function () {
@@ -38,23 +39,23 @@ vows.describe('nconf/multiple-stores').addBatch({
         that.callback();
       });
     },
-    "should have the correct `stores`": function () {
+    'should have the correct `stores`': function () {
       assert.isObject(nconf.stores.env);
       assert.isObject(nconf.stores.argv);
       assert.isObject(nconf.stores.file);
     },
-    "env vars": {
-      "are present": function () {
+    'env vars': {
+      'are present': function () {
         ['NODE_ENV', 'FOO', 'BAR', 'NCONF_foo'].forEach(function (key) {
           assert.equal(nconf.get(key), process.env[key]);
         });
       }
     },
-    "json vars": {
+    'json vars': {
       topic: function () {
         fs.readFile(complete, 'utf8', this.callback);
       },
-      "are present": function (err, data) {
+      'are present': function (err, data) {
         assert.isNull(err);
         data = JSON.parse(data);
         Object.keys(data).forEach(function (key) {
@@ -62,28 +63,29 @@ vows.describe('nconf/multiple-stores').addBatch({
         });
       }
     },
-    "literal vars": {
-      "are present": function () {
+    'literal vars': {
+      'are present': function () {
         Object.keys(data).forEach(function (key) {
           assert.deepEqual(nconf.get(key), data[key]);
         });
       }
     },
-    "and saving *synchronously*": {
+    'and saving *synchronously*': {
       topic: function () {
         nconf.set('weebls', 'stuff');
         return nconf.save();
       },
-      "correct return value": function (topic) {
+      'correct return value': function (topic) {
         Object.keys(topic).forEach(function (key) {
           assert.deepEqual(topic[key], nconf.get(key));
         });
       },
-      "the file": {
+      'the file': {
         topic: function () {
           fs.readFile(completeTest, 'utf8', this.callback);
         },
-        "saved correctly": function (err, data) {
+        'saved correctly': function (err, data) {
+          if (err) { console.log(err); }
           data = JSON.parse(data);
           Object.keys(data).forEach(function (key) {
             assert.deepEqual(data[key], nconf.get(key));
@@ -100,23 +102,23 @@ vows.describe('nconf/multiple-stores').addBatch({
 }).addBatch({
   // Threw this in it's own batch to make sure it's run separately from the
   // sync check
-  "When using the nconf with multiple providers": {
-    "and saving *asynchronously*": {
+  'When using the nconf with multiple providers': {
+    'and saving *asynchronously*': {
       topic: function () {
         nconf.set('weebls', 'crap');
         nconf.save(this.callback);
       },
-      "correct return value": function (err, data) {
+      'correct return value': function (err, data) {
         assert.isNull(err);
         Object.keys(data).forEach(function (key) {
           assert.deepEqual(data[key], nconf.get(key));
         });
       },
-      "the file": {
+      'the file': {
         topic: function () {
           fs.readFile(completeTest, 'utf8', this.callback);
         },
-        "saved correctly": function (err, data) {
+        'saved correctly': function (err, data) {
           assert.isNull(err);
           data = JSON.parse(data);
           Object.keys(data).forEach(function (key) {

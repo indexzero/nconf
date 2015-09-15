@@ -1,3 +1,6 @@
+/* eslint no-unused-vars: 0 */
+'use strict';
+
 var fs    = require('fs'),
     path  = require('path'),
     nconf = require('./lib/nconf');
@@ -44,7 +47,8 @@ console.dir(database);
 // Save the configuration object to disk
 //
 nconf.save(function (err) {
-  fs.readFile(path.join(__dirname, 'config.json'), function (err, data) {
-    console.dir(JSON.parse(data.toString()))
+  fs.readFile(path.join(__dirname, 'config.json'), function (error, data) {
+    if (err) { console.log(error); }
+    console.dir(JSON.parse(data.toString()));
   });
 });

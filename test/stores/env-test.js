@@ -4,16 +4,16 @@
  * (C) 2011, Charlie Robbins and the Contributors.
  *
  */
+'use strict';
 
 var vows = require('vows'),
     assert = require('assert'),
-    helpers = require('../helpers'),
     nconf = require('../../lib/nconf');
 
 vows.describe('nconf/stores/env').addBatch({
-  "An instance of nconf.Env": {
+  'An instance of nconf.Env': {
     topic: new nconf.Env(),
-    "should have the correct methods defined": function (env) {
+    'should have the correct methods defined': function (env) {
       assert.isFunction(env.loadSync);
       assert.isFunction(env.loadEnv);
       assert.isArray(env.whitelist);

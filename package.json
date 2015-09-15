@@ -18,10 +18,12 @@
     "yargs": "^3.19.0"
   },
   "devDependencies": {
+    "eslint": "1.0.0",
     "vows": "0.8.x"
   },
   "main": "./lib/nconf",
   "scripts": {
+    "pretest": "eslint .",
     "test": "vows test/*-test.js test/**/*-test.js --spec"
   },
   "engines": {
