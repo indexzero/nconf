@@ -62,7 +62,7 @@ vows.describe('nconf/hierarchy').addBatch({
           data += d;
         });
 
-        child.on('exit', function () {
+        child.on('close', function () {
           fs.readFile(configFile, 'utf8', that.callback.bind(null, null, data));
         });
       },
@@ -90,7 +90,7 @@ vows.describe('nconf/hierarchy').addBatch({
           data += d;
         });
 
-        child.on('exit', function() {
+        child.on('close', function() {
           that.callback(null, data);
         });
       },
