@@ -134,4 +134,26 @@ vows.describe('nconf/multiple-stores').addBatch({
       nconf.remove('env');
     }
   }
+}).addBatch({
+  // Threw this in it's own batch to make sure it's run separately from the
+  // sync check
+  "When using env with lowerCase:true": {
+    topic: function () {
+      var that = this;
+      helpers.cp(complete, completeTest, function () {
+        nconf.env({ lowerCase: true });
+        that.callback();
+      });
+    },
+    "env vars": {
+      "keys also available as lower case": function () {
+        Object.keys(process.env).forEach(function (key) {
+          assert.equal(nconf.get(key.toLowerCase()), process.env[key]);
+        });
+      }
+    },
+    teardown: function () {
+      nconf.remove('env');
+    }
+  }
 }).export(module);
