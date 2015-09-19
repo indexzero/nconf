@@ -222,5 +222,28 @@ vows.describe('nconf/stores/file').addBatch({
       }
     }
   }
+}).addBatch({
+  "When using the nconf file store": {
+    topic: function () {
+      var secureStore = new nconf.File({
+        file: 'mock-file-path.json',
+        secure: 'super-secretzzz'
+      });
+
+      secureStore.store = data;
+      return secureStore;
+    },
+    "the stringify() method should encrypt properly": function (store) {
+      var contents = JSON.parse(store.stringify());
+      Object.keys(data).forEach(function (key) {
+        assert.isString(contents[key]);
+      });
+    },
+    "the parse() method should decrypt properly": function (store) {
+      var contents = store.stringify();
+      var parsed = store.parse(contents);
+      assert.deepEqual(parsed, data);
+    }
+  }
 }).export(module);
 
