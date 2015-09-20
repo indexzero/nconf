@@ -1,0 +1,18 @@
+{
+  "isNull": {
+    "alg": "aes-256-ctr",
+    "value": "af07fbcf"
+  },
+  "literal": {
+    "alg": "aes-256-ctr",
+    "value": "e310f6d94f13"
+  },
+  "arr": {
+    "alg": "aes-256-ctr",
+    "value": "9a78b783175e69bb8f3458042b1c098d8ed9613410fac185b3735099224f8fe4ece0f0da8decfddbbf0eab3b7c391c47772b5441"
+  },
+  "obj": {
+    "alg": "aes-256-ctr",
+    "value": "ba78b783175968add93a680429424ae4cf957d2916ebcfa399730bb17200ddb0ecacb183c1b1ebcd950ced76726964062e74643c995c47372bfb1311bee8f65bbeb5a1d9426537a6d83635220ec7934e1d7cc187f7218cd4afadfa2f107fb42c232d80d95c160ee704fa8e922998b0b3e47ec579dd0baef7cae6d7dbaa203d732adb5cff22b80d810d7191237999cd8dc528d8f2201ae128a9f9e2df96d1a816aa73e3e6b8e6246cd98b454e453b36f43f9117cb4af8fa85429a92"
+  }
+}

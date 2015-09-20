@@ -5,6 +5,7 @@ test/fixtures/*.json
 !test/fixtures/malformed.json
 !test/fixtures/bom.json
 !test/fixtures/no-bom.json
+!test/fixtures/secure.json
 node_modules/
 node_modules/*
 npm-debug.log

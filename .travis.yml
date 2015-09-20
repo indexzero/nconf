@@ -1,14 +1,28 @@
-language: node_js
 sudo: false
-before_install:
-  - '[ "${TRAVIS_NODE_VERSION}" != "0.8" ] || npm install -g npm@1.4.28'
-  - npm install -g npm@latest
+language: node_js
 node_js:
   - "0.8"
   - "0.10"
-  - "0.11"
   - "0.12"
-  - "iojs"
+  - "4.1"
+
+before_install:
+  - '[ "${TRAVIS_NODE_VERSION}" != "0.8" ] || travis_retry npm install -g npm@1.4.28'
+  - '[ "${TRAVIS_NODE_VERSION}" == "0.8" ] || travis_retry npm install -g npm@2.14.2'
+  - travis_retry npm install
+
+before_install:
+  - travis_retry npm install -g npm@2.5.1
+  - travis_retry npm install
+
+script:
+  - npm test
+
+matrix:
+  allow_failures:
+    - node_js: "0.8"
+    - node_js: "0.10"
+
 notifications:
   email:
     - travis@nodejitsu.com

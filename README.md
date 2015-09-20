@@ -20,8 +20,8 @@ Using nconf is easy; it is designed to be a simple key-value store with support 
   //   3. A file located at 'path/to/config.json'
   //
   nconf.argv()
-       .env()
-       .file({ file: 'path/to/config.json' });
+   .env()
+   .file({ file: 'path/to/config.json' });
 
   //
   // Set a few variables on `nconf`.
@@ -216,7 +216,9 @@ Loads a given object literal into the configuration hierarchy. Both `nconf.defau
 ```
 
 ### File
-Based on the Memory store, but provides additional methods `.save()` and `.load()` which allow you to read your configuration to and from file. As with the Memory store, all method calls are synchronous with the exception of `.save()` and `.load()` which take callback functions. It is important to note that setting keys in the File engine will not be persisted to disk until a call to `.save()` is made. Note a custom key must be supplied as the first parameter for hierarchy to work if multiple files are used.
+Based on the Memory store, but provides additional methods `.save()` and `.load()` which allow you to read your configuration to and from file. As with the Memory store, all method calls are synchronous with the exception of `.save()` and `.load()` which take callback functions.
+
+It is important to note that setting keys in the File engine will not be persisted to disk until a call to `.save()` is made. Note a custom key must be supplied as the first parameter for hierarchy to work if multiple files are used.
 
 ``` js
   nconf.file('path/to/your/config.json');
@@ -228,6 +230,35 @@ Based on the Memory store, but provides additional methods `.save()` and `.load(
 The file store is also extensible for multiple file formats, defaulting to `JSON`. To use a custom format, simply pass a format object to the `.use()` method. This object must have `.parse()` and `.stringify()` methods just like the native `JSON` object.
 
 If the file does not exist at the provided path, the store will simply be empty.
+
+#### Encrypting file contents
+
+As of `nconf@0.8.0` it is now possible to encrypt and decrypt file contents using the `secure` option:
+
+``` js
+nconf.file('secure-file', {
+  file: 'path/to/secure-file.json',
+  secure: {
+    secret: 'super-secretzzz-keyzz',
+    alg: 'aes-256-ctr'
+  }
+})
+```
+
+This will encrypt each key using [`crypto.createCipher`](https://nodejs.org/api/crypto.html#crypto_crypto_createcipher_algorithm_password), defaulting to `aes-256-ctr`. The encrypted file contents will look like this:
+
+```
+{
+  "config-key-name": {
+    "alg": "aes-256-ctr", // cipher used
+    "value": "af07fbcf"   // encrypted contents
+  },
+  "another-config-key": {
+    "alg": "aes-256-ctr",   // cipher used
+    "value": "e310f6d94f13" // encrypted contents
+  },
+}
+```
 
 ### Redis
 There is a separate Redis-based store available through [nconf-redis][0]. To install and use this store simply:
@@ -252,22 +283,8 @@ Once installing both `nconf` and `nconf-redis`, you must require both modules to
 ```
 
 ## Installation
-
-### Installing npm (node package manager)
 ```
-  curl http://npmjs.org/install.sh | sh
-```
-
-### Installing nconf
-```
-  [sudo] npm install nconf
-```
-
-## More Documentation
-There is more documentation available through docco. I haven't gotten around to making a gh-pages branch so in the meantime if you clone the repository you can view the docs:
-
-```
-  open docs/nconf.html
+  npm install nconf --save
 ```
 
 ## Run Tests
