@@ -1,3 +1,89 @@
+v0.8.0 / Sun, 20 Sep 2015
+=========================
+  * [0922563](https://github.com/indexzero/nconf/commit/0922563) [doc fix] Remove unused and outdated literate coding documentation. (`indexzero`)
+  * [4b5030d](https://github.com/indexzero/nconf/commit/4b5030d) [fix] Only merge actual objects, not `null` values. Fixes #150. (`indexzero`)
+  * [a3589fa](https://github.com/indexzero/nconf/commit/a3589fa) Fixing provider issue in source (`Rob Rodriguez`)
+  * [51653e6](https://github.com/indexzero/nconf/commit/51653e6) Passing the value parameter to the providers (`Rob Rodriguez`)
+  * [2030144](https://github.com/indexzero/nconf/commit/2030144) [test dist] Add `test/fixtures/secure.json`. (`indexzero`)
+  * [9dbed2d](https://github.com/indexzero/nconf/commit/9dbed2d) [doc minor] Update docs for secure information. (`indexzero`)
+  * [0358545](https://github.com/indexzero/nconf/commit/0358545) [test api] Make the format capable of sub-objects. (`indexzero`)
+  * [04c0f3a](https://github.com/indexzero/nconf/commit/04c0f3a) [api test] Encrypt individual keys instead of entire stringified contents. Added basic unit tests. (`indexzero`)
+  * [d2b3561](https://github.com/indexzero/nconf/commit/d2b3561) [dist] Update `.travis.yml`. (`indexzero`)
+  * [442d2b4](https://github.com/indexzero/nconf/commit/442d2b4) [api] Allow for `secure` to be simply a secret string. (`indexzero`)
+  * [2de2bc0](https://github.com/indexzero/nconf/commit/2de2bc0) [api] Allow for "secure" option to be passed to `nconf.stores.File` to perform content encryption / decryption with `crypto.createCipher`. (`indexzero`)
+  * [5d95f13](https://github.com/indexzero/nconf/commit/5d95f13) filter out undefined values (`Christian Murphy`)
+  * [7d6be32](https://github.com/indexzero/nconf/commit/7d6be32) [travis] fix yaml syntax (supposed to solve nvm bugs #182) (`Joseph Page`)
+  * [abeeca0](https://github.com/indexzero/nconf/commit/abeeca0) [travis] fix npm bugs for node 0.8 (recommended way) (`Joseph Page`)
+  * [59056fe](https://github.com/indexzero/nconf/commit/59056fe) Update Async and ini (`Christian Murphy`)
+  * [a2b812f](https://github.com/indexzero/nconf/commit/a2b812f) Add travis tests for iojs (`Joseph Page`)
+  * [32d560c](https://github.com/indexzero/nconf/commit/32d560c) Add tests for node 0.12 (`Joseph Page`)
+  * [8a21ef3](https://github.com/indexzero/nconf/commit/8a21ef3) env({lowerCase:true}) option to make it possible to get() keys in lower case (`Olivier Lalonde`)
+  * [89dff39](https://github.com/indexzero/nconf/commit/89dff39) Quick grammar fix (`Nick Heiner`)
+  * [339e59a](https://github.com/indexzero/nconf/commit/339e59a) fix random fails on tests that use child process (`Pierre Beaujeu`)
+  * [a65e1a3](https://github.com/indexzero/nconf/commit/a65e1a3) update async (`Christian Murphy`)
+  * [a82b539](https://github.com/indexzero/nconf/commit/a82b539) update badge and use container build (`Christian Murphy`)
+  * [e5b33ce](https://github.com/indexzero/nconf/commit/e5b33ce) Add license attribute (`Gilad Peleg`)
+
+0.7.2 / Tue, 4 Aug 2015
+=======================
+  * [c2b8b97](https://github.com/indexzero/nconf/commit/c2b8b97) [dist] Version bump. 0.7.2 (`indexzero`)
+  * [3c11ef5](https://github.com/indexzero/nconf/commit/3c11ef5) fix: env.match test (`Remy Sharp`)
+  * [372521b](https://github.com/indexzero/nconf/commit/372521b) [doc] Add the badges!. (`indexzero`)
+  * [80ec01b](https://github.com/indexzero/nconf/commit/80ec01b) replace optimist with yargs (`Christian Murphy`)
+  * [6d86950](https://github.com/indexzero/nconf/commit/6d86950) Grammar nit (`Nick Heiner`)
+
+v0.7.1 / Wed, 26 Nov 2014
+=========================
+  * [dc6aed2](https://github.com/indexzero/nconf/commit/dc6aed2) [dist] Version bump. 0.7.1 (`Jarrett Cruger`)
+  * [87a3b82](https://github.com/indexzero/nconf/commit/87a3b82) [fix] we shouldnt be reversing here fixes #127 (`Jarrett Cruger`)
+  * [6271cdb](https://github.com/indexzero/nconf/commit/6271cdb) Revert "fixing the tests" (`Jarrett Cruger`)
+  * [f0d5b6e](https://github.com/indexzero/nconf/commit/f0d5b6e) [dist] Fix travis. (`indexzero`)
+
+v0.7.0 / Wed, 26 Nov 2014
+=========================
+  * [a2a1321](https://github.com/indexzero/nconf/commit/a2a1321) [dist] Version bump. 0.7.0 (`indexzero`)
+  * [352f075](https://github.com/indexzero/nconf/commit/352f075) [dist] "Real" CHANGELOG.md again. (`indexzero`)
+  * [af0e9fb](https://github.com/indexzero/nconf/commit/af0e9fb) [dist fix] Cleanup some whitespace. (`indexzero`)
+  * [0934255](https://github.com/indexzero/nconf/commit/0934255) [fix] Fixed regression introduced by #98. (`indexzero`)
+  * [8d5fb25](https://github.com/indexzero/nconf/commit/8d5fb25) [fix] Fix my own sloppy coding fixing the sloppy coding from #76. (`indexzero`)
+  * [f07bc40](https://github.com/indexzero/nconf/commit/f07bc40) [fix] Fix inconsistent style from #98. (`indexzero`)
+  * [0b8aa90](https://github.com/indexzero/nconf/commit/0b8aa90) [fix test] Remove leftover `console.log()` from #79. (`indexzero`)
+  * [f771500](https://github.com/indexzero/nconf/commit/f771500) [dist] Semantic cleanup from sloppy coding in #76. (`indexzero`)
+  * [ffce2cb](https://github.com/indexzero/nconf/commit/ffce2cb) [dist] Update package.json versions. (`indexzero`)
+  * [6301d7d](https://github.com/indexzero/nconf/commit/6301d7d) Update Readme; multiple file() needs custom key (`Mitchell McKenna`)
+  * [f69e43a](https://github.com/indexzero/nconf/commit/f69e43a) fixing the tests (`Chris Manson`)
+  * [c8b6c98](https://github.com/indexzero/nconf/commit/c8b6c98) Adding helpful information in case parsing failed. (`Martin Heidegger`)
+  * [8105c76](https://github.com/indexzero/nconf/commit/8105c76) [fix] only reverse keys for "get" action to be safe. (`Christopher Jeffrey`)
+  * [2241a36](https://github.com/indexzero/nconf/commit/2241a36) [fix] have latter stores precede the former stores again. (`Christopher Jeffrey`)
+  * [0bb89ee](https://github.com/indexzero/nconf/commit/0bb89ee) [fix] have latter stores precede the former stores. (`Christopher Jeffrey`)
+  * [43505a5](https://github.com/indexzero/nconf/commit/43505a5) Use ~ for dependencies (`Gabe Gorelick`)
+  * [05d73de](https://github.com/indexzero/nconf/commit/05d73de) [fix] No need to test 0.6 anymore (`Jarrett Cruger`)
+  * [79b9b84](https://github.com/indexzero/nconf/commit/79b9b84) [doc] Add a Literal example to add() (`Tommy Stanton`)
+  * [3a7b788](https://github.com/indexzero/nconf/commit/3a7b788) [doc] The store for File is empty if non-existent (`Tommy Stanton`)
+  * [9891814](https://github.com/indexzero/nconf/commit/9891814) Delete CHANGELOG.md (`Alexey Simonenko`)
+  * [120f5f0](https://github.com/indexzero/nconf/commit/120f5f0) added documentation (`joaoafrmartins`)
+  * [681fd2f](https://github.com/indexzero/nconf/commit/681fd2f) added regexp filtering to nconf env store (`joaoafrmartins`)
+  * [039057c](https://github.com/indexzero/nconf/commit/039057c) allow different separator for memorystore (`José F. Romaniello`)
+  * [b73b0e1](https://github.com/indexzero/nconf/commit/b73b0e1) attach help and showHelp arguments to the argv store (`Johnny Domino`)
+  * [4894c8f](https://github.com/indexzero/nconf/commit/4894c8f) resolves #64 passing usage string to optimist (`Johnny Domino`)
+
+v0.6.9 / Sun, 1 Dec 2013
+========================
+  * [022b9bc](https://github.com/indexzero/nconf/commit/022b9bc) [dist] Version bump. 0.6.9 (`Jarrett Cruger`)
+  * [9aa33b5](https://github.com/indexzero/nconf/commit/9aa33b5) [dist] bump optimist version, fixes #89 (`Jarrett Cruger`)
+  * [92311c8](https://github.com/indexzero/nconf/commit/92311c8) [rm] kill pkginfo (`Jarrett Cruger`)
+  * [c713936](https://github.com/indexzero/nconf/commit/c713936) [dist] bump async (`Jarrett Cruger`)
+
+v0.6.8 / Tue, 29 Oct 2013
+=========================
+  * [cd81efa](https://github.com/indexzero/nconf/commit/cd81efa) [dist] Version bump. 0.6.8 (`Jarrett Cruger`)
+  * [6c1eb5e](https://github.com/indexzero/nconf/commit/6c1eb5e) fixed white spacing and added (embarrassing absent) variable declarations (`midknight41`)
+  * [5546469](https://github.com/indexzero/nconf/commit/5546469) updated .travis.yml as travis doesn't support node 0.4 or 0.9 (`midknight41`)
+  * [29f1ca2](https://github.com/indexzero/nconf/commit/29f1ca2) added support for BOM in load() and loadSync() (`midknight41`)
+  * [ada15db](https://github.com/indexzero/nconf/commit/ada15db) Test that invalid file name is indicated (`Marcin Floryan`)
+  * [0135d95](https://github.com/indexzero/nconf/commit/0135d95) Additional error information when JSON config file cannot be read (`Marcin Floryan`)
+  * [5d2ebfb](https://github.com/indexzero/nconf/commit/5d2ebfb) Added test to confirm merging an Object and null behaves as expected. (`Michael Schoonmaker`)
+  * [ed41c51](https://github.com/indexzero/nconf/commit/ed41c51) Updated Memory.merge to handle null values (`Michael Schoonmaker`)
 
 v0.6.7 / Thu, 20 Dec 2012
 =========================
