@@ -226,7 +226,7 @@ vows.describe('nconf/stores/file').addBatch({
   "When using the nconf file store": {
     topic: function () {
       var secureStore = new nconf.File({
-        file: 'mock-file-path.json',
+        file: path.join(__dirname, '..', 'fixtures', 'secure.json'),
         secure: 'super-secretzzz'
       });
 
@@ -236,13 +236,25 @@ vows.describe('nconf/stores/file').addBatch({
     "the stringify() method should encrypt properly": function (store) {
       var contents = JSON.parse(store.stringify());
       Object.keys(data).forEach(function (key) {
-        assert.isString(contents[key]);
+        assert.isObject(contents[key]);
+        assert.isString(contents[key].value);
+        assert.equal(contents[key].alg, 'aes-256-ctr');
       });
     },
     "the parse() method should decrypt properly": function (store) {
       var contents = store.stringify();
       var parsed = store.parse(contents);
       assert.deepEqual(parsed, data);
+    },
+    "the load() method should decrypt properly": function (store) {
+      store.load(function (err, loaded) {
+        assert.isNull(err);
+        assert.deepEqual(loaded, data);
+      });
+    },
+    "the loadSync() method should decrypt properly": function (store) {
+      var loaded = store.loadSync()
+      assert.deepEqual(loaded, data);
     }
   }
 }).export(module);
