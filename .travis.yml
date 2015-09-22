@@ -1,15 +1,12 @@
 sudo: false
 language: node_js
 node_js:
-  - "0.8"
   - "0.10"
   - "0.12"
   - "4.1"
 
 before_install:
-  - '[ "${TRAVIS_NODE_VERSION}" != "0.8" ] || travis_retry npm install -g npm@1.4.28'
-  - '[ "${TRAVIS_NODE_VERSION}" == "0.8" ] || travis_retry npm install -g npm@2.14.2'
-  - travis_retry npm install
+  - travis_retry npm install npm -g
 
 before_install:
   - travis_retry npm install -g npm@2.5.1
@@ -20,7 +17,6 @@ script:
 
 matrix:
   allow_failures:
-    - node_js: "0.8"
     - node_js: "0.10"
 
 notifications:
