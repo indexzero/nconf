@@ -46,7 +46,7 @@ vows.describe('nconf').addBatch({
     "the required() method": {
       "should throw error with missing keys": function() {
         nconf.set('foo:bar:bazz', 'buzz');
-        assert.throws(nconf.required.bind(null, ['missingkey', 'foo:bar:bazz']), Error);
+        assert.throws(nconf.required.bind(nconf, ['missing', 'foo:bar:bazz']), Error);
       },
       "should return true if all required keys exist": function() {
         nconf.set('foo:bar:bazz', 'buzz');
