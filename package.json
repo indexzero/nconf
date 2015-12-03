@@ -18,11 +18,13 @@
     "yargs": "^3.19.0"
   },
   "devDependencies": {
+    "istanbul": "^0.4.1",
     "vows": "0.8.x"
   },
   "main": "./lib/nconf",
   "scripts": {
-    "test": "vows test/*-test.js test/**/*-test.js --spec"
+    "test": "vows test/*-test.js test/**/*-test.js --spec",
+    "cover": "istanbul cover vows -- test/*-test.js test/**/*-test.js  --spec"
   },
   "engines": {
     "node": ">= 0.4.0"
