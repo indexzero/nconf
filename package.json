@@ -18,13 +18,15 @@
     "yargs": "^3.19.0"
   },
   "devDependencies": {
+    "coveralls": "^2.11.4",
     "istanbul": "^0.4.1",
     "vows": "0.8.x"
   },
   "main": "./lib/nconf",
   "scripts": {
     "test": "vows test/*-test.js test/**/*-test.js --spec",
-    "cover": "istanbul cover vows -- test/*-test.js test/**/*-test.js  --spec"
+    "cover": "istanbul cover vows -- test/*-test.js test/**/*-test.js  --spec",
+    "coveralls": "cat coverage/lcov.info | coveralls"
   },
   "engines": {
     "node": ">= 0.4.0"
