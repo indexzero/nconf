@@ -23,6 +23,15 @@ process.env.BAR = 'zalgo';
 process.env.NODE_ENV = 'debug';
 process.env.FOOBAR = 'should not load';
 
+var isFreight = /^[A-Z0-9_]+$/;
+function freightToCamel(str) {
+  if (!isFreight.test(str)) return str;
+  return str.split(/_+/)
+    .filter(function (w) { return !!w; })
+    .map(function (w, i) { return i === 0 ? w.toLowerCase() : w[0].toUpperCase() + w.substr(1).toLowerCase(); })
+    .join('');
+}
+
 vows.describe('nconf/multiple-stores').addBatch({
   "When using the nconf with multiple providers": {
     topic: function () {
@@ -31,7 +40,8 @@ vows.describe('nconf/multiple-stores').addBatch({
         nconf.env({
           // separator: '__',
           match: /^NCONF_/,
-          whitelist: ['NODE_ENV', 'FOO', 'BAR']
+          whitelist: ['NODE_ENV', 'FOO', 'BAR'],
+          transform: freightToCamel
         });
         nconf.file({ file: completeTest });
         nconf.use('argv', { type: 'literal', store: data });
@@ -48,6 +58,9 @@ vows.describe('nconf/multiple-stores').addBatch({
         ['NODE_ENV', 'FOO', 'BAR', 'NCONF_foo'].forEach(function (key) {
           assert.equal(nconf.get(key), process.env[key]);
         });
+      },
+      "are transformed": function () {
+        assert.equal(nconf.get('fooBar'), process.env['FOO_BAR'])
       }
     },
     "json vars": {
