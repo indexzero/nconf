@@ -4,6 +4,7 @@ node_js:
   - "0.10"
   - "0.12"
   - "4.1"
+  - "5"
 
 before_install:
   - travis_retry npm install npm -g
@@ -14,6 +15,10 @@ before_install:
 
 script:
   - npm test
+
+after_script:
+  - npm run cover
+  - npm run coveralls
 
 matrix:
   allow_failures:
