@@ -71,7 +71,15 @@ vows.describe('nconf/provider').addBatch({
       "when 'env' is set to true with a nested separator": helpers.assertSystemConf({
         script: path.join(fixturesDir, 'scripts', 'nconf-nested-env.js'),
         env: { SOME_THING: 'foobar' }
-      })
+      }),
+      "calling the use() method after adding other stores": {
+        topic: new nconf.Provider().use('file', { file: files[0] }).defaults({candy: {something: 'should never get this'}}),
+        "should use a new instance of the store type": function (provider) {
+          provider.use('file', { file: files[1] });
+
+          assert.equal(provider.get('candy:something'), 'file2');
+        }
+      },
     }
   }
 }).addBatch({
