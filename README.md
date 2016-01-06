@@ -177,6 +177,23 @@ Responsible for loading the values parsed from `process.argv` by `yargs` into th
   });
 ```
 
+It's also possible to pass a configured yargs instance
+
+``` js
+  nconf.argv(require('yargs')
+    .version('1.2.3')
+    .usage('My usage definition')
+    .strict()
+    .options({
+      "x": {
+        alias: 'example',
+        describe: 'Example description for usage generation',
+        demand: true,
+        default: 'some-value'
+      }
+    }));
+```
+
 ### Env
 Responsible for loading the values parsed from `process.env` into the configuration hierarchy.
 
