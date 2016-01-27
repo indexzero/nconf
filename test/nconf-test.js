@@ -24,6 +24,7 @@ vows.describe('nconf').addBatch({
       assert.isFunction(nconf.load);
       assert.isFunction(nconf.save);
       assert.isFunction(nconf.reset);
+      assert.isFunction(nconf.required);
     },
     "the use() method": {
       "should instaniate the correct store": function () {
@@ -40,6 +41,16 @@ vows.describe('nconf').addBatch({
         assert.isNull(err);
         data = JSON.parse(data.toString());
         assert.equal(nconf.version, data.version);
+      }
+    },
+    "the required() method": {
+      "should throw error with missing keys": function() {
+        nconf.set('foo:bar:bazz', 'buzz');
+        assert.throws(nconf.required.bind(nconf, ['missing', 'foo:bar:bazz']), Error);
+      },
+      "should return true if all required keys exist": function() {
+        nconf.set('foo:bar:bazz', 'buzz');
+        assert.isTrue(nconf.required(['foo:bar:bazz']));
       }
     }
   }
