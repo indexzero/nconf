@@ -149,7 +149,7 @@ Removes the store with the specified `name.` The configuration stored at that le
 
 ``` js
   nconf.remove('file');
-```y
+```
 
 ### nconf.required(keys)
 Declares a set of string keys to be mandatory, and throw an error if any are missing.
