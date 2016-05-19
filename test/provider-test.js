@@ -167,4 +167,73 @@ vows.describe('nconf/provider').addBatch({
       }
     }
   }
+}).addBatch({
+  "When using nconf": {
+    "an instance of 'nconf.Provider'": {
+      "the any() method": {
+        topic: new nconf.Provider({
+          type: 'literal',
+          store: {
+              key: "getThisValue"
+          }
+        }),
+        "without a callback": {
+          "given an array of keys with one matching": {
+            "should respond with the correct value": function (provider) {
+              assert.equal(provider.any(["notthis", "orthis", "key"]), 'getThisValue');
+            }
+          },
+          "given an array of keys with no match": {
+            "should respond with null": function (provider) {
+              assert.isNull(provider.any(["notthis", "orthis"]));
+            }
+          },
+          "given a variable argument list of keys with one matching": {
+            "should respond with the correct value": function (provider) {
+              assert.equal(provider.any("notthis", "orthis", "key"), 'getThisValue');
+            }
+          },
+          "given no arguments": {
+            "should respond with null": function (provider) {
+              assert.isNull(provider.any());
+            }
+          }
+        },
+        "with a callback": {
+          "given an array of keys with one matching": {
+            topic: function(provider) {
+              provider.any(["notthis", "orthis", "key"], this.callback);
+            },
+            "should respond with the correct value": function (err, value) {
+              assert.equal(value, 'getThisValue');
+            }
+          },
+          "given an array of keys with no match": {
+            topic: function(provider) {
+              provider.any(["notthis", "orthis"], this.callback);
+            },
+            "should respond with an undefined value": function (err, value) {
+              assert.isUndefined(value);
+            }
+          },
+          "given a variable argument list of keys with one matching": {
+            topic: function(provider) {
+              provider.any("notthis", "orthis", "key", this.callback);
+            },
+            "should respond with the correct value": function (err, value) {
+              assert.equal(value, 'getThisValue');
+            }
+          },
+          "given no keys": {
+            topic: function(provider) {
+              provider.any(this.callback);
+            },
+            "should respond with an undefined value": function (err, value) {
+              assert.isUndefined(value);
+            }
+          }
+        }
+      }
+    }
+  }
 }).export(module);
