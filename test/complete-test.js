@@ -9,6 +9,7 @@ var fs = require('fs'),
     path = require('path'),
     vows = require('vows'),
     assert = require('assert'),
+    camelCase = require('lodash.camelcase'),
     nconf = require('../lib/nconf'),
     data = require('./fixtures/data').data,
     helpers = require('./helpers');
@@ -22,6 +23,7 @@ process.env.FOO = 'bar';
 process.env.BAR = 'zalgo';
 process.env.NODE_ENV = 'debug';
 process.env.FOOBAR = 'should not load';
+process.env.CAMEL_CASE = 'Camel case test';
 
 vows.describe('nconf/multiple-stores').addBatch({
   "When using the nconf with multiple providers": {
@@ -149,6 +151,26 @@ vows.describe('nconf/multiple-stores').addBatch({
       "keys also available as lower case": function () {
         Object.keys(process.env).forEach(function (key) {
           assert.equal(nconf.get(key.toLowerCase()), process.env[key]);
+        });
+      }
+    },
+    teardown: function () {
+      nconf.remove('env');
+    }
+  }
+}).addBatch({
+  "When using env with camelCase:true": {
+    topic: function () {
+      var that = this;
+      helpers.cp(complete, completeTest, function () {
+        nconf.env({ camelCase: true });
+        that.callback();
+      });
+    },
+    "env vars": {
+      "keys also available as camel case": function () {
+        Object.keys(process.env).forEach(function (key) {
+          assert.equal(nconf.get(camelCase(key)), process.env[key]);
         });
       }
     },
