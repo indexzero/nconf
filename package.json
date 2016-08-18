@@ -29,6 +29,7 @@
     "cover": "istanbul cover vows -- test/*-test.js test/**/*-test.js  --spec",
     "coveralls": "cat coverage/lcov.info | coveralls"
   },
+  "files": ["lib"],
   "engines": {
     "node": ">= 0.4.0"
   },
