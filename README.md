@@ -206,12 +206,26 @@ Responsible for loading the values parsed from `process.env` into the configurat
   var dbHost = nconf.get('database:host');
 
   //
+  // Can also lowerCase keys. 
+  // Especially handy when dealing with environment variables which are usually 
+  // uppercased while argv are lowercased.
+  //
+
+  // Given an environment variable PORT=3001
+  nconf.env({ lowerCase: false });
+  var port = nconf.get('port') // undefined
+
+  nconf.env({ lowerCase: true });
+  var port = nconf.get('port') // 3001
+
+  //
   // Or use all options
   //
   nconf.env({
     separator: '__',
     match: /^whatever_matches_this_will_be_whitelisted/
-    whitelist: ['database__host', 'only', 'load', 'these', 'values', 'if', 'whatever_doesnt_match_but_is_whitelisted_gets_loaded_too']
+    whitelist: ['database__host', 'only', 'load', 'these', 'values', 'if', 'whatever_doesnt_match_but_is_whitelisted_gets_loaded_too'],
+    lowerCase: true
   });
   var dbHost = nconf.get('database:host');
 ```
