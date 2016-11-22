@@ -47,7 +47,42 @@ vows.describe('nconf/provider').addBatch({
       "when 'env' is true": helpers.assertSystemConf({
         script: path.join(fixturesDir, 'scripts', 'provider-env.js'),
         env: { SOMETHING: 'foobar' }
-      })
+      }),
+      "when 'env' is true and 'tryParse' option is true": {
+        topic: function() {
+          var env = {
+            SOMETHING: 'foobar',
+            SOMEBOOL: 'true',
+            SOMENULL: 'null',
+            SOMEUNDEF: 'undefined',
+            SOMEINT: '3600',
+            SOMEFLOAT: '0.5',
+            SOMEBAD: '5.1a'
+          };
+          var oenv = {};
+          Object.keys(env).forEach(function (key) {
+              if (process.env[key]) oenv[key] = process.env[key];
+              process.env[key] = env[key];
+          });
+          var provider = new nconf.Provider().use('env', {tryParse: true});
+          Object.keys(env).forEach(function (key) {
+              delete process.env[key];
+              if (oenv[key]) process.env[key] = oenv[key];
+          });
+          return provider;
+        },
+        "should respond with parsed values": function (provider) {
+
+          assert.equal(provider.get('SOMETHING'), 'foobar');
+          assert.strictEqual(provider.get('SOMEBOOL'), true);
+          assert.notEqual(provider.get('SOMEBOOL'), 'true');
+          assert.strictEqual(provider.get('SOMENULL'), null);
+          assert.strictEqual(provider.get('SOMEUNDEF'), undefined);
+          assert.strictEqual(provider.get('SOMEINT'), 3600);
+          assert.strictEqual(provider.get('SOMEFLOAT'), .5);
+          assert.strictEqual(provider.get('SOMEBAD'), '5.1a');
+        }
+      }
     },
     "the default nconf provider": {
       "when 'argv' is set to true": helpers.assertSystemConf({
