@@ -66,7 +66,7 @@ vows.describe('nconf/hierarchy').addBatch({
           fs.readFile(configFile, 'utf8', that.callback.bind(null, null, data));
         });
       },
-      "should not persist information passed in to process.env and process.argv to disk ": function (_, data, _, ondisk){
+      "should not persist information passed in to process.env and process.argv to disk ": function (_unused1, data, _unused2, ondisk){
         assert.equal(data, 'foo');
         assert.deepEqual(JSON.parse(ondisk), {
           database: {
