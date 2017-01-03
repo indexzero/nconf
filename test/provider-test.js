@@ -16,6 +16,7 @@ var assert = require('assert'),
 var fixturesDir = path.join(__dirname, 'fixtures'),
     mergeFixtures = path.join(fixturesDir, 'merge'),
     files = [path.join(mergeFixtures, 'file1.json'), path.join(mergeFixtures, 'file2.json')],
+    getFirstFixture = path.join(fixturesDir, 'get-first.json'),
     override = JSON.parse(fs.readFileSync(files[0]), 'utf8');
 
 function assertProvider(test) {
@@ -89,6 +90,17 @@ vows.describe('nconf/provider').addBatch({
           provider.load();
           provider.merge(override);
           assert.equal(provider.stores.file.store.unicorn.exists, true);
+        }
+      }
+    }
+  }
+}).addBatch({
+  "When using nconf": {
+    "an instance of 'nconf.Provider'": {
+      "the getFirst() method": {
+        topic: new nconf.Provider().use('file', { file: getFirstFixture}),
+        "should use the first truthy get in the keyList": function(provider) {
+          assert.equal(provider.getFirst("ports"), true);
         }
       }
     }
