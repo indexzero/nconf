@@ -132,7 +132,7 @@ vows.describe('nconf/hierarchy').addBatch({
             something: 'much better something for you',
             something1: true,
             something2: true,
-            something3: 'completely unique',
+            something18: 'completely unique',
             something5: {
               first: 1,
               second: 99
