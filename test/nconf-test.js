@@ -49,7 +49,7 @@ vows.describe('nconf').addBatch({
         assert.throws(nconf.required.bind(nconf, ['missing', 'foo:bar:bazz']), Error);
       },
       "should return the provider if all required keys exist": function() {
-        let Provider = nconf.Provider;
+        var Provider = nconf.Provider;
         nconf.set('foo:bar:bazz', 'buzz');
         assert.isTrue(nconf.required(['foo:bar:bazz']) instanceof Provider);
       }
