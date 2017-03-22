@@ -162,6 +162,24 @@ Declares a set of string keys to be mandatory, and throw an error if any are mis
   nconf.required(['keya', 'keyb']);
   // Error: Missing required keys: keyb
 ```
+You can also chain `.required()` calls when needed. for example when a configuration depends on another configuration store
+
+```js
+config
+  .argv()
+  .env()
+  .required([ 'STAGE']) //here you should have STAGE otherwise throw an error
+  .file( 'stage', path.resolve( 'configs', 'stages', config.get( 'STAGE' ) + '.json' ) )
+  .required([ 'OAUTH:redirectURL']) // here you should have OAUTH:redirectURL, otherwise throw an error
+  .file( 'oauth', path.resolve( 'configs', 'oauth', config.get( 'OAUTH:MODE' ) + '.json' ) )
+  .file( 'app', path.resolve( 'configs', 'app.json' ) )
+  .required([ 'LOGS_MODE']) // here you should haveLOGS_MODE, otherwise throw an error
+  .add( 'logs', {
+    type: 'literal',
+    store: require( path.resolve( 'configs', 'logs', config.get( 'LOGS_MODE' ) + '.js') )
+  } )
+  .defaults( defaults );
+```
 
 ## Storage Engines
 

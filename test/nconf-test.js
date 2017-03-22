@@ -48,9 +48,10 @@ vows.describe('nconf').addBatch({
         nconf.set('foo:bar:bazz', 'buzz');
         assert.throws(nconf.required.bind(nconf, ['missing', 'foo:bar:bazz']), Error);
       },
-      "should return true if all required keys exist": function() {
+      "should return the provider if all required keys exist": function() {
+        let Provider = nconf.Provider;
         nconf.set('foo:bar:bazz', 'buzz');
-        assert.isTrue(nconf.required(['foo:bar:bazz']));
+        assert.isTrue(nconf.required(['foo:bar:bazz']) instanceof Provider);
       }
     }
   }
@@ -118,22 +119,22 @@ vows.describe('nconf').addBatch({
         "without a callback": {
           "should respond with the merged store": function () {
             assert.deepEqual(nconf.load(), {
-              title: 'My specific title', 
+              title: 'My specific title',
               color: 'green',
-              movie: 'Kill Bill' 
+              movie: 'Kill Bill'
             });
           }
         },
         "with a callback": {
           topic: function () {
-            nconf.load(this.callback.bind(null, null)); 
+            nconf.load(this.callback.bind(null, null));
           },
           "should respond with the merged store": function (ign, err, store) {
             assert.isNull(err);
             assert.deepEqual(store, {
-              title: 'My specific title', 
+              title: 'My specific title',
               color: 'green',
-              movie: 'Kill Bill' 
+              movie: 'Kill Bill'
             });
           }
         }
