@@ -224,6 +224,8 @@ Responsible for loading the values parsed from `process.env` into the configurat
   nconf.env({
     separator: '__',
     arraySeparator: ',',
+    // This is necessary to differentiate between e.g. 1, being parsed as ['1'] or as  ['1', ''], which both are valid cases
+    allowSingleValueArray: false
     match: /^whatever_matches_this_will_be_whitelisted/,
     whitelist: ['database__host', 'only', 'load', 'these', 'values', 'if', 'whatever_doesnt_match_but_is_whitelisted_gets_loaded_too'],
     lowerCase: true
