@@ -108,6 +108,38 @@ vows.describe('nconf/hierarchy').addBatch({
           }
         });
       }
+    },
+    "configured with .file(), .defaults() should deep merge objects": {
+      topic: function () {
+        var script = path.join(__dirname, 'fixtures', 'scripts', 'nconf-hierarchical-defaults-merge.js'),
+            that = this,
+            data = '',
+            child;
+
+        child = spawn('node', [script]);
+
+        child.stdout.on('data', function (d) {
+          data += d;
+        });
+
+        child.on('close', function() {
+          that.callback(null, data);
+        });
+      },
+      "should merge nested objects ": function (err, data) {
+        assert.deepEqual(JSON.parse(data), {
+          candy: {
+            something: 'much better something for you',
+            something1: true,
+            something2: true,
+            something18: 'completely unique',
+            something5: {
+              first: 1,
+              second: 99
+            }
+          }
+        });
+      }
     }
   }
 }).export(module);

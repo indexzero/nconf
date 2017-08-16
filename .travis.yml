@@ -3,15 +3,9 @@ language: node_js
 node_js:
   - "0.10"
   - "0.12"
-  - "4.1"
-  - "5"
-
-before_install:
-  - travis_retry npm install npm -g
-
-before_install:
-  - travis_retry npm install -g npm@2.5.1
-  - travis_retry npm install
+  - "4"
+  - "6"
+  - "7"
 
 script:
   - npm test
@@ -23,6 +17,7 @@ after_script:
 matrix:
   allow_failures:
     - node_js: "0.10"
+    - node_js: "0.12"
 
 notifications:
   email:
