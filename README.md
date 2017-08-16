@@ -191,6 +191,9 @@ Responsible for loading the values parsed from `process.argv` by `yargs` into th
 
 ### Env
 Responsible for loading the values parsed from `process.env` into the configuration hierarchy.
+Usually the env variables values are loaded into the configuration as strings,
+to ensure well-known strings ('false', 'true', 'null', 'undefined', '3', '5.1') are properly parsed
+the `tryParse` boolean option is available.
 
 ``` js
   //
@@ -211,7 +214,8 @@ Responsible for loading the values parsed from `process.env` into the configurat
   nconf.env({
     separator: '__',
     match: /^whatever_matches_this_will_be_whitelisted/
-    whitelist: ['database__host', 'only', 'load', 'these', 'values', 'if', 'whatever_doesnt_match_but_is_whitelisted_gets_loaded_too']
+    whitelist: ['database__host', 'only', 'load', 'these', 'values', 'if', 'whatever_doesnt_match_but_is_whitelisted_gets_loaded_too'],
+    tryParse: true
   });
   var dbHost = nconf.get('database:host');
 ```
