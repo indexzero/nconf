@@ -22,6 +22,8 @@ process.env.FOO = 'bar';
 process.env.BAR = 'zalgo';
 process.env.NODE_ENV = 'debug';
 process.env.FOOBAR = 'should not load';
+process.env.json_array = JSON.stringify(['foo', 'bar', 'baz']);
+process.env.json_obj = JSON.stringify({foo: 'bar', baz: 'foo'});
 
 vows.describe('nconf/multiple-stores').addBatch({
   "When using the nconf with multiple providers": {
@@ -149,6 +151,42 @@ vows.describe('nconf/multiple-stores').addBatch({
       "keys also available as lower case": function () {
         Object.keys(process.env).forEach(function (key) {
           assert.equal(nconf.get(key.toLowerCase()), process.env[key]);
+        });
+      }
+    },
+    teardown: function () {
+      nconf.remove('env');
+    }
+  }
+}).addBatch({
+  // Threw this in it's own batch to make sure it's run separately from the
+  // sync check
+  "When using env with parseJson:true": {
+    topic: function () {
+      var that = this;
+      helpers.cp(complete, completeTest, function () {
+        nconf.env({ parseJson: true });
+        that.callback();
+      });
+    },
+    "env vars": {
+      "JSON keys properly parsed": function () {
+        Object.keys(process.env).forEach(function (key) {
+          var val = process.env[key];
+          
+          try {
+            var ret = JSON.parse(val);
+            
+            // apply JSON parsing only if its non-primitive types: JSON Object or Array
+            // avoid breaking backward-compatibility
+            if (typeof ret !== 'number' &&
+                typeof ret !== 'string' &&
+                typeof ret !== 'boolean') {
+              val = ret;
+            }
+          } catch (err) {}
+
+          assert.deepEqual(nconf.get(key), val);
         });
       }
     },
