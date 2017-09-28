@@ -16,7 +16,7 @@ vows.describe('nconf/stores/argv').addBatch({
     "should have the correct methods defined": function (argv) {
       assert.isFunction(argv.loadSync);
       assert.isFunction(argv.loadArgv);
-      assert.isFalse(argv.options);
+      assert.deepEqual(argv.options, {});
     }
   }
 }).export(module);

@@ -48,7 +48,7 @@ vows.describe('nconf/provider').addBatch({
         script: path.join(fixturesDir, 'scripts', 'provider-env.js'),
         env: { SOMETHING: 'foobar' }
       }),
-      "when 'env' is true and 'tryParse' option is true": {
+      "when 'env' is true and 'parseValues' option is true": {
         topic: function() {
           var env = {
             SOMETHING: 'foobar',
@@ -64,7 +64,7 @@ vows.describe('nconf/provider').addBatch({
               if (process.env[key]) oenv[key] = process.env[key];
               process.env[key] = env[key];
           });
-          var provider = new nconf.Provider().use('env', {tryParse: true});
+          var provider = new nconf.Provider().use('env', {parseValues: true});
           Object.keys(env).forEach(function (key) {
               delete process.env[key];
               if (oenv[key]) process.env[key] = oenv[key];
