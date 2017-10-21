@@ -161,7 +161,7 @@ vows.describe('nconf/multiple-stores').addBatch({
 }).addBatch({
   // Threw this in it's own batch to make sure it's run separately from the
   // sync check
-  "When using env with parseJson:true": {
+  "When using env with parseValues:true": {
     topic: function () {
       var that = this;
       helpers.cp(complete, completeTest, function () {
@@ -175,15 +175,7 @@ vows.describe('nconf/multiple-stores').addBatch({
           var val = process.env[key];
           
           try {
-            var ret = JSON.parse(val);
-            
-            // apply JSON parsing only if its non-primitive types: JSON Object or Array
-            // avoid breaking backward-compatibility
-            if (typeof ret !== 'number' &&
-                typeof ret !== 'string' &&
-                typeof ret !== 'boolean') {
-              val = ret;
-            }
+            val = JSON.parse(val);
           } catch (err) {}
 
           assert.deepEqual(nconf.get(key), val);
