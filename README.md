@@ -130,7 +130,8 @@ Adds a new store with the specified `name` and `options`. If `options.type` is n
 ```
 
 ### nconf.any(names, callback)
-Given a set of key names, gets the value of the first key found. The key names can be given as separate arguments or as an array. If the last argument is a function it will be called with the result; otherwise, the value is returned.
+Given a set of key names, gets the value of the first key found to be truthy. The key names can be given as separate arguments 
+or as an array. If the last argument is a function, it will be called with the result; otherwise, the value is returned.
 
 ``` js
   //
