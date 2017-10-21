@@ -195,14 +195,15 @@ vows.describe('nconf/stores/file').addBatch({
     "the search() method": {
       "when the target file exists higher in the directory tree": {
         topic: function () {
-          var filePath = this.filePath = path.join(process.env.HOME, '.nconf');
+          var searchBase = this.searchBase = process.env.HOME;
+          var filePath = this.filePath = path.join(searchBase, '.nconf');
           fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
           return new (nconf.File)({
             file: '.nconf'
           })
         },
         "should update the file appropriately": function (store) {
-          store.search();
+          store.search(this.searchBase);
           assert.equal(store.file, this.filePath);
           fs.unlinkSync(this.filePath);
         }
