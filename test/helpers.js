@@ -7,7 +7,6 @@
 
 var assert = require('assert'),
     spawn = require('child_process').spawn,
-    util = require('util'),
     fs = require('fs'),
     path = require('path'),
     nconf = require('../lib/nconf');

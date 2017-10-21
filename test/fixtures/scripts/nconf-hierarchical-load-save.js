@@ -5,8 +5,7 @@
  *
  */
 
-var fs = require('fs'),
-    path = require('path'),
+var path = require('path'),
     nconf = require('../../../lib/nconf');
 
 //

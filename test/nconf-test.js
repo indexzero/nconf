@@ -9,8 +9,7 @@ var fs = require('fs'),
     path = require('path'),
     vows = require('vows'),
     assert = require('assert'),
-    nconf = require('../lib/nconf'),
-    data = require('./fixtures/data').data;
+    nconf = require('../lib/nconf')
 
 vows.describe('nconf').addBatch({
   "When using the nconf": {

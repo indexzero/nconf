@@ -54,7 +54,9 @@ vows.describe('nconf/hierarchy').addBatch({
             child;
 
         try { fs.unlinkSync(configFile) }
-        catch (ex) { }
+        catch (ex) { 
+          // No-op
+        }
 
         child = spawn('node', [script].concat(argv));
 

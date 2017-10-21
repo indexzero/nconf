@@ -7,7 +7,6 @@
 
 var vows = require('vows'),
     assert = require('assert'),
-    helpers = require('../helpers'),
     nconf = require('../../lib/nconf');
 
 vows.describe('nconf/stores/literal').addBatch({

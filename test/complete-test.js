@@ -6,7 +6,6 @@
  */
 
 var fs = require('fs'),
-    path = require('path'),
     vows = require('vows'),
     assert = require('assert'),
     nconf = require('../lib/nconf'),

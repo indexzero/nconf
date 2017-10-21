@@ -8,7 +8,6 @@
 var fs = require('fs'),
     path = require('path'),
     vows = require('vows'),
-    assert = require('assert'),
     helpers = require('./helpers'),
     nconf = require('../lib/nconf');
 
