@@ -129,6 +129,24 @@ Adds a new store with the specified `name` and `options`. If `options.type` is n
   nconf.add('global', { type: 'file', file: '/path/to/globalconf.json' });
 ```
 
+### nconf.any(names, callback)
+Given a set of key names, gets the value of the first key found to be truthy. The key names can be given as separate arguments 
+or as an array. If the last argument is a function, it will be called with the result; otherwise, the value is returned.
+
+``` js
+  //
+  // Get one of 'NODEJS_PORT' and 'PORT' as a return value
+  //
+  var port = nconf.any('NODEJS_PORT', 'PORT');
+
+  //
+  // Get one of 'NODEJS_IP' and 'IPADDRESS' using a callback
+  //
+  nconf.any(['NODEJS_IP', 'IPADDRESS'], function(err, value) {
+    console.log('Connect to IP address ' + value);
+  });
+```
+
 ### nconf.use(name, options)
 Similar to `nconf.add`, except that it can replace an existing store if new options are provided
 

@@ -17,6 +17,7 @@ vows.describe('nconf').addBatch({
       assert.isFunction(nconf.key);
       assert.isFunction(nconf.path);
       assert.isFunction(nconf.use);
+      assert.isFunction(nconf.any);
       assert.isFunction(nconf.get);
       assert.isFunction(nconf.set);
       assert.isFunction(nconf.clear);
