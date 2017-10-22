@@ -164,7 +164,7 @@ vows.describe('nconf/multiple-stores').addBatch({
     topic: function () {
       var that = this;
       helpers.cp(complete, completeTest, function () {
-        nconf.env({ parseJson: true });
+        nconf.env({ parseValues: true });
         that.callback();
       });
     },
