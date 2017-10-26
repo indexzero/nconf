@@ -184,5 +184,61 @@ vows.describe('nconf/multiple-stores').addBatch({
     teardown: function () {
       nconf.remove('env');
     }
+  },
+}).addBatch({
+  // Threw this in it's own batch to make sure it's run separately from the
+  // sync check
+  "When using env with transform:fn": {
+    topic: function () {
+
+      function testTransform(obj) {
+        if (obj.key === 'FOO') {
+          obj.key = 'FOOD';
+          obj.value = 'BARFOO';
+        }
+
+        return obj;
+      }
+
+      var that = this;
+      helpers.cp(complete, completeTest, function () {
+        nconf.env({ transform: testTransform })
+        that.callback();
+      });
+    }, "env vars": {
+      "port key/value properly transformed": function() {
+        assert.equal(nconf.get('FOOD'), 'BARFOO');
+      }
+    }
+  },
+  teardown: function () {
+    nconf.remove('env');
+  }
+}).addBatch({
+  // Threw this in it's own batch to make sure it's run separately from the
+  // sync check
+  "When using env with a bad transform:fn": {
+    topic: function () {
+      function testTransform() {
+        return {foo: 'bar'};
+      }
+
+      var that = this;
+      helpers.cp(complete, completeTest, function () {
+        try {
+          nconf.env({ transform: testTransform });
+          that.callback();
+        } catch (err) {
+          that.callback(null, err);
+        }
+      });
+    }, "env vars": {
+      "port key/value throws transformation error": function(err) {
+        assert.equal(err.name, 'RuntimeError');
+      }
+    }
+  },
+  teardown: function () {
+    nconf.remove('env');
   }
 }).export(module);

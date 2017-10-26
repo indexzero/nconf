@@ -193,6 +193,32 @@ A simple in-memory storage engine that stores a nested JSON representation of th
 ### Argv
 Responsible for loading the values parsed from `process.argv` by `yargs` into the configuration hierarchy. See the [yargs option docs](https://github.com/bcoe/yargs#optionskey-opt) for more on the option format.
 
+#### Options
+
+##### `parseValues: {true|false}` (default: `false`)
+Attempt to parse well-known values (e.g. 'false', 'true', 'null', 'undefined', '3', '5.1' and JSON values)
+into their proper types. If a value cannot be parsed, it will remain a string.
+
+##### `transform: function(obj)`
+Pass each key/value pair to the specified function for transformation.
+
+The input `obj` contains two properties passed in the following format:
+```
+{
+  key: '<string>',
+  value: '<string>'
+}
+```
+
+The transformation function may alter both the key and the value.
+
+The function may return either an object in the asme format as the input or a value that evaluates to false.
+If the return value is falsey, the entry will be dropped from the store, otherwise it will replace the original key/value.
+
+*Note: If the return value doesn't adhere to the above rules, an exception will be thrown.*
+
+#### Examples
+
 ``` js
   //
   // Can optionally also be an object literal to pass to `yargs`.
@@ -202,16 +228,52 @@ Responsible for loading the values parsed from `process.argv` by `yargs` into th
       alias: 'example',
       describe: 'Example description for usage generation',
       demand: true,
-      default: 'some-value'
+      default: 'some-value',
+      parseValues: true,
+      transform: function(obj) {
+        if (obj.key === 'foo') {
+          obj.value = 'baz';
+        }
+        return obj;
+      }
     }
   });
 ```
 
 ### Env
 Responsible for loading the values parsed from `process.env` into the configuration hierarchy.
-Usually the env variables values are loaded into the configuration as strings.
-To ensure well-known strings ('false', 'true', 'null', 'undefined', '3', '5.1') and JSON values
-are properly parsed, the `parseValues` boolean option is available.
+By default, the env variables values are loaded into the configuration as strings.
+
+#### Options
+
+##### `lowerCase: {true|false}` (default: `false`)
+Convert all input keys to lower case. Values are not modified.
+
+If this option is enabled, all calls to `nconf.get()` must pass in a lowercase string (e.g. `nconf.get('port')`)
+
+##### `parseValues: {true|false}` (default: `false`)
+Attempt to parse well-known values (e.g. 'false', 'true', 'null', 'undefined', '3', '5.1' and JSON values)
+into their proper types. If a value cannot be parsed, it will remain a string.
+
+##### `transform: function(obj)`
+Pass each key/value pair to the specified function for transformation.
+
+The input `obj` contains two properties passed in the following format:
+```
+{
+  key: '<string>',
+  value: '<string>'
+}
+```
+
+The transformation function may alter both the key and the value.
+
+The function may return either an object in the asme format as the input or a value that evaluates to false.
+If the return value is falsey, the entry will be dropped from the store, otherwise it will replace the original key/value.
+
+*Note: If the return value doesn't adhere to the above rules, an exception will be thrown.*
+
+#### Examples
 
 ``` js
   //
@@ -247,7 +309,13 @@ are properly parsed, the `parseValues` boolean option is available.
     match: /^whatever_matches_this_will_be_whitelisted/
     whitelist: ['database__host', 'only', 'load', 'these', 'values', 'if', 'whatever_doesnt_match_but_is_whitelisted_gets_loaded_too'],
     lowerCase: true,
-    parseValues: true
+    parseValues: true,
+    transform: function(obj) {
+      if (obj.key === 'foo') {
+        obj.value = 'baz';
+      }
+      return obj;
+    }
   });
   var dbHost = nconf.get('database:host');
 ```
