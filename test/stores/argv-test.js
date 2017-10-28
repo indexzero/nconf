@@ -21,7 +21,6 @@ vows.describe('nconf/stores/argv').addBatch({
     "can be created with a custom yargs":{
       topic: function(){
         var yargsInstance = yargs.alias('v', 'verbose').default('v', 'false');
-        console.log(yargsInstance)
         return [yargsInstance, new nconf.Argv(yargsInstance)];
       },
       "and can give access to them": function (argv) {
@@ -31,6 +30,20 @@ vows.describe('nconf/stores/argv').addBatch({
       },
       "values are the one from the custom yargv": function (argv) {
         argv = argv[1]
+        argv.loadSync()
+        assert.equal(argv.get('verbose'), 'false');
+        assert.equal(argv.get('v'), 'false');
+      }
+    },
+    "can be created with a nconf yargs":{
+      topic: function(){
+        var options = {verbose: {alias: 'v', default: 'false'}};
+        return  new nconf.Argv(options);
+      },
+      "and can give access to them": function (argv) {
+        assert.deepEqual(argv.options, {verbose: {alias: 'v', default: 'false'}})
+      },
+      "values are the one from the custom yargv": function (argv) {
         argv.loadSync()
         assert.equal(argv.get('verbose'), 'false');
         assert.equal(argv.get('v'), 'false');
