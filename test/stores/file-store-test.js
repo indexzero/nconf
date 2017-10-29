@@ -128,6 +128,30 @@ vows.describe('nconf/stores/file').addBatch({
         assert.isNull(err);
         assert.deepEqual(read, data);
       }
+    },
+    "the saveToFile() method": {
+      topic: function (tmpStore) {
+        var that = this,
+            pathFile = '/tmp/nconf-save-toFile.json';
+
+        Object.keys(data).forEach(function (key) {
+          tmpStore.set(key, data[key]);
+        });
+
+        tmpStore.saveToFile(pathFile, function () {
+          fs.readFile(pathFile, function (err, d) {
+            fs.unlinkSync(pathFile);
+
+            return err
+              ? that.callback(err)
+              : that.callback(err, JSON.parse(d.toString()));
+          });
+        });
+      },
+      "should save the data correctly": function (err, read) {
+        assert.isNull(err);
+        assert.deepEqual(read, data);
+      }
     }
   }
 }).addBatch({
