@@ -19,5 +19,15 @@ vows.describe('nconf/stores/env').addBatch({
       assert.lengthOf(env.whitelist, 0);
       assert.equal(env.separator, '');
     }
+  },
+  "An instance of nconf.Env with readOnly option set to false": {
+    topic: new nconf.Env({readOnly: false}),
+    "should have it's readOnly property set to false": function (env) {
+      assert.isFunction(env.loadSync);
+      assert.isFunction(env.loadEnv);
+      assert.isArray(env.whitelist);
+      assert.lengthOf(env.whitelist, 0);
+      assert.ok(!env.readOnly);
+    }
   }
 }).export(module);
