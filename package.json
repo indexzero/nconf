@@ -1,8 +1,14 @@
 {
   "name": "nconf",
   "description": "Hierarchical node.js configuration with files, environment variables, command-line arguments, and atomic object merging.",
-  "version": "0.8.5",
+  "version": "0.9.0",
   "author": "Charlie Robbins <charlie.robbins@gmail.com>",
+  "contributors": [
+    "Matt Hamann <matthew.hamann@gmail.com>",
+    "Maciej Małecki <me@mmalecki.com>",
+    "Jarrett Cruger <jcrugzz@gmail.com>",
+    "Adrien Becchis"
+  ],
   "repository": {
     "type": "git",
     "url": "http://github.com/flatiron/nconf.git"
