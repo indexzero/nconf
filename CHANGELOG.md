@@ -1,4 +1,20 @@
 
+0.9.0 / Mon, 30 Oct 2017
+========================
+  * [8afcf99](https://github.com/projects/nconf/commit/8afcf99) [dist] Version bump. 0.9.0 (`Matt Hamann`)
+  * [b41c505](https://github.com/projects/nconf/commit/b41c505) Save conf to dedicated file (#283) (`Adrien Becchis`)
+  * [52e0a35](https://github.com/projects/nconf/commit/52e0a35) Update changelog (`Matt Hamann`)
+  * [fa215a4](https://github.com/projects/nconf/commit/fa215a4) add tests for the normal configuration of yargs via argv (`AdrieanKhisbe`)
+  * [802a8d6](https://github.com/projects/nconf/commit/802a8d6) test for yargs custom instance (more flexible check isYargs) (`AdrieanKhisbe`)
+  * [3e26bb2](https://github.com/projects/nconf/commit/3e26bb2) Add posibility to pass a yargs instance to argv() method (`Nicolas Deveaud`)
+  * [856fdf8](https://github.com/projects/nconf/commit/856fdf8) First pass at transform functions (#279) (`Matt Hamann`)
+  * [b9c345b](https://github.com/projects/nconf/commit/b9c345b) Fix `parseValues` option name (`Matt Hamann`)
+  * [35088a3](https://github.com/projects/nconf/commit/35088a3) Added nconf.any method (#278) (`Matt Hamann`)
+  * [ca10d0e](https://github.com/projects/nconf/commit/ca10d0e) Add basic linting rules (`Matt Hamann`)
+  * [bfb0220](https://github.com/projects/nconf/commit/bfb0220) Remove unused module (#277) (`Brian Harrington`)
+  * [532ac9c](https://github.com/projects/nconf/commit/532ac9c) Support parsing simple values from env/argv strings (#273) (`Matt Hamann`)
+  * [b8402d4](https://github.com/projects/nconf/commit/b8402d4) Enable support for parsing JSON environment variables (#272) (`Matt Hamann`)
+
 v0.8.5 / Tue, 15 Aug 2017
 =========================
   * [f46c449](https://github.com/projects/nconf/commit/f46c449) 0.8.5 (`Matt Hamann`)
