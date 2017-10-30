@@ -130,7 +130,7 @@ Adds a new store with the specified `name` and `options`. If `options.type` is n
 ```
 
 ### nconf.any(names, callback)
-Given a set of key names, gets the value of the first key found to be truthy. The key names can be given as separate arguments 
+Given a set of key names, gets the value of the first key found to be truthy. The key names can be given as separate arguments
 or as an array. If the last argument is a function, it will be called with the result; otherwise, the value is returned.
 
 ``` js
@@ -290,6 +290,9 @@ If the return value is falsey, the entry will be dropped from the store, otherwi
 
 *Note: If the return value doesn't adhere to the above rules, an exception will be thrown.*
 
+#### `readOnly: {true|false}` (defaultL `true`)
+Allow values in the env store to be updated in the future. The default is to not allow items in the env store to be updated.
+
 #### Examples
 
 ``` js
@@ -306,8 +309,8 @@ If the return value is falsey, the entry will be dropped from the store, otherwi
   var dbHost = nconf.get('database:host');
 
   //
-  // Can also lowerCase keys. 
-  // Especially handy when dealing with environment variables which are usually 
+  // Can also lowerCase keys.
+  // Especially handy when dealing with environment variables which are usually
   // uppercased while argv are lowercased.
   //
 
