@@ -10,6 +10,7 @@ var fs = require('fs'),
     vows = require('vows'),
     assert = require('assert'),
     nconf = require('../../lib/nconf'),
+    yamlFormat = require('nconf-yaml'),
     data = require('../fixtures/data').data,
     store;
 
@@ -121,6 +122,53 @@ vows.describe('nconf/stores/file').addBatch({
             return err
               ? that.callback(err)
               : that.callback(err, JSON.parse(d.toString()));
+          });
+        });
+      },
+      "should save the data correctly": function (err, read) {
+        assert.isNull(err);
+        assert.deepEqual(read, data);
+      }
+    },
+    "the saveToFile() method": {
+      topic: function (tmpStore) {
+        var that = this,
+            pathFile = '/tmp/nconf-save-toFile.json';
+
+        Object.keys(data).forEach(function (key) {
+          tmpStore.set(key, data[key]);
+        });
+
+        tmpStore.saveToFile(pathFile, function () {
+          fs.readFile(pathFile, function (err, d) {
+            fs.unlinkSync(pathFile);
+
+            return err
+              ? that.callback(err)
+              : that.callback(err, JSON.parse(d.toString()));
+          });
+        });
+      },
+      "should save the data correctly": function (err, read) {
+        assert.isNull(err);
+        assert.deepEqual(read, data);
+      }
+    },
+    "the saveToFile() method with custom format": {
+      topic: function (tmpStore) {
+        var that = this,
+            pathFile = '/tmp/nconf-save-toFile.yaml';
+
+        Object.keys(data).forEach(function (key) {
+          tmpStore.set(key, data[key]);
+        });
+
+        tmpStore.saveToFile(pathFile, yamlFormat, function () {
+          fs.readFile(pathFile, function (err, d) {
+            fs.unlinkSync(pathFile);
+            return err
+              ? that.callback(err)
+              : that.callback(err, yamlFormat.parse(d.toString()));
           });
         });
       },
