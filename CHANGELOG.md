@@ -1,6 +1,8 @@
 
-0.9.0 / Mon, 30 Oct 2017
+0.9.0 / Tue, 31 Oct 2017
 ========================
+  * [b1ee63c](https://github.com/projects/nconf/commit/b1ee63c) fix error in transform function when dealing with dropped entries (#287) (`Augusto Franzoia`)
+  * [9f70ba1](https://github.com/projects/nconf/commit/9f70ba1) [doc] Update changelog (`Matt Hamann`)
   * [8afcf99](https://github.com/projects/nconf/commit/8afcf99) [dist] Version bump. 0.9.0 (`Matt Hamann`)
   * [b41c505](https://github.com/projects/nconf/commit/b41c505) Save conf to dedicated file (#283) (`Adrien Becchis`)
   * [52e0a35](https://github.com/projects/nconf/commit/52e0a35) Update changelog (`Matt Hamann`)
