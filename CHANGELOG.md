@@ -1,4 +1,11 @@
 
+v0.9.1 / Fri, 3 Nov 2017
+========================
+  * [806f1b1](https://github.com/projects/nconf/commit/806f1b1) 0.9.1 (`Matt Hamann`)
+  * [2bdf7e1](https://github.com/projects/nconf/commit/2bdf7e1) Clean Argv Store options (#290) (`Adrien Becchis`)
+  * [b9321b2](https://github.com/projects/nconf/commit/b9321b2) transformer can now return an undefined key (#289) (`Adrien Becchis`)
+  * [81ce0be](https://github.com/projects/nconf/commit/81ce0be) Update changelog (`Matt Hamann`)
+
 0.9.0 / Tue, 31 Oct 2017
 ========================
   * [b1ee63c](https://github.com/projects/nconf/commit/b1ee63c) fix error in transform function when dealing with dropped entries (#287) (`Augusto Franzoia`)
