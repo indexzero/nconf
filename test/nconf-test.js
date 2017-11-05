@@ -67,6 +67,9 @@ vows.describe('nconf').addBatch({
         "without a callback": {
           "should respond with the correct value": function () {
             assert.equal(nconf.get('foo:bar:bazz'), 'buzz');
+          },
+          "should not step inside strings": function () {
+            assert.equal(nconf.get('foo:bar:bazz:0'), undefined);
           }
         },
         "with a callback": {
