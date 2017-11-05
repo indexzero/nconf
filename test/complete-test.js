@@ -23,6 +23,8 @@ process.env.NODE_ENV = 'debug';
 process.env.FOOBAR = 'should not load';
 process.env.json_array = JSON.stringify(['foo', 'bar', 'baz']);
 process.env.json_obj = JSON.stringify({foo: 'bar', baz: 'foo'});
+process.env.NESTED__VALUE = 'nested';
+process.env.NESTED___VALUE_EXTRA_LODASH = '_nested_';
 
 vows.describe('nconf/multiple-stores').addBatch({
   "When using the nconf with multiple providers": {
@@ -291,6 +293,30 @@ vows.describe('nconf/multiple-stores').addBatch({
     }, "env vars": {
       "port key/value throws transformation error": function(err) {
         assert.equal(err.name, 'RuntimeError');
+      }
+    }
+  },
+  teardown: function () {
+    nconf.remove('env');
+  }
+}).addBatch({
+  // Threw this in it's own batch to make sure it's run separately from the
+  // sync check
+  "When using env with a bad transform:fn": {
+    topic: function () {
+
+      var that = this;
+      helpers.cp(complete, completeTest, function () {
+        try {
+          nconf.env({ separator: /__+/ });
+          that.callback();
+        } catch (err) {
+          that.callback(null, err);
+        }
+      });
+    }, "env vars": {
+      "can access to nested values": function(err) {
+        assert.deepEqual(nconf.get('NESTED'), {VALUE:'nested', VALUE_EXTRA_LODASH: '_nested_'});
       }
     }
   },
