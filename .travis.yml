@@ -5,8 +5,8 @@ node_js:
   - "0.12"
   - "4"
   - "6"
-  - "7"
   - "8"
+  - "9"
 
 script:
   - npm test
@@ -19,7 +19,7 @@ matrix:
   allow_failures:
     - node_js: "0.10"
     - node_js: "0.12"
-    - node_js: "8"
+    - node_js: "9"
 
 notifications:
   email:
