@@ -111,7 +111,43 @@ vows.describe('nconf/hierarchy').addBatch({
         });
       }
     },
-    "configured with .file(), .defaults() should deep merge objects": {
+      "configured with .argv() and separator, .file() and invoked with nested command line options": {
+          topic: function () {
+              var script = path.join(__dirname, 'fixtures', 'scripts', 'nconf-hierarchical-load-merge-with-separator.js'),
+                  argv = ['--candy--something', 'foo', '--candy--something5--second', 'bar'],
+                  that = this,
+                  data = '',
+                  child;
+              process.env.candy__bonbon =  'sweet';
+              child = spawn('node', [script].concat(argv));
+              delete process.env.candy__bonbon;
+              child.stdout.on('data', function (d) {
+                  data += d;
+              });
+
+              child.on('close', function() {
+                  that.callback(null, data);
+              });
+          },
+          "should merge nested objects ": function (err, data) {
+            console.log(data)
+              assert.deepEqual(JSON.parse(data), {
+                  apples: true,
+                  candy: {
+                      bonbon: 'sweet',
+                      something: 'foo',
+                      something1: true,
+                      something2: true,
+                      something5: {
+                          first: 1,
+                          second: 'bar'
+                      }
+                  }
+              });
+          }
+      },
+
+      "configured with .file(), .defaults() should deep merge objects": {
       topic: function () {
         var script = path.join(__dirname, 'fixtures', 'scripts', 'nconf-hierarchical-defaults-merge.js'),
             that = this,
