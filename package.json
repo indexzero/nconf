@@ -38,6 +38,7 @@
     "coveralls": "cat coverage/lcov.info | coveralls",
     "lint": "eslint ."
   },
+  "files": ["lib"],
   "engines": {
     "node": ">= 0.4.0"
   },
