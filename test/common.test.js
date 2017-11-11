@@ -5,27 +5,24 @@
  *
  */
 
-var fs = require('fs'),
-    path = require('path'),
-    vows = require('vows'),
-    helpers = require('./helpers'),
-    nconf = require('../lib/nconf');
+const fs = require('fs');
+const path = require('path');
+const helpers = require('./helpers-jest');
+const nconf = require('../lib/nconf');
 
-var mergeDir = path.join(__dirname, 'fixtures', 'merge'),
-    files = fs.readdirSync(mergeDir).map(function (f) { return path.join(mergeDir, f) });
+const mergeDir = path.join(__dirname, 'fixtures', 'merge');
+const files = fs.readdirSync(mergeDir).map(function (f) { return path.join(mergeDir, f) });
 
-vows.describe('nconf/common').addBatch({
-  "Using nconf.common module": {
-    "the loadFiles() method": {
-      topic: function () {
-        nconf.loadFiles(files, this.callback);
-      },
-      "should merge the files correctly": helpers.assertMerged
-    },
-    "the loadFilesSync() method": {
-      "should merge the files correctly": function () {
+describe('nconf/common', () => {
+  describe('Using nconf.common module', () => {
+    it('the loadFiles() method should merge the files correctly', done => {
+        nconf.loadFiles(files, (err, res) => {
+            helpers.assertMerged(err, res);
+            done();
+        });
+    });
+    it("the loadFilesSync() method should merge the files correctly", () => {
         helpers.assertMerged(null, nconf.loadFilesSync(files));
-      }
-    }
-  }
-}).export(module);
+    });
+  });
+});

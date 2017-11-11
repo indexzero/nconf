@@ -5,30 +5,31 @@
  *
  */
 
-var assert = require('assert'),
-    spawn = require('child_process').spawn,
-    fs = require('fs'),
-    path = require('path'),
-    nconf = require('../lib/nconf');
+const spawn = require('child_process').spawn;
+const fs = require('fs');
+const path = require('path');
+const nconf = require('../lib/nconf');
 
 exports.assertMerged = function (err, merged) {
   merged = merged instanceof nconf.Provider
     ? merged.store.store
     : merged;
 
-  assert.isNull(err);
-  assert.isObject(merged);
-  assert.isTrue(merged.apples);
-  assert.isTrue(merged.bananas);
-  assert.isObject(merged.candy);
-  assert.isTrue(merged.candy.something1);
-  assert.isTrue(merged.candy.something2);
-  assert.isTrue(merged.candy.something3);
-  assert.isTrue(merged.candy.something4);
-  assert.isTrue(merged.dates);
-  assert.isTrue(merged.elderberries);
+  expect()
+  expect(err).toBeNull();
+  expect(typeof merged).toBe('object');
+  expect(merged.apples).toBeTruthy();
+  expect(merged.bananas).toBeTruthy();
+  expect(typeof merged.candy).toBe('object');
+  expect(merged.candy.something1).toBeTruthy();
+  expect(merged.candy.something2).toBeTruthy();
+  expect(merged.candy.something3).toBeTruthy();
+  expect(merged.candy.something4).toBeTruthy();
+  expect(merged.dates).toBeTruthy();
+  expect(merged.elderberries).toBeTruthy();
 };
 
+//FIXME TODO
 exports.assertSystemConf = function (options) {
   return {
     topic: function () {
