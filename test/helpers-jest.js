@@ -31,27 +31,25 @@ exports.assertMerged = function (err, merged) {
 
 //FIXME TODO
 exports.assertSystemConf = function (options) {
-  return {
-    topic: function () {
-      var env = null;
+  return done => {
+    let env = null;
 
-      if (options.env) {
-        env = {}
-        Object.keys(process.env).forEach(function (key) {
-          env[key] = process.env[key];
-        });
+    if (options.env) {
+      env = {}
+      Object.keys(process.env).forEach(function (key) {
+        env[key] = process.env[key];
+      });
 
-        Object.keys(options.env).forEach(function (key) {
-          env[key] = options.env[key];
-        });
-      }
-
-      var child = spawn('node', [options.script].concat(options.argv), { env: env });
-      child.stdout.once('data', this.callback.bind(this, null));
-    },
-    "should respond with the value passed into the script": function (_, data) {
-      assert.equal(data.toString(), 'foobar');
+      Object.keys(options.env).forEach(function (key) {
+        env[key] = options.env[key];
+      });
     }
+
+    const child = spawn('node', [options.script].concat(options.argv), {env: env});
+    child.stdout.once('data', data => {
+      expect(data.toString()).toEqual('foobar');
+      done();
+    });
   }
 }
 
