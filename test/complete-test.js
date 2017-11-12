@@ -21,6 +21,7 @@ process.env.FOO = 'bar';
 process.env.BAR = 'zalgo';
 process.env.NODE_ENV = 'debug';
 process.env.FOOBAR = 'should not load';
+process.env.TES = 'TING';
 process.env.json_array = JSON.stringify(['foo', 'bar', 'baz']);
 process.env.json_obj = JSON.stringify({foo: 'bar', baz: 'foo'});
 
@@ -32,7 +33,7 @@ vows.describe('nconf/multiple-stores').addBatch({
         nconf.env({
           // separator: '__',
           match: /^NCONF_/,
-          whitelist: ['NODE_ENV', 'FOO', 'BAR']
+          whitelist: ['NODE_ENV', 'FOO', 'BAR', 'TES']
         });
         nconf.file({ file: completeTest });
         nconf.use('argv', { type: 'literal', store: data });
@@ -49,6 +50,10 @@ vows.describe('nconf/multiple-stores').addBatch({
         ['NODE_ENV', 'FOO', 'BAR', 'NCONF_foo'].forEach(function (key) {
           assert.equal(nconf.get(key), process.env[key]);
         });
+      },
+      "are readOnly": function () {
+        nconf.set('TES', 'broken');
+        assert(nconf.get('TES'), 'TING');
       }
     },
     "json vars": {
@@ -172,7 +177,7 @@ vows.describe('nconf/multiple-stores').addBatch({
       "JSON keys properly parsed": function () {
         Object.keys(process.env).forEach(function (key) {
           var val = process.env[key];
-          
+
           try {
             val = JSON.parse(val);
           } catch (err) {}
