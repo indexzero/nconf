@@ -13,13 +13,7 @@ process.env.TES = 'TING';
 
 vows.describe('nconf/stores/env').addBatch({
   "An instance of nconf.Env": {
-    topic: function() {
-      nconf.env({
-        readOnly: false,
-        whitelist: ['TES']
-      });
-      nconf.set('TES', 'changed');
-    },
+    topic: new nconf.Env(),
     "should have the correct methods defined": function (env) {
       assert.isFunction(env.loadSync);
       assert.isFunction(env.loadEnv);
@@ -36,7 +30,6 @@ vows.describe('nconf/stores/env').addBatch({
       assert.isArray(env.whitelist);
       assert.lengthOf(env.whitelist, 0);
       assert.ok(!env.readOnly);
-      assert.equal(nconf.get('TEST'), 'changed');
     }
-  }
+}
 }).export(module);

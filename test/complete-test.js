@@ -54,8 +54,8 @@ vows.describe('nconf/multiple-stores').addBatch({
         });
       },
       "are readOnly": function () {
-        nconf.set('TES', 'broken');
-        assert(nconf.get('TES'), 'TING');
+        nconf.set('tes', 'broken');
+        assert(nconf.get('tes'), 'TING');
       }
     },
     "json vars": {
@@ -322,6 +322,32 @@ vows.describe('nconf/multiple-stores').addBatch({
     }, "env vars": {
       "can access to nested values": function(err) {
         assert.deepEqual(nconf.get('NESTED'), {VALUE:'nested', VALUE_EXTRA_LODASH: '_nested_'});
+      }
+    }
+  },
+  teardown: function () {
+    nconf.remove('env');
+  }
+}).addBatch({
+  // Threw this in it's own batch to make sure it's run separately from the
+  // sync check
+  "When using env with a readOnly:false": {
+    topic: function () {
+
+      var that = this;
+      helpers.cp(complete, completeTest, function () {
+        try {
+          nconf.env({ readOnly: false });
+          that.callback();
+        } catch (err) {
+          that.callback(null, err);
+        }
+      });
+    }, "env vars": {
+      "can be changed when readOnly is false": function() {
+        assert.equal(nconf.get('TES'), 'TING');
+        nconf.set('TES', 'changed');
+        assert.equal(nconf.get('TES'), 'changed');
       }
     }
   },
