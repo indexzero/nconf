@@ -1,8 +1,14 @@
 {
   "name": "nconf",
   "description": "Hierarchical node.js configuration with files, environment variables, command-line arguments, and atomic object merging.",
-  "version": "0.8.5",
+  "version": "0.9.1",
   "author": "Charlie Robbins <charlie.robbins@gmail.com>",
+  "contributors": [
+    "Matt Hamann <matthew.hamann@gmail.com>",
+    "Maciej Małecki <me@mmalecki.com>",
+    "Jarrett Cruger <jcrugzz@gmail.com>",
+    "Adrien Becchis"
+  ],
   "repository": {
     "type": "git",
     "url": "http://github.com/flatiron/nconf.git"
@@ -13,15 +19,16 @@
     "plugabble"
   ],
   "dependencies": {
-    "async": "^1.4.0",
+    "async": "^2.3.0",
     "ini": "^1.3.0",
     "secure-keys": "^1.0.0",
-    "yargs": "^3.19.0"
+    "yargs": "^10.0.3"
   },
   "devDependencies": {
-    "coveralls": "^2.11.4",
+    "coveralls": "^3.0.0",
     "eslint": "^4.9.0",
     "istanbul": "^0.4.1",
+    "nconf-yaml": "^1.0.2",
     "vows": "0.8.x"
   },
   "main": "./lib/nconf",
@@ -31,6 +38,7 @@
     "coveralls": "cat coverage/lcov.info | coveralls",
     "lint": "eslint ."
   },
+  "files": ["lib"],
   "engines": {
     "node": ">= 0.4.0"
   },
