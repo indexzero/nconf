@@ -33,9 +33,8 @@
   },
   "main": "./lib/nconf",
   "scripts": {
-    "test": "vows test/*-test.js test/**/*-test.js --spec",
-    "test:jest": "jest",
-    "cover": "istanbul cover vows -- test/*-test.js test/**/*-test.js  --spec",
+    "test":  "jest --verbose",
+    "cover": "jest --coverage",
     "coveralls": "cat coverage/lcov.info | coveralls",
     "lint": "eslint ."
   },
