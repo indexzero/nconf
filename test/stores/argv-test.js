@@ -47,6 +47,25 @@ vows.describe('nconf/stores/argv').addBatch({
         argv.loadSync()
         assert.equal(argv.get('verbose'), 'false');
         assert.equal(argv.get('v'), 'false');
+      },
+      "values cannot be altered with set when readOnly:true": function (argv) {
+        argv.set('verbose', 'true');
+        assert.equal(argv.get('verbose'), 'false');
+      }
+    },
+    "can be created with readOnly set to be false":{
+      topic: function(){
+        var options = {verbose: {alias: 'v', default: 'false'}, readOnly: false};
+        return  new nconf.Argv(options);
+      },
+      "readOnly is actually false": function (argv) {
+        assert.equal(argv.readOnly, false);
+      },
+      "values can be changed by calling .set": function (argv) {
+        argv.loadSync()
+        assert.equal(argv.get('verbose'), 'false');
+        argv.set('verbose', 'true');
+        assert.equal(argv.get('verbose'), 'true');
       }
     }
   }
