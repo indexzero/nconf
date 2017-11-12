@@ -18,7 +18,7 @@ describe('nconf/stores/argv, An instance of nconf.Argv', () => {
   });
 
   describe("can be created with a custom yargs", () => {
-    const yargsInstance = yargs.alias('v', 'verbose').default('v', 'false');
+    const yargsInstance = yargs.alias('d', 'debug').default('d', 'false');
 
     it("and can give access to them", () => {
       const argv = new nconf.Argv(yargsInstance);
@@ -28,23 +28,23 @@ describe('nconf/stores/argv, An instance of nconf.Argv', () => {
     it("values are the one from the custom yargv", () => {
       const argv = new nconf.Argv(yargsInstance);
       argv.loadSync();
-      expect(argv.get('verbose')).toBe('false');
-      expect(argv.get('v')).toBe('false');
+      expect(argv.get('debug')).toBe('false');
+      expect(argv.get('d')).toBe('false');
     });
   });
 
   describe("can be created with a nconf yargs", () => {
-    const options = {verbose: {alias: 'v', default: 'false'}};
+    const options = {debug: {alias: 'd', default: 'false'}};
     it("and can give access to them", () => {
       const argv = new nconf.Argv(options);
-      expect(argv.options).toEqual({verbose: {alias: 'v', default: 'false'}});
+      expect(argv.options).toEqual({debug: {alias: 'd', default: 'false'}});
     });
 
     it("values are the one from the custom yargv", () => {
       const argv = new nconf.Argv(options);
       argv.loadSync();
-      expect(argv.get('verbose')).toBe('false');
-      expect(argv.get('v')).toBe('false');
+      expect(argv.get('debug')).toBe('false');
+      expect(argv.get('d')).toBe('false');
     })
   });
   describe("can be created with readOnly set to be false", () => {
