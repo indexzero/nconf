@@ -94,20 +94,12 @@ describe('nconf, When using the nconf', () => {
     describe("the load() method", () => {
 
       it("should respond with the merged store without a callback", () => {
-        expect(nconf.load()).toEqual({
-          title: 'My specific title',
-          color: 'green',
-          movie: 'Kill Bill'
-        });
+        expect(nconf.load()).toEqual({"foo": {"bar": {}}});
       });
       it("should respond with the merged store", done => {
         nconf.load((err, store) => {
           expect(err).toBe(null);
-          expect(store).toEqual({
-            title: 'My specific title',
-            color: 'green',
-            movie: 'Kill Bill'
-          });
+          expect(store).toEqual({"foo": {"bar": {}}});
           done();
         });
       })
