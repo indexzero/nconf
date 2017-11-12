@@ -8,7 +8,7 @@
 const fs = require('fs');
 const nconf = require('../lib/nconf');
 const data = require('./fixtures/data').data;
-const helpers = require('./helpers-jest');
+const helpers = require('./helpers');
 
 const completeTest = helpers.fixture('complete-test.json');
 const complete = helpers.fixture('complete.json');

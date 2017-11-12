@@ -7,7 +7,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const helpers = require('./helpers-jest');
+const helpers = require('./helpers');
 const nconf = require('../lib/nconf');
 
 const mergeDir = path.join(__dirname, 'fixtures', 'merge');
