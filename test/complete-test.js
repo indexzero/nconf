@@ -21,6 +21,7 @@ process.env.FOO = 'bar';
 process.env.BAR = 'zalgo';
 process.env.NODE_ENV = 'debug';
 process.env.FOOBAR = 'should not load';
+process.env.TES = 'TING';
 process.env.json_array = JSON.stringify(['foo', 'bar', 'baz']);
 process.env.json_obj = JSON.stringify({foo: 'bar', baz: 'foo'});
 process.env.NESTED__VALUE = 'nested';
@@ -34,7 +35,7 @@ vows.describe('nconf/multiple-stores').addBatch({
         nconf.env({
           // separator: '__',
           match: /^NCONF_/,
-          whitelist: ['NODE_ENV', 'FOO', 'BAR']
+          whitelist: ['NODE_ENV', 'FOO', 'BAR', 'TES']
         });
         nconf.file({ file: completeTest });
         nconf.use('argv', { type: 'literal', store: data });
@@ -51,6 +52,10 @@ vows.describe('nconf/multiple-stores').addBatch({
         ['NODE_ENV', 'FOO', 'BAR', 'NCONF_foo'].forEach(function (key) {
           assert.equal(nconf.get(key), process.env[key]);
         });
+      },
+      "are readOnly": function () {
+        nconf.set('tes', 'broken');
+        assert(nconf.get('tes'), 'TING');
       }
     },
     "json vars": {
@@ -174,7 +179,7 @@ vows.describe('nconf/multiple-stores').addBatch({
       "JSON keys properly parsed": function () {
         Object.keys(process.env).forEach(function (key) {
           var val = process.env[key];
-          
+
           try {
             val = JSON.parse(val);
           } catch (err) {}
@@ -317,6 +322,32 @@ vows.describe('nconf/multiple-stores').addBatch({
     }, "env vars": {
       "can access to nested values": function(err) {
         assert.deepEqual(nconf.get('NESTED'), {VALUE:'nested', VALUE_EXTRA_LODASH: '_nested_'});
+      }
+    }
+  },
+  teardown: function () {
+    nconf.remove('env');
+  }
+}).addBatch({
+  // Threw this in it's own batch to make sure it's run separately from the
+  // sync check
+  "When using env with a readOnly:false": {
+    topic: function () {
+
+      var that = this;
+      helpers.cp(complete, completeTest, function () {
+        try {
+          nconf.env({ readOnly: false });
+          that.callback();
+        } catch (err) {
+          that.callback(null, err);
+        }
+      });
+    }, "env vars": {
+      "can be changed when readOnly is false": function() {
+        assert.equal(nconf.get('TES'), 'TING');
+        nconf.set('TES', 'changed');
+        assert.equal(nconf.get('TES'), 'changed');
       }
     }
   },
