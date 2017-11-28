@@ -22,8 +22,7 @@ var single = new nconf.Provider({
 //
 var multiple = new nconf.Provider({
   stores: [
-    { name: 'user', type: 'file', file: path.join(__dirname, 'user-config.json') },
-    { name: 'global', type: 'global', file: path.join(__dirname, 'global-config.json') }
+    { name: 'user', type: 'file', file: path.join(__dirname, 'user-config.json') }
   ]
 });
 
@@ -31,6 +30,7 @@ var multiple = new nconf.Provider({
 // Setup nconf to use the 'file' store and set a couple of values;
 //
 nconf.use('file', { file: path.join(__dirname, 'config.json') });
+nconf.use('watch', { file: path.join(__dirname, 'config-watch.json'), onChange: function () { console.dir(nconf.get('database')); } });
 nconf.set('database:host', '127.0.0.1');
 nconf.set('database:port', 5984);
 
