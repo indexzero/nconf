@@ -1,5 +1,6 @@
 .DS_Store
 config.json
+config-watch.json
 test/fixtures/*.json
 !test/fixtures/complete.json
 !test/fixtures/malformed.json
