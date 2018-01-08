@@ -309,15 +309,24 @@ vows.describe('nconf/stores/file').addBatch({
   }
 }).addBatch({
   "When using nconf file store": {
-    topic: function() {
-      var tmpPath = path.join(__dirname, '..', 'fixtures', 'store.json'),
-          tmpStore = new nconf.File({ file: tmpPath });
-      return tmpStore;
-    },
-    "the stringify() method should return a complete last line (EOL)": function(tmpStore) {
-      var contents = tmpStore.stringify();
+    "the stringify() method should return a complete last line (EOL)": function() {
+      var contents = store.stringify();
       assert.equal(contents.slice(-1), os.EOL);
-    }
+    },
+    "with option `eol` set to `false`": {
+      topic: function() {
+        var storePath = path.join(__dirname, '..', 'fixtures', 'store.json');
+        this.store = new nconf.File({
+          file: storePath,
+          eol: false
+        });
+        this.store.load(this.callback.bind(null, null));
+      },
+      "the stringify() method should return an incomplete last line (no EOL)": function(_, err) {
+        assert.equal(err, null);
+        assert.notEqual(this.store.stringify().slice(-1), os.EOL);
+      }
+    },
   }
 }).export(module);
 
