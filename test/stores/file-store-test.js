@@ -5,7 +5,8 @@
  *
  */
 
-var fs = require('fs'),
+var os = require('os'),
+    fs = require('fs'),
     path = require('path'),
     vows = require('vows'),
     assert = require('assert'),
@@ -304,6 +305,18 @@ vows.describe('nconf/stores/file').addBatch({
     "the loadSync() method should decrypt properly": function (store) {
       var loaded = store.loadSync()
       assert.deepEqual(loaded, data);
+    }
+  }
+}).addBatch({
+  "When using nconf file store": {
+    topic: function() {
+      var tmpPath = path.join(__dirname, '..', 'fixtures', 'store.json'),
+          tmpStore = new nconf.File({ file: tmpPath });
+      return tmpStore;
+    },
+    "the stringify() method should return a complete last line (EOL)": function(tmpStore) {
+      var contents = tmpStore.stringify();
+      assert.equal(contents.slice(-1), os.EOL);
     }
   }
 }).export(module);
