@@ -392,21 +392,20 @@ nconf.file('secure-file', {
   file: 'path/to/secure-file.json',
   secure: {
     secret: 'super-secretzzz-keyzz',
-    alg: 'aes-256-ctr'
   }
 })
 ```
 
-This will encrypt each key using [`crypto.createCipher`](https://nodejs.org/api/crypto.html#crypto_crypto_createcipher_algorithm_password), defaulting to `aes-256-ctr`. The encrypted file contents will look like this:
+This will encrypt each key using [`crypto.createCipher`](https://nodejs.org/api/crypto.html#crypto_crypto_createcipher_algorithm_password) using `aes-256-cbc`. The encrypted file contents will look like this:
 
 ```
 {
   "config-key-name": {
-    "alg": "aes-256-ctr", // cipher used
+    "alg": "aes-256-cbc", // cipher used
     "value": "af07fbcf"   // encrypted contents
   },
   "another-config-key": {
-    "alg": "aes-256-ctr",   // cipher used
+    "alg": "aes-256-cbc",   // cipher used
     "value": "e310f6d94f13" // encrypted contents
   },
 }

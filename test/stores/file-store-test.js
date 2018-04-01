@@ -287,7 +287,7 @@ vows.describe('nconf/stores/file').addBatch({
       Object.keys(data).forEach(function (key) {
         assert.isObject(contents[key]);
         assert.isString(contents[key].value);
-        assert.equal(contents[key].alg, 'aes-256-ctr');
+        assert.equal(contents[key].alg, 'aes-256-cbc');
       });
     },
     "the parse() method should decrypt properly": function (store) {
