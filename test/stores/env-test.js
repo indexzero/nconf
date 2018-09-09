@@ -10,6 +10,7 @@ var vows = require('vows'),
     nconf = require('../../lib/nconf');
 
 process.env.TES = 'TING';
+process.env.SEPARATED__VALUE = 'FOO';
 
 vows.describe('nconf/stores/env').addBatch({
   "An instance of nconf.Env": {
@@ -31,5 +32,15 @@ vows.describe('nconf/stores/env').addBatch({
       assert.lengthOf(env.whitelist, 0);
       assert.ok(!env.readOnly);
     }
+},
+"An instance of nconf.Env with logicalSeparator option overridden": {
+  topic: new nconf.Env({logicalSeparator: '.', separator: '__'}),
+  "should be able to retrieve a value using the logical separator": function (env) {
+    env.loadEnv();
+    assert.isFunction(env.loadSync);
+    assert.isFunction(env.loadEnv);
+    assert.equal(env.logicalSeparator, '.');
+    assert.equal(env.get('SEPARATED.VALUE'), 'FOO');
+  }
 }
 }).export(module);

@@ -14,7 +14,6 @@ var fs = require('fs'),
 vows.describe('nconf').addBatch({
   "When using the nconf": {
     "should have the correct methods set": function () {
-      assert.isFunction(nconf.key);
       assert.isFunction(nconf.path);
       assert.isFunction(nconf.use);
       assert.isFunction(nconf.any);

@@ -130,7 +130,6 @@ vows.describe('nconf/hierarchy').addBatch({
               });
           },
           "should merge nested objects ": function (err, data) {
-            console.log(data)
               assert.deepEqual(JSON.parse(data), {
                   apples: true,
                   candy: {

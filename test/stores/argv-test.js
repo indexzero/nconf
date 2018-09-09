@@ -56,7 +56,7 @@ vows.describe('nconf/stores/argv').addBatch({
     "can be created with readOnly set to be false":{
       topic: function(){
         var options = {verbose: {alias: 'v', default: 'false'}, readOnly: false};
-        return  new nconf.Argv(options);
+        return new nconf.Argv(options);
       },
       "readOnly is actually false": function (argv) {
         assert.equal(argv.readOnly, false);
