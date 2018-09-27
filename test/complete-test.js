@@ -320,7 +320,7 @@ vows.describe('nconf/multiple-stores').addBatch({
         }
       });
     }, "env vars": {
-      "can access to nested values": function(err) {
+      "can access to nested values": function(/*err*/) {
         assert.deepEqual(nconf.get('NESTED'), {VALUE:'nested', VALUE_EXTRA_LODASH: '_nested_'});
       }
     }
