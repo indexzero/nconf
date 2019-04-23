@@ -18,7 +18,7 @@ describe('nconf/stores/argv, An instance of nconf.Argv', () => {
   });
 
   describe("can be created with a custom yargs", () => {
-    const yargsInstance = yargs.alias('d', 'debug').default('d', 'false');
+    const yargsInstance = yargs.alias('s', 'somearg').default('s', 'false');
 
     it("and can give access to them", () => {
       const argv = new nconf.Argv(yargsInstance);
@@ -28,39 +28,45 @@ describe('nconf/stores/argv, An instance of nconf.Argv', () => {
     it("values are the one from the custom yargv", () => {
       const argv = new nconf.Argv(yargsInstance);
       argv.loadSync();
-      expect(argv.get('debug')).toBe('false');
-      expect(argv.get('d')).toBe('false');
+      expect(argv.get('somearg')).toBe('false');
+      expect(argv.get('s')).toBe('false');
     });
   });
 
   describe("can be created with a nconf yargs", () => {
-    const options = {debug: {alias: 'd', default: 'false'}};
+    const options = {somearg: {alias: 's', default: 'false'}};
     it("and can give access to them", () => {
       const argv = new nconf.Argv(options);
-      expect(argv.options).toEqual({debug: {alias: 'd', default: 'false'}});
+      expect(argv.options).toEqual({somearg: {alias: 's', default: 'false'}});
     });
 
     it("values are the one from the custom yargv", () => {
       const argv = new nconf.Argv(options);
       argv.loadSync();
-      expect(argv.get('debug')).toBe('false');
-      expect(argv.get('d')).toBe('false');
-    })
+      expect(argv.get('somearg')).toBe('false');
+      expect(argv.get('s')).toBe('false');
+    });
+
+    it("values cannot be altered with set when readOnly:true", () => {
+      const argv = new nconf.Argv(options);
+      argv.loadSync();
+      argv.set('somearg', 'true');
+      expect(argv.get('somearg')).toBe('false');
+    });
   });
   describe("can be created with readOnly set to be false", () => {
-    const options = {verbose: {alias: 'v', default: 'false'}, readOnly: false};
       
     it("readOnly is actually false", () =>  {
-      const argv = new nconf.Argv(options)
+      const argv = new nconf.Argv({readOnly: false});
       expect(argv.readOnly).toBe(false);
     });
 
     it("values can be changed by calling .set", () => {
-      const argv = new nconf.Argv(options)
-      argv.loadSync()
-      expect(argv.get('verbose')).toBe('false');
-      argv.set('verbose', 'true');
-      expect(argv.get('verbose')).toBe('true');
+      const argv = new nconf.Argv({somearg: {alias: 's', default: 'false'}, readOnly: false});
+      argv.loadSync();
+      expect(argv.get('somearg')).toBe('false');
+      argv.set('somearg', 'true');
+      expect(argv.get('somearg')).toBe('true');
     });
   });
 });

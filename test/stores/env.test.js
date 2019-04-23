@@ -17,7 +17,7 @@ describe('nconf/stores/env, An instance of nconf.Env', () => {
     expect(env.separator).toEqual('');
   });
   it("should have the correct methods defined and with readOnly false", () => {
-    const env = new nconf.Env({readOnly: false}));
+    const env = new nconf.Env({readOnly: false});
     expect(typeof env.loadSync).toBe('function');
     expect(typeof env.loadEnv).toBe('function');
     expect(env.whitelist instanceof Array).toBeTruthy();
