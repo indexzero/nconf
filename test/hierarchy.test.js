@@ -41,7 +41,7 @@ describe('nconf/hierarchy, When using nconf', () => {
       var configFile = path.join(__dirname, 'fixtures', 'load-save.json');
       var script = path.join(__dirname, 'fixtures', 'scripts', 'nconf-hierarchical-load-save.js');
       var argv = ['--foo', 'foo', '--bar', 'bar'];
-      let data = '';
+      var data = '';
 
       try {
         fs.unlinkSync(configFile)
@@ -75,7 +75,7 @@ describe('nconf/hierarchy, When using nconf', () => {
     done => {
       var script = path.join(__dirname, 'fixtures', 'scripts', 'nconf-hierarchical-load-merge.js');
       var argv = ['--candy:something', 'foo', '--candy:something5:second', 'bar'];
-      let data = '';
+      var data = '';
 
       var child = spawn('node', [script].concat(argv));
 
@@ -104,7 +104,7 @@ describe('nconf/hierarchy, When using nconf', () => {
     var script = path.join(__dirname, 'fixtures',
       'scripts', 'nconf-hierarchical-load-merge-with-separator.js');
     var argv = ['--candy--something', 'foo', '--candy--something5--second', 'bar'];
-    let data = '';
+    var data = '';
     process.env.candy__bonbon = 'sweet';
     var child = spawn('node', [script].concat(argv));
     delete process.env.candy__bonbon;
@@ -133,7 +133,7 @@ describe('nconf/hierarchy, When using nconf', () => {
 
   it("configured with .file(), .defaults() should deep merge objects should merge nested objects ", done => {
     var script = path.join(__dirname, 'fixtures', 'scripts', 'nconf-hierarchical-defaults-merge.js');
-    let data = '';
+    var data = '';
     var child = spawn('node', [script]);
 
     child.stdout.on('data', function (d) {

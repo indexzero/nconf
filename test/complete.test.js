@@ -139,7 +139,7 @@ describe('nconf/multiple-stores', () => {
       })
       it("JSON keys properly parsed", () => {
         Object.keys(process.env).forEach(function (key) {
-          let val = process.env[key];
+          var val = process.env[key];
 
           try {
             val = JSON.parse(val);

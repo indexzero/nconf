@@ -32,7 +32,7 @@ exports.assertMerged = function (err, merged) {
 //FIXME TODO
 exports.assertSystemConf = function (options) {
   return done => {
-    let env = null;
+    var env = null;
 
     if (options.env) {
       env = {}
