@@ -5,13 +5,13 @@
  *
  */
 
-const fs = require('fs');
-const nconf = require('../lib/nconf');
-const data = require('./fixtures/data').data;
-const helpers = require('./helpers');
+var fs = require('fs');
+var nconf = require('../lib/nconf');
+var data = require('./fixtures/data').data;
+var helpers = require('./helpers');
 
-const completeTest = helpers.fixture('complete-test.json');
-const complete = helpers.fixture('complete.json');
+var completeTest = helpers.fixture('complete-test.json');
+var complete = helpers.fixture('complete.json');
 
 // prime the process.env
 process.env['NCONF_foo'] = 'bar';
@@ -77,7 +77,7 @@ describe('nconf/multiple-stores', () => {
       });
       it("and saving *synchronously* correct return value, the file, saved correctly", done => {
         nconf.set('weebls', 'stuff');
-        const topic = nconf.save();
+        var topic = nconf.save();
         Object.keys(topic).forEach(function (key) {
           expect(topic[key]).toEqual(nconf.get(key));
         });

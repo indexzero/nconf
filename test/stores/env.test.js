@@ -5,11 +5,11 @@
  *
  */
 
-const nconf = require('../../lib/nconf');
+var nconf = require('../../lib/nconf');
 
 describe('nconf/stores/env, An instance of nconf.Env', () => {
   it("should have the correct methods defined", () => {
-    const env = new nconf.Env();
+    var env = new nconf.Env();
     expect(typeof env.loadSync).toBe('function');
     expect(typeof env.loadEnv).toBe('function');
     expect(env.whitelist instanceof Array).toBeTruthy();
@@ -17,7 +17,7 @@ describe('nconf/stores/env, An instance of nconf.Env', () => {
     expect(env.separator).toEqual('');
   });
   it("should have the correct methods defined and with readOnly false", () => {
-    const env = new nconf.Env({readOnly: false});
+    var env = new nconf.Env({readOnly: false});
     expect(typeof env.loadSync).toBe('function');
     expect(typeof env.loadEnv).toBe('function');
     expect(env.whitelist instanceof Array).toBeTruthy();

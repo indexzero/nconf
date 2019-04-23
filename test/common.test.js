@@ -5,13 +5,13 @@
  *
  */
 
-const fs = require('fs');
-const path = require('path');
-const helpers = require('./helpers');
-const nconf = require('../lib/nconf');
+var fs = require('fs');
+var path = require('path');
+var helpers = require('./helpers');
+var nconf = require('../lib/nconf');
 
-const mergeDir = path.join(__dirname, 'fixtures', 'merge');
-const files = fs.readdirSync(mergeDir).map(function (f) { return path.join(mergeDir, f) });
+var mergeDir = path.join(__dirname, 'fixtures', 'merge');
+var files = fs.readdirSync(mergeDir).map(function (f) { return path.join(mergeDir, f) });
 
 describe('nconf/common', () => {
   describe('Using nconf.common module', () => {

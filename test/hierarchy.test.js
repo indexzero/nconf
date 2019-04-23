@@ -5,14 +5,14 @@
  *
  */
 
-const fs = require('fs');
-const path = require('path');
-const spawn = require('child_process').spawn;
-const nconf = require('../lib/nconf');
+var fs = require('fs');
+var path = require('path');
+var spawn = require('child_process').spawn;
+var nconf = require('../lib/nconf');
 
-const configDir = path.join(__dirname, 'fixtures', 'hierarchy');
-const globalConfig = path.join(configDir, 'global.json');
-const userConfig = path.join(configDir, 'user.json');
+var configDir = path.join(__dirname, 'fixtures', 'hierarchy');
+var globalConfig = path.join(configDir, 'global.json');
+var userConfig = path.join(configDir, 'user.json');
 
 describe('nconf/hierarchy, When using nconf', () => {
   it("configured with two file stores, should have the appropriate keys present", () => {
@@ -38,9 +38,9 @@ describe('nconf/hierarchy, When using nconf', () => {
 
   it("configured with .argv(), .env() and .file() should not persist information passed in to process.env and process.argv to disk",
     done => {
-      const configFile = path.join(__dirname, 'fixtures', 'load-save.json');
-      const script = path.join(__dirname, 'fixtures', 'scripts', 'nconf-hierarchical-load-save.js');
-      const argv = ['--foo', 'foo', '--bar', 'bar'];
+      var configFile = path.join(__dirname, 'fixtures', 'load-save.json');
+      var script = path.join(__dirname, 'fixtures', 'scripts', 'nconf-hierarchical-load-save.js');
+      var argv = ['--foo', 'foo', '--bar', 'bar'];
       let data = '';
 
       try {
@@ -50,7 +50,7 @@ describe('nconf/hierarchy, When using nconf', () => {
         // No-op
       }
 
-      const child = spawn('node', [script].concat(argv));
+      var child = spawn('node', [script].concat(argv));
 
       child.stdout.on('data', function (d) {
         data += d;
@@ -73,11 +73,11 @@ describe('nconf/hierarchy, When using nconf', () => {
 
   it("configured with .argv(), .file() and invoked with nested command line options, should merge nested objects",
     done => {
-      const script = path.join(__dirname, 'fixtures', 'scripts', 'nconf-hierarchical-load-merge.js');
-      const argv = ['--candy:something', 'foo', '--candy:something5:second', 'bar'];
+      var script = path.join(__dirname, 'fixtures', 'scripts', 'nconf-hierarchical-load-merge.js');
+      var argv = ['--candy:something', 'foo', '--candy:something5:second', 'bar'];
       let data = '';
 
-      const child = spawn('node', [script].concat(argv));
+      var child = spawn('node', [script].concat(argv));
 
       child.stdout.on('data', function (d) {
         data += d;
@@ -101,12 +101,12 @@ describe('nconf/hierarchy, When using nconf', () => {
     });
   it("configured with .argv() and separator, .file() and invoked with nested command line options should merge nested objects", done => {
 
-    const script = path.join(__dirname, 'fixtures',
+    var script = path.join(__dirname, 'fixtures',
       'scripts', 'nconf-hierarchical-load-merge-with-separator.js');
-    const argv = ['--candy--something', 'foo', '--candy--something5--second', 'bar'];
+    var argv = ['--candy--something', 'foo', '--candy--something5--second', 'bar'];
     let data = '';
     process.env.candy__bonbon = 'sweet';
-    const child = spawn('node', [script].concat(argv));
+    var child = spawn('node', [script].concat(argv));
     delete process.env.candy__bonbon;
     child.stdout.on('data', function (d) {
       data += d;
@@ -132,9 +132,9 @@ describe('nconf/hierarchy, When using nconf', () => {
   });
 
   it("configured with .file(), .defaults() should deep merge objects should merge nested objects ", done => {
-    const script = path.join(__dirname, 'fixtures', 'scripts', 'nconf-hierarchical-defaults-merge.js');
+    var script = path.join(__dirname, 'fixtures', 'scripts', 'nconf-hierarchical-defaults-merge.js');
     let data = '';
-    const child = spawn('node', [script]);
+    var child = spawn('node', [script]);
 
     child.stdout.on('data', function (d) {
       data += d;

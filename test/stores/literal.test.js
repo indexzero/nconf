@@ -5,12 +5,12 @@
  *
  */
 
-const nconf = require('../../lib/nconf');
+var nconf = require('../../lib/nconf');
 
 describe('nconf/stores/literal, An instance of nconf.Literal', () => {
-  const envOptions = {foo: 'bar', one: 2};
+  var envOptions = {foo: 'bar', one: 2};
   it("should have the correct methods defined", () => {
-    const literal = new nconf.Literal(envOptions);
+    var literal = new nconf.Literal(envOptions);
     expect(literal.type).toEqual('literal');
     expect(typeof literal.get).toBe('function');
     expect(typeof literal.set).toBe('function');
@@ -18,7 +18,7 @@ describe('nconf/stores/literal, An instance of nconf.Literal', () => {
     expect(typeof literal.loadSync).toBe('function');
   });
   it("should have the correct values in the store", () => {
-    const literal = new nconf.Literal(envOptions);
+    var literal = new nconf.Literal(envOptions);
     expect(literal.store.foo).toEqual('bar');
     expect(literal.store.one).toEqual(2);
   });

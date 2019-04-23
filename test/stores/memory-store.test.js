@@ -5,12 +5,12 @@
  *
  */
 
-const nconf = require('../../lib/nconf');
-const merge = require('../fixtures/data').merge;
+var nconf = require('../../lib/nconf');
+var merge = require('../fixtures/data').merge;
 
 describe('nconf/stores/memory', () => {
   describe("When using the nconf memory store", () => {
-    const store = new nconf.Memory();
+    var store = new nconf.Memory();
     it("the set() method should respond with true", () => {
       expect(store.set('foo:bar:bazz', 'buzz')).toBeTruthy();
       expect(store.set('falsy:number', 0)).toBeTruthy();
@@ -97,7 +97,7 @@ describe('nconf/stores/memory', () => {
     });
   });
   describe("When using the nconf memory store with different logical separator", () => {
-    const store = new nconf.Memory({logicalSeparator: '||'});
+    var store = new nconf.Memory({logicalSeparator: '||'});
 
     it("when storing with : (colon), should store the config atomicly", () => {
       store.set('foo:bar:bazz', 'buzz');

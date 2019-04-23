@@ -5,9 +5,9 @@
  *
  */
 
-const fs = require('fs');
-const path = require('path');
-const nconf = require('../lib/nconf');
+var fs = require('fs');
+var path = require('path');
+var nconf = require('../lib/nconf');
 
 describe('nconf, When using the nconf', () => {
   it("should have the correct methods set", () => {

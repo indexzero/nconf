@@ -5,10 +5,10 @@
  *
  */
 
-const spawn = require('child_process').spawn;
-const fs = require('fs');
-const path = require('path');
-const nconf = require('../lib/nconf');
+var spawn = require('child_process').spawn;
+var fs = require('fs');
+var path = require('path');
+var nconf = require('../lib/nconf');
 
 exports.assertMerged = function (err, merged) {
   merged = merged instanceof nconf.Provider
@@ -45,7 +45,7 @@ exports.assertSystemConf = function (options) {
       });
     }
 
-    const child = spawn('node', [options.script].concat(options.argv), {env: env});
+    var child = spawn('node', [options.script].concat(options.argv), {env: env});
     child.stdout.once('data', data => {
       expect(data.toString()).toEqual('foobar');
       done();

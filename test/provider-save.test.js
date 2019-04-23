@@ -5,7 +5,7 @@
  *
  */
 
-const nconf = require('../lib/nconf');
+var nconf = require('../lib/nconf');
 
 //
 // Expose `nconf.Mock`
@@ -14,9 +14,9 @@ require('./mocks/mock-store');
 
 describe('nconf/provider/save', () => {
   describe("When using nconf an instance of 'nconf.Provider' with a Mock store", () => {
-    const nconfMock = nconf.use('mock');
+    var nconfMock = nconf.use('mock');
     it("the save() method should actually save before responding", done => {
-      const mock = nconf.stores.mock;
+      var mock = nconf.stores.mock;
 
       mock.on('save', function () {
         nconfMock.saved = true;

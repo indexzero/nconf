@@ -5,22 +5,22 @@
  *
  */
 
-const fs = require('fs');
-const path = require('path');
-const helpers = require('./helpers');
-const nconf = require('../lib/nconf');
+var fs = require('fs');
+var path = require('path');
+var helpers = require('./helpers');
+var nconf = require('../lib/nconf');
 
-const fixturesDir = path.join(__dirname, 'fixtures');
-const mergeFixtures = path.join(fixturesDir, 'merge');
-const files = [path.join(mergeFixtures, 'file1.json'), path.join(mergeFixtures, 'file2.json')];
-const override = JSON.parse(fs.readFileSync(files[0]), 'utf8');
+var fixturesDir = path.join(__dirname, 'fixtures');
+var mergeFixtures = path.join(fixturesDir, 'merge');
+var files = [path.join(mergeFixtures, 'file1.json'), path.join(mergeFixtures, 'file2.json')];
+var override = JSON.parse(fs.readFileSync(files[0]), 'utf8');
 
 describe('nconf/provider When using nconf', () => {
   describe("an instance of 'nconf.Provider'", () => {
     it("calling the use() method with the same store type and different options"
       + " should use a new instance of the store type", () => {
-      const provider = new nconf.Provider().use('file', {file: files[0]});
-      const old = provider.stores['file'];
+      var provider = new nconf.Provider().use('file', {file: files[0]});
+      var old = provider.stores['file'];
 
       expect(provider.stores.file.file).toEqual(files[0]);
       provider.use('file', {file: files[1]});
@@ -40,7 +40,7 @@ describe('nconf/provider When using nconf', () => {
   }));
 
   it("respond with correct arg when 'env' is true and 'parseValues' option is true", () => {
-    const env = {
+    var env = {
       SOMETHING: 'foobar',
       SOMEBOOL: 'true',
       SOMENULL: 'null',
@@ -49,12 +49,12 @@ describe('nconf/provider When using nconf', () => {
       SOMEFLOAT: '0.5',
       SOMEBAD: '5.1a'
     };
-    const oenv = {};
+    var oenv = {};
     Object.keys(env).forEach(function (key) {
       if (process.env[key]) oenv[key] = process.env[key];
       process.env[key] = env[key];
     });
-    const provider = new nconf.Provider().use('env', {parseValues: true});
+    var provider = new nconf.Provider().use('env', {parseValues: true});
     Object.keys(env).forEach(function (key) {
       delete process.env[key];
       if (oenv[key]) process.env[key] = oenv[key];
@@ -103,14 +103,14 @@ describe('nconf/provider When using nconf', () => {
   describe("an instance of 'nconf.Provider'", () => {
     describe("the merge() method", () => {
       it("should have the result merged in", () => {
-        const provider = new nconf.Provider().use('file', {file: files[1]});
+        var provider = new nconf.Provider().use('file', {file: files[1]});
         provider.load();
         provider.merge(override);
         helpers.assertMerged(null, provider.stores.file.store);
         expect(provider.stores.file.store.candy.something).toEqual('file1');
       });
       it("should merge Objects over null", () => {
-        const provider = new nconf.Provider().use('file', {file: files[1]});
+        var provider = new nconf.Provider().use('file', {file: files[1]});
         provider.load();
         provider.merge(override);
         expect(provider.stores.file.store.unicorn.exists).toEqual(true);
@@ -118,7 +118,7 @@ describe('nconf/provider When using nconf', () => {
     })
     describe("the load() method", () => {
       it("should respect the hierarchy when sources are passed in", () => {
-        const provider = new nconf.Provider({
+        var provider = new nconf.Provider({
           sources: {
             user: {
               type: 'file',
@@ -130,16 +130,16 @@ describe('nconf/provider When using nconf', () => {
             }
           }
         });
-        const merged = provider.load();
+        var merged = provider.load();
         helpers.assertMerged(null, merged);
         expect(merged.candy.something).toEqual('file1');
       })
       it("should respect the hierarchy when multiple stores are used", () => {
-        const provider = new nconf.Provider().overrides({foo: {bar: 'baz'}})
+        var provider = new nconf.Provider().overrides({foo: {bar: 'baz'}})
           .add('file1', {type: 'file', file: files[0]})
           .add('file2', {type: 'file', file: files[1]});
 
-        const merged = provider.load();
+        var merged = provider.load();
 
         helpers.assertMerged(null, merged);
         expect(merged.foo.bar).toEqual('baz');
@@ -149,17 +149,17 @@ describe('nconf/provider When using nconf', () => {
   })
   describe("the .file() method", () => {
     it("should use the correct File store with a single filepath", () => {
-      const provider = new nconf.Provider();
+      var provider = new nconf.Provider();
       provider.file(helpers.fixture('store.json'));
       expect(typeof provider.stores.file).toBe('object');
     });
     it("should use the correct File store with a name and a filepath", () => {
-      const provider = new nconf.Provider();
+      var provider = new nconf.Provider();
       provider.file('custom', helpers.fixture('store.json'));
       expect(typeof provider.stores.custom).toBe('object');
     });
     it("should use the correct File store with a single object", () => {
-      const provider = new nconf.Provider();
+      var provider = new nconf.Provider();
       provider.file({
         dir: helpers.fixture(''),
         file: 'store.json',
@@ -170,7 +170,7 @@ describe('nconf/provider When using nconf', () => {
       expect(provider.stores.file.file).toEqual(helpers.fixture('store.json'));
     });
     it("should use the correct File store with a name and an object", () => {
-      const provider = new nconf.Provider();
+      var provider = new nconf.Provider();
       provider.file('custom', {
         dir: helpers.fixture(''),
         file: 'store.json',
@@ -181,7 +181,7 @@ describe('nconf/provider When using nconf', () => {
       expect(provider.stores.custom.file).toEqual(helpers.fixture('store.json'));
     })
     describe("the any() method", () => {
-      const provider = new nconf.Provider({
+      var provider = new nconf.Provider({
         type: 'literal',
         store: {
           key: "getThisValue"
