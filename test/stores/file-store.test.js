@@ -183,7 +183,7 @@ describe('nconf/stores/file', () => {
   describe("When using the nconf file store", () => {
 
     it("the search() method when the target file exists higher in the directory tree should update the file appropriately", () => {
-      var searchBase = process.env.HOME;
+      var searchBase = require('os').homedir();
       var filePath = path.join(searchBase, '.nconf');
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
       var store = new nconf.File({
