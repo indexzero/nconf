@@ -10,4 +10,3 @@ node_modules/
 node_modules/*
 npm-debug.log
 coverage
-package-lock.json
