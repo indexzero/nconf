@@ -1,7 +1,7 @@
 {
   "name": "nconf",
   "description": "Hierarchical node.js configuration with files, environment variables, command-line arguments, and atomic object merging.",
-  "version": "0.9.1",
+  "version": "0.11.0",
   "author": "Charlie Robbins <charlie.robbins@gmail.com>",
   "contributors": [
     "Matt Hamann <matthew.hamann@gmail.com>",
