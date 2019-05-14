@@ -59,28 +59,7 @@ commands:
           command: npm run cover
       - run:
           command: npm run coveralls
-
-  publish:
-    steps:
-      - checkout
-      - run:
-          name: Authenticate with registry
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
-      - run:
-          name: publish to npm
-          command: npm publish
-
 jobs:
-  node-v4:
-    docker:
-      - image: node:4
-    steps:
-      - test-nodejs-legacy
-  node-v6:
-    docker:
-      - image: node:6
-    steps:
-      - test-nodejs-legacy
   node-v8:
     docker:
       - image: node:8
@@ -96,30 +75,11 @@ jobs:
       - image: node:12
     steps:
       - test-nodejs
-  publish:
-    docker:
-      - image: node:10
-    steps:
-      - publish
 
 workflows:
   version: 2
   node-multi-build:
     jobs:
-      - node-v4
-      - node-v6
       - node-v8
       - node-v10
       - node-v12
-      - publish:
-          requires:
-            - node-v4
-            - node-v6
-            - node-v8
-            - node-v10
-            - node-v12
-          filters:
-            tags:
-              only: /^v.*/
-            branches:
-              ignore: /.*/
