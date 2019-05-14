@@ -33,7 +33,7 @@
   },
   "main": "./lib/nconf",
   "scripts": {
-    "test":  "jest --verbose",
+    "test": "jest --verbose",
     "cover": "jest --coverage",
     "coveralls": "cat coverage/lcov.info | coveralls",
     "lint": "eslint ."
