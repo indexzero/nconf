@@ -106,14 +106,14 @@ describe('nconf/hierarchy, When using nconf', () => {
     var argv = ['--candy--something', 'foo', '--candy--something5--second', 'bar'];
     var data = '';
     process.env.candy__bonbon = 'sweet';
-    var child = spawn('node', [script].concat(argv));
+    var child = spawn('node', [script].concat(argv), {env: process.env});
     delete process.env.candy__bonbon;
     child.stdout.on('data', function (d) {
       data += d;
     });
 
     child.on('close', function () {
-      console.log(data)
+      console.log(data);
       expect(JSON.parse(data)).toEqual({
         apples: true,
         candy: {
