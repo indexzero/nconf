@@ -183,7 +183,7 @@ describe('nconf/stores/file', () => {
   describe("When using the nconf file store", () => {
 
     it("the search() method when the target file exists higher in the directory tree should update the file appropriately", () => {
-      var searchBase = process.env.HOME;
+      var searchBase = require('os').homedir();
       var filePath = path.join(searchBase, '.nconf');
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
       var store = new nconf.File({
@@ -206,8 +206,8 @@ describe('nconf/stores/file', () => {
   })
   describe("When using the nconf file store", () => {
     var secureStore = new nconf.File({
-      file: path.join(__dirname, '..', 'fixtures', 'secure.json'),
-      secure: 'super-secretzzz'
+      file: path.join(__dirname, '..', 'fixtures', 'secure-iv.json'),
+      secure: 'super-secret-key-32-characterszz'
     });
 
     secureStore.store = data;
@@ -218,6 +218,7 @@ describe('nconf/stores/file', () => {
         expect(typeof contents[key]).toBe('object');
         expect(typeof contents[key].value).toBe('string');
         expect(contents[key].alg).toEqual('aes-256-ctr');
+        expect(typeof contents[key].iv).toBe('string');
       });
     });
     it("the parse() method should decrypt properly", () => {
@@ -232,8 +233,27 @@ describe('nconf/stores/file', () => {
       });
     });
     it("the loadSync() method should decrypt properly", () => {
-      var loaded = secureStore.loadSync()
+      var loaded = secureStore.loadSync();
       expect(loaded).toEqual(data);
     });
   })
+
+  describe("When using the nconf file store", () => {
+    var secureStore = new nconf.File({
+      file: path.join(__dirname, '..', 'fixtures', 'secure.json'),
+      secure: 'super-secretzzz'
+    });
+
+    it("the load() method should decrypt legacy file properly", () => {
+      secureStore.load(function (err, loaded) {
+        expect(err).toBe(null);
+        expect(loaded).toEqual(data);
+      });
+    });
+    it("the loadSync() method should decrypt legacy file properly", () => {
+      var loaded = secureStore.loadSync();
+      expect(loaded).toEqual(data);
+    });
+  })
+
 });
