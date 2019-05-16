@@ -8,8 +8,7 @@ Hierarchical node.js configuration with files, environment variables, command-li
 Using nconf is easy; it is designed to be a simple key-value store with support for both local and remote storage. Keys are namespaced and delimited by `:`. Let's dive right into sample usage:
 
 ``` js
-  var fs    = require('fs'),
-      nconf = require('nconf');
+  var nconf = require('nconf');
 
   //
   // Setup nconf to use (in-order):
@@ -39,7 +38,7 @@ Using nconf is easy; it is designed to be a simple key-value store with support 
   // Save the configuration object to disk
   //
   nconf.save(function (err) {
-    fs.readFile('path/to/your/config.json', function (err, data) {
+    require('fs').readFile('path/to/your/config.json', function (err, data) {
       console.dir(JSON.parse(data.toString()))
     });
   });
