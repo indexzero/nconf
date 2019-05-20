@@ -24,7 +24,7 @@
     "yargs": "^10.0.3"
   },
   "devDependencies": {
-    "async": "^2.6.1",
+    "async": "^3.0.0",
     "coveralls": "^3.0.2",
     "eslint": "^5.5.0",
     "istanbul": "^0.4.1",
