@@ -119,12 +119,12 @@ describe('nconf/multiple-stores', () => {
           nconf.env({lowerCase: true});
           done();
         })
-      })
+      });
       it("env vars keys also available as lower case", () => {
         Object.keys(process.env).forEach(function (key) {
           expect(nconf.get(key.toLowerCase())).toEqual(process.env[key]);
         });
-      })
+      });
       afterAll(() => nconf.remove('env'))
     });
 
@@ -136,7 +136,7 @@ describe('nconf/multiple-stores', () => {
           nconf.env({parseValues: true});
           done();
         })
-      })
+      });
       it("JSON keys properly parsed", () => {
         Object.keys(process.env).forEach(function (key) {
           var val = process.env[key];
@@ -147,7 +147,7 @@ describe('nconf/multiple-stores', () => {
           }
 
           expect(nconf.get(key)).toEqual(val);
-        })
+        });
         afterAll(() => nconf.remove('env'))
       });
 

@@ -113,7 +113,6 @@ describe('nconf/hierarchy, When using nconf', () => {
     });
 
     child.on('close', function () {
-      console.log(data);
       expect(JSON.parse(data)).toEqual({
         apples: true,
         candy: {

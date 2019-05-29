@@ -7,6 +7,8 @@
 
 var nconf = require('../../lib/nconf');
 
+process.env.DEEP__NESTED__VALUE = 'foo';
+
 describe('nconf/stores/env, An instance of nconf.Env', () => {
   it("should have the correct methods defined", () => {
     var env = new nconf.Env();
@@ -25,4 +27,11 @@ describe('nconf/stores/env, An instance of nconf.Env', () => {
     expect(env.separator).toEqual('');
     expect(env.readOnly).toBe(false);
   });
+  it("should be able to retrieve a value using the logical separator", () => {
+    var env = new nconf.Env({logicalSeparator: '.', separator: '__'});
+    env.loadSync();
+
+    expect(env.logicalSeparator).toBe('.');
+    expect(env.get('DEEP.NESTED.VALUE')).toBe('foo');
+  })
 });
