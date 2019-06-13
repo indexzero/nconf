@@ -6,6 +6,7 @@
  */
 
 var fs = require('fs');
+var os = require('os');
 var path = require('path');
 var nconf = require('../../lib/nconf');
 var yamlFormat = require('nconf-yaml');
@@ -97,14 +98,14 @@ describe('nconf/stores/file', () => {
     });
     it("the saveToFile() method should save the data correctly", done => {
       var tmpStore = new nconf.File({file: tmpPath});
-      var pathFile = '/tmp/nconf-save-toFile.json';
+      var pathFile = path.join(os.tmpdir(), 'nconf-save-toFile.json');
 
       Object.keys(data).forEach(function (key) {
         tmpStore.set(key, data[key]);
       });
 
       tmpStore.saveToFile(pathFile, function () {
-        fs.readFile(pathFile, function (err, d) {
+        fs.readFile(pathFile, 'utf8', function (err, d) {
           fs.unlinkSync(pathFile);
 
           expect(err).toBe(null);
@@ -116,14 +117,14 @@ describe('nconf/stores/file', () => {
     });
     it("the saveToFile() method with custom format should save the data correctly", done => {
       var tmpStore = new nconf.File({file: tmpPath});
-      var pathFile = '/tmp/nconf-save-toFile.yaml';
+      var pathFile = path.join(os.tmpdir(), 'nconf-save-toFile.yaml');
 
       Object.keys(data).forEach(function (key) {
         tmpStore.set(key, data[key]);
       });
 
       tmpStore.saveToFile(pathFile, yamlFormat, function () {
-        fs.readFile(pathFile, function (err, d) {
+        fs.readFile(pathFile, 'utf8' ,function (err, d) {
           fs.unlinkSync(pathFile);
 
           expect(err).toBe(null);
