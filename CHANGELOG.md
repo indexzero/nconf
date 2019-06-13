@@ -1,7 +1,13 @@
 
+v0.10.0 / Mon, 18 Dec 2017
+==========================
+  * [0ef652e](https://github.com/projects/nconf/commit/0ef652e) 0.10.0 (`Matt Hamann`)
+  * [01f25fa](https://github.com/projects/nconf/commit/01f25fa) Regex as env separator (#288) (`Adrien Becchis`)
+  * [16667be](https://github.com/projects/nconf/commit/16667be) Argv store separator (#291) (`Adrien Becchis`)
+
 v0.9.1 / Fri, 3 Nov 2017
 ========================
-  * [806f1b1](https://github.com/projects/nconf/commit/806f1b1) 0.9.1 (`Matt Hamann`)
+  * [bac910a](https://github.com/projects/nconf/commit/bac910a) 0.9.1 (`Matt Hamann`)
   * [2bdf7e1](https://github.com/projects/nconf/commit/2bdf7e1) Clean Argv Store options (#290) (`Adrien Becchis`)
   * [b9321b2](https://github.com/projects/nconf/commit/b9321b2) transformer can now return an undefined key (#289) (`Adrien Becchis`)
   * [81ce0be](https://github.com/projects/nconf/commit/81ce0be) Update changelog (`Matt Hamann`)
