@@ -97,7 +97,7 @@ describe('nconf/stores/file', () => {
     });
     it("the saveToFile() method should save the data correctly", done => {
       var tmpStore = new nconf.File({file: tmpPath});
-      var pathFile = '/tmp/nconf-save-toFile.json';
+      var pathFile = path.join(__dirname, '..', 'fixtures', 'tmp-save-tofile.json');
 
       Object.keys(data).forEach(function (key) {
         tmpStore.set(key, data[key]);
@@ -116,7 +116,7 @@ describe('nconf/stores/file', () => {
     });
     it("the saveToFile() method with custom format should save the data correctly", done => {
       var tmpStore = new nconf.File({file: tmpPath});
-      var pathFile = '/tmp/nconf-save-toFile.yaml';
+      var pathFile = path.join(__dirname, '..', 'fixtures', 'tmp-save-tofile.yaml');
 
       Object.keys(data).forEach(function (key) {
         tmpStore.set(key, data[key]);
