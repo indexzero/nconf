@@ -97,7 +97,7 @@ describe('nconf/stores/memory', () => {
     });
   });
   describe("When using the nconf memory store with different logical separator", () => {
-    var store = new nconf.Memory({ accessSeparator: '||', disableDefaultSeparator: true });
+    var store = new nconf.Memory({ accessSeparator: '||', disableDefaultAccessSeparator: true });
 
     it("when storing with : (colon), should store the config atomicly (leave key as-is)", () => {
       store.set('foo:bar:bazz', 'buzz');
