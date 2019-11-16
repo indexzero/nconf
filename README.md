@@ -203,9 +203,26 @@ config
 ### Memory
 A simple in-memory storage engine that stores a nested JSON representation of the configuration. To use this engine, just call `.use()` with the appropriate arguments. All calls to `.get()`, `.set()`, `.clear()`, `.reset()` methods are synchronous since we are only dealing with an in-memory object.
 
+All built-in storage engines inherit from the Memory store.
+
+Basic usage:
+
 ``` js
   nconf.use('memory');
 ```
+
+#### Options
+
+The options defined below apply to all storage engines that inherit from Memory.
+
+##### `accessSeparator: string` (default: `':'`)
+Defines the separator used to get or set data using the `get()` and `set()` methods. Even if this is changed, the default "colon" separator will be available unless explicitly disabled (see `disableDefaultAccessSeparator`).
+
+##### `inputSeparator: string` (default: `'__'`)
+This option is used by the `argv` and `env` storage engines when loading values. Since most systems only allow dashes, underscores, and alphanumeric characters in environment variables and command line arguments, the `inputSeparator` provides a mechanism for loading hierarchical values from these sources.
+
+##### `disableDefaultAccessSeparator: {true|false}` (default: `false`)
+Disables the default access separator of `':'`, which is always available otherwise. This is mainly used to preserve legacy behavior. It can also be used to set keys that contain the default separator (e.g. `{ 'some:long:key' : 'some value' }`).
 
 ### Argv
 Responsible for loading the values parsed from `process.argv` by `yargs` into the configuration hierarchy. See the [yargs option docs](https://github.com/bcoe/yargs#optionskey-opt) for more on the option format.
@@ -307,7 +324,7 @@ If the return value is falsey, the entry will be dropped from the store, otherwi
 
 *Note: If the return value doesn't adhere to the above rules, an exception will be thrown.*
 
-#### `readOnly: {true|false}` (defaultL `true`)
+#### `readOnly: {true|false}` (default: `true`)
 Allow values in the env store to be updated in the future. The default is to not allow items in the env store to be updated.
 
 #### Examples
@@ -319,7 +336,7 @@ Allow values in the env store to be updated in the future. The default is to not
   nconf.env(['only', 'load', 'these', 'values', 'from', 'process.env']);
 
   //
-  // Can also specify a separator for nested keys (instead of the default ':')
+  // Can also specify an input separator for nested keys
   //
   nconf.env('__');
   // Get the value of the env variable 'database__host'
@@ -342,7 +359,7 @@ Allow values in the env store to be updated in the future. The default is to not
   // Or use all options
   //
   nconf.env({
-    separator: '__',
+    inputSeparator: '__',
     match: /^whatever_matches_this_will_be_whitelisted/
     whitelist: ['database__host', 'only', 'load', 'these', 'values', 'if', 'whatever_doesnt_match_but_is_whitelisted_gets_loaded_too'],
     lowerCase: true,
