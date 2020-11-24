@@ -1,4 +1,9 @@
 
+v0.11.0 / Mon, 23 Nov 2020
+==========================
+  * [4122731](https://github.com/projects/nconf/commit/4122731) 0.11.0 (`Matt Hamann`)
+  * [56794d1](https://github.com/projects/nconf/commit/56794d1) chore: upgrade deps to fix security vulns (`Matt Hamann`)
+
 v0.10.0 / Mon, 18 Dec 2017
 ==========================
   * [0ef652e](https://github.com/projects/nconf/commit/0ef652e) 0.10.0 (`Matt Hamann`)
