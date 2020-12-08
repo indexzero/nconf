@@ -27,7 +27,7 @@
     "coveralls": "^3.0.2",
     "eslint": "^7.0.0",
     "istanbul": "^0.4.1",
-    "jest": "^24.0.0",
+    "jest": "^26.0.0",
     "nconf-yaml": "^1.0.2"
   },
   "main": "./lib/nconf",
