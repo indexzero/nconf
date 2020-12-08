@@ -8,6 +8,8 @@
 var yargs = require('yargs');
 var nconf = require('../../lib/nconf');
 
+process.env.DEEP__NESTED__VALUE = 'foo';
+
 describe('nconf/stores/argv, An instance of nconf.Argv', () => {
 
   it("should have the correct methods defined", () => {
@@ -15,6 +17,19 @@ describe('nconf/stores/argv, An instance of nconf.Argv', () => {
     expect(typeof argv.loadSync).toBe('function');
     expect(typeof argv.loadArgv).toBe('function');
     expect(argv.options).toEqual({});
+  });
+
+  it("should be able to retrieve a value using the logical separator", () => {
+      var argv = new nconf.Argv({
+          deep__nested__value: {alias: 'nv', default: 'foo'},
+          accessSeparator: '.',
+          inputSeparator: '__'
+      });
+      argv.loadSync();
+
+      expect(argv.accessSeparator).toBe('.');
+      expect(argv.get('deep.nested.value')).toBe('foo');
+      expect(argv.get('deep:nested:value')).toBe('foo');
   });
 
   describe("can be created with a custom yargs", () => {
