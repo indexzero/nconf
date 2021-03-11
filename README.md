@@ -8,6 +8,7 @@ Hierarchical node.js configuration with files, environment variables, command-li
 Using nconf is easy; it is designed to be a simple key-value store with support for both local and remote storage. Keys are namespaced and delimited by `:`. Let's dive right into sample usage:
 
 ``` js
+  // sample.js
   var nconf = require('nconf');
 
   //
@@ -44,10 +45,10 @@ Using nconf is easy; it is designed to be a simple key-value store with support 
   });
 ```
 
-If you run the above script:
+If you run the below script:
 
 ``` bash
-  $ NODE_ENV=production sample.js --foo bar
+  $ NODE_ENV=production node sample.js --foo bar
 ```
 
 The output will be:
