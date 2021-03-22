@@ -124,7 +124,7 @@ The top-level of `nconf` is an instance of the `nconf.Provider` abstracts this a
 Adds a new store with the specified `name` and `options`. If `options.type` is not set, then `name` will be used instead:
 
 ``` js
-  nconf.add('supplied', { type: 'literal', store: { 'some': 'config' });
+  nconf.add('supplied', { type: 'literal', store: { 'some': 'config' } });
   nconf.add('user', { type: 'file', file: '/path/to/userconf.json' });
   nconf.add('global', { type: 'file', file: '/path/to/globalconf.json' });
 ```
