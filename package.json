@@ -20,12 +20,12 @@
   ],
   "dependencies": {
     "ini": "^2.0.0",
-    "yargs": "^16.0.0"
+    "yargs": "^16.2.0"
   },
   "devDependencies": {
-    "async": "^2.6.1",
-    "coveralls": "^3.0.2",
-    "eslint": "^7.0.0",
+    "async": "^2.6.2",
+    "coveralls": "^3.1.0",
+    "eslint": "^7.24.0",
     "istanbul": "^0.4.1",
     "jest": "^26.0.0",
     "nconf-yaml": "^1.0.2"
