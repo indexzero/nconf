@@ -34,17 +34,17 @@ commands:
 jobs:
   node-v10:
     docker:
-      - image: node:10
+      - image: node:16
     steps:
       - test-nodejs
   node-v12:
     docker:
-      - image: node:12
+      - image: node:16
     steps:
       - test-nodejs
   node-v14:
     docker:
-      - image: node:14
+      - image: node:16
     steps:
       - test-nodejs
 
