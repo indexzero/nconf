@@ -238,7 +238,7 @@ into their proper types. If a value cannot be parsed, it will remain a string.
 Pass each key/value pair to the specified function for transformation.
 
 The input `obj` contains two properties passed in the following format:
-```
+``` js
 {
   key: '<string>',
   value: '<string>'
@@ -311,7 +311,7 @@ into their proper types. If a value cannot be parsed, it will remain a string.
 Pass each key/value pair to the specified function for transformation.
 
 The input `obj` contains two properties passed in the following format:
-```
+``` js
 {
   key: '<string>',
   value: '<string>'
@@ -416,7 +416,7 @@ nconf.file('secure-file', {
 
 This will encrypt each key using [`crypto.createCipheriv`](https://nodejs.org/api/crypto.html#crypto_crypto_createcipheriv_algorithm_key_iv_options), defaulting to `aes-256-ctr`. The encrypted file contents will look like this:
 
-```
+``` js
 {
   "config-key-name": {
     "alg": "aes-256-ctr", // cipher used
