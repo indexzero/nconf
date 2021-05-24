@@ -20,7 +20,7 @@
   ],
   "dependencies": {
     "ini": "^2.0.0",
-    "yargs": "^16.0.0"
+    "yargs": "^17.0.0"
   },
   "devDependencies": {
     "async": "^2.6.1",
