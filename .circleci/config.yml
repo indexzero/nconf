@@ -47,6 +47,5 @@ workflows:
   version: 2
   node-multi-build:
     jobs:
-      - node-v10
       - node-v12
       - node-v14
