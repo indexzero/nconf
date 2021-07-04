@@ -9,6 +9,7 @@ var fs = require('fs');
 var nconf = require('../lib/nconf');
 var data = require('./fixtures/data').data;
 var helpers = require('./helpers');
+const _ = require('lodash');
 
 var completeTest = helpers.fixture('complete-test.json');
 var complete = helpers.fixture('complete.json');
@@ -23,6 +24,9 @@ process.env.json_array = JSON.stringify(['foo', 'bar', 'baz']);
 process.env.json_obj = JSON.stringify({foo: 'bar', baz: 'foo'});
 process.env.NESTED__VALUE = 'nested';
 process.env.NESTED___VALUE_EXTRA_LODASH = '_nested_';
+
+// Ensure tests only validate a controlled set of env vars
+let process_env = _.pick(process.env, ['NCONF_foo', 'FOO', 'BAR', 'NODE_ENV', 'FOOBAR', 'json_array', 'json_obj', 'NESTED__VALUE', 'NESTED___VALUE_EXTRA_LODASH']);
 
 describe('nconf/multiple-stores', () => {
   describe("When using the nconf with multiple providers", () => {
@@ -121,7 +125,7 @@ describe('nconf/multiple-stores', () => {
         })
       });
       it("env vars keys also available as lower case", () => {
-        Object.keys(process.env).forEach(function (key) {
+        Object.keys(process_env).forEach(function (key) {
           expect(nconf.get(key.toLowerCase())).toEqual(process.env[key]);
         });
       });
@@ -138,7 +142,7 @@ describe('nconf/multiple-stores', () => {
         })
       });
       it("JSON keys properly parsed", () => {
-        Object.keys(process.env).forEach(function (key) {
+        Object.keys(process_env).forEach(function (key) {
           var val = process.env[key];
 
           try {
