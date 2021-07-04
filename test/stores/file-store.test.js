@@ -6,12 +6,12 @@
  */
 
 var fs = require('fs');
+var os = require('os');
 var path = require('path');
 var nconf = require('../../lib/nconf');
 var yamlFormat = require('nconf-yaml');
 var data = require('../fixtures/data').data;
 
-// FIXME TO RENAME
 describe('nconf/stores/file', () => {
   describe("When using the nconf file store", () => {
     describe("with a valid JSON file", () => {
@@ -19,7 +19,7 @@ describe('nconf/stores/file', () => {
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 
       it("the load() method should load the data correctly", done => {
-        var store = new nconf.File({file: filePath});
+        var store = new nconf.File({ file: filePath });
         store.load((err, data) => {
           expect(err).toBe(null);
           expect(data).toEqual(store.store);
@@ -32,7 +32,7 @@ describe('nconf/stores/file', () => {
 
       it("the load() method with a malformed JSON config file, should respond with an error and indicate file name",
         done => {
-          var store = new nconf.File({file: filePath});
+          var store = new nconf.File({ file: filePath });
           //FIXME this.store.load(this.callback.bind(null, null));
           store.load((err) => {
             expect(err).toBeTruthy();
@@ -43,7 +43,7 @@ describe('nconf/stores/file', () => {
     });
     describe("with a valid UTF8 JSON file that contains a BOM", () => {
       var filePath = path.join(__dirname, '..', 'fixtures', 'bom.json');
-      var store = new nconf.File({file: filePath});
+      var store = new nconf.File({ file: filePath });
 
       it("the load() method should load the data correctly", done => {
         store.load((err, data) => {
@@ -59,7 +59,7 @@ describe('nconf/stores/file', () => {
     });
     describe("with a valid UTF8 JSON file that contains no BOM", () => {
       var filePath = path.join(__dirname, '..', 'fixtures', 'no-bom.json');
-      var store = new nconf.File({file: filePath});
+      var store = new nconf.File({ file: filePath });
 
       it("the load() method should load the data correctly", done => {
         store.load((err, data) => {
@@ -79,7 +79,7 @@ describe('nconf/stores/file', () => {
     var tmpPath = path.join(__dirname, '..', 'fixtures', 'tmp.json');
 
     it("the save() method should save the data correctly", done => {
-      var tmpStore = new nconf.File({file: tmpPath});
+      var tmpStore = new nconf.File({ file: tmpPath });
 
       Object.keys(data).forEach(function (key) {
         tmpStore.set(key, data[key]);
@@ -96,7 +96,7 @@ describe('nconf/stores/file', () => {
       });
     });
     it("the saveToFile() method should save the data correctly", done => {
-      var tmpStore = new nconf.File({file: tmpPath});
+      var tmpStore = new nconf.File({ file: tmpPath });
       var pathFile = path.join(__dirname, '..', 'fixtures', 'tmp-save-tofile.json');
 
       Object.keys(data).forEach(function (key) {
@@ -115,7 +115,7 @@ describe('nconf/stores/file', () => {
 
     });
     it("the saveToFile() method with custom format should save the data correctly", done => {
-      var tmpStore = new nconf.File({file: tmpPath});
+      var tmpStore = new nconf.File({ file: tmpPath });
       var pathFile = path.join(__dirname, '..', 'fixtures', 'tmp-save-tofile.yaml');
 
       Object.keys(data).forEach(function (key) {
@@ -137,7 +137,7 @@ describe('nconf/stores/file', () => {
   describe("When using the nconf file store", () => {
     var tmpPath = path.join(__dirname, '..', 'fixtures', 'tmp.json');
     it("the saveSync() method should save the data correctly", done => {
-      var tmpStore = new nconf.File({file: tmpPath});
+      var tmpStore = new nconf.File({ file: tmpPath });
       Object.keys(data).forEach(function (key) {
         tmpStore.set(key, data[key]);
       });
@@ -158,7 +158,7 @@ describe('nconf/stores/file', () => {
   });
   describe("When using the nconf file store", () => {
     var tmpPath = path.join(__dirname, '..', 'fixtures', 'tmp.json');
-    var store = new nconf.File({file: tmpPath});
+    var store = new nconf.File({ file: tmpPath });
 
     it("the set() method should respond with true", () => {
       expect(store.set('foo:bar:bazz', 'buzz')).toBeTruthy();
@@ -235,6 +235,30 @@ describe('nconf/stores/file', () => {
     it("the loadSync() method should decrypt properly", () => {
       var loaded = secureStore.loadSync();
       expect(loaded).toEqual(data);
+    });
+  })
+
+  describe("When using nconf file store", () => {
+    it("the stringify() method should return a complete last line (EOL)", () => {
+      var storePath = path.join(__dirname, '..', 'fixtures', 'store.json');
+      var store = new nconf.File({
+        file: storePath,
+      });
+
+      var contents = store.stringify();
+      expect(contents.slice(-1)).toEqual(os.EOL);
+    });
+
+    it("with option `eol` set to `false`, the stringify() method should return an incomplete last line (no EOL)", () => {
+      var storePath = path.join(__dirname, '..', 'fixtures', 'store.json');
+      this.store = new nconf.File({
+        file: storePath,
+        eol: false
+      });
+      this.store.load((err) => {
+        expect(err).toEqual(null);
+        expect.not(this.store.stringify().slice(-1)).toEqual(os.EOL);
+      });
     });
   })
 
