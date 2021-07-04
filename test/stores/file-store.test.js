@@ -257,7 +257,7 @@ describe('nconf/stores/file', () => {
       });
       this.store.load((err) => {
         expect(err).toEqual(null);
-        expect.not(this.store.stringify().slice(-1)).toEqual(os.EOL);
+        expect(this.store.stringify().slice(-1)).not.toEqual(os.EOL);
       });
     });
   })
