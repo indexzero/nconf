@@ -5,52 +5,51 @@
  *
  */
 
-var assert = require('assert'),
-    spawn = require('child_process').spawn,
-    fs = require('fs'),
-    path = require('path'),
-    nconf = require('../lib/nconf');
+var spawn = require('child_process').spawn;
+var fs = require('fs');
+var path = require('path');
+var nconf = require('../lib/nconf');
 
 exports.assertMerged = function (err, merged) {
   merged = merged instanceof nconf.Provider
     ? merged.store.store
     : merged;
 
-  assert.isNull(err);
-  assert.isObject(merged);
-  assert.isTrue(merged.apples);
-  assert.isTrue(merged.bananas);
-  assert.isObject(merged.candy);
-  assert.isTrue(merged.candy.something1);
-  assert.isTrue(merged.candy.something2);
-  assert.isTrue(merged.candy.something3);
-  assert.isTrue(merged.candy.something4);
-  assert.isTrue(merged.dates);
-  assert.isTrue(merged.elderberries);
+  expect()
+  expect(err).toBeNull();
+  expect(typeof merged).toBe('object');
+  expect(merged.apples).toBeTruthy();
+  expect(merged.bananas).toBeTruthy();
+  expect(typeof merged.candy).toBe('object');
+  expect(merged.candy.something1).toBeTruthy();
+  expect(merged.candy.something2).toBeTruthy();
+  expect(merged.candy.something3).toBeTruthy();
+  expect(merged.candy.something4).toBeTruthy();
+  expect(merged.dates).toBeTruthy();
+  expect(merged.elderberries).toBeTruthy();
 };
 
+//FIXME TODO
 exports.assertSystemConf = function (options) {
-  return {
-    topic: function () {
-      var env = null;
+  return done => {
+    var env = null;
 
-      if (options.env) {
-        env = {}
-        Object.keys(process.env).forEach(function (key) {
-          env[key] = process.env[key];
-        });
+    if (options.env) {
+      env = {}
+      Object.keys(process.env).forEach(function (key) {
+        env[key] = process.env[key];
+      });
 
-        Object.keys(options.env).forEach(function (key) {
-          env[key] = options.env[key];
-        });
-      }
-
-      var child = spawn('node', [options.script].concat(options.argv), { env: env });
-      child.stdout.once('data', this.callback.bind(this, null));
-    },
-    "should respond with the value passed into the script": function (_, data) {
-      assert.equal(data.toString(), 'foobar');
+      Object.keys(options.env).forEach(function (key) {
+        env[key] = options.env[key];
+      });
     }
+
+    var child = spawn('node', [options.script].concat(options.argv), {env: env});
+    child.stdout.once('data', data => {
+      expect(data.toString()).toEqual('foobar');
+      done();
+    });
   }
 }
 

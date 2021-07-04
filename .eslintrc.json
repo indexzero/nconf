@@ -2,6 +2,9 @@
     "env": {
         "node": true
     },
+    "parserOptions": {
+        "ecmaVersion": 6
+    },
     "rules": {
         "no-unused-vars": "error"
     }
