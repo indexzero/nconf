@@ -19,14 +19,14 @@
     "plugabble"
   ],
   "dependencies": {
-    "async": "^1.4.0",
+    "async": "^3.0.0",
     "ini": "^2.0.0",
     "secure-keys": "^1.0.0",
     "yargs": "^16.1.1"
   },
   "devDependencies": {
     "coveralls": "^3.1.0",
-    "eslint": "^4.9.0",
+    "eslint": "^7.0.0",
     "istanbul": "^0.4.5",
     "nconf-yaml": "^1.0.2",
     "vows": "^0.8.3"
