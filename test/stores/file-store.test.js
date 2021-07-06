@@ -11,7 +11,6 @@ var nconf = require('../../lib/nconf');
 var yamlFormat = require('nconf-yaml');
 var data = require('../fixtures/data').data;
 
-// FIXME TO RENAME
 describe('nconf/stores/file', () => {
   describe("When using the nconf file store", () => {
     describe("with a valid JSON file", () => {
