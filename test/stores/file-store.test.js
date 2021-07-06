@@ -268,15 +268,21 @@ describe('nconf/stores/file', () => {
       secure: 'super-secretzzz'
     });
 
-    it("the load() method should decrypt legacy file properly", () => {
+    it("the load() method should throw an error when presented a legacy encrypted file", (done) => {
       secureStore.load(function (err, loaded) {
-        expect(err).toBe(null);
-        expect(loaded).toEqual(data);
+        try {
+          expect(err).not.toBe(null);
+          expect(loaded).toEqual(void 0);
+          done();
+        } catch (err) {
+          done(err);
+        }
       });
     });
-    it("the loadSync() method should decrypt legacy file properly", () => {
-      var loaded = secureStore.loadSync();
-      expect(loaded).toEqual(data);
+    it("the loadSync() method should throw an error when presented a legacy encrypted file", () => {
+      expect(() => {
+        secureStore.loadSync();
+      }).toThrow();
     });
   })
 
