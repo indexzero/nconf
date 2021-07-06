@@ -274,9 +274,10 @@ describe('nconf/stores/file', () => {
         expect(loaded).toEqual(data);
       });
     });
-    it("the loadSync() method should decrypt legacy file properly", () => {
-      var loaded = secureStore.loadSync();
-      expect(loaded).toEqual(data);
+    it("the loadSync() method should throw an error with a legacy encrypted file", () => {
+      expect(() => {
+        secureStore.loadSync();
+      }).toThrow();
     });
   })
 
