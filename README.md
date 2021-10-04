@@ -219,8 +219,8 @@ The options defined below apply to all storage engines that inherit from Memory.
 ##### `accessSeparator: string` (default: `':'`)
 Defines the separator used to get or set data using the `get()` and `set()` methods. Even if this is changed, the default "colon" separator will be available unless explicitly disabled (see `disableDefaultAccessSeparator`).
 
-##### `inputSeparator: string` (default: `'__'`)
-This option is used by the `argv` and `env` storage engines when loading values. Since most systems only allow dashes, underscores, and alphanumeric characters in environment variables and command line arguments, the `inputSeparator` provides a mechanism for loading hierarchical values from these sources.
+##### `separator: string` (default: `'__'`)
+This option is used by the `argv` and `env` storage engines when loading values. Since most systems only allow dashes, underscores, and alphanumeric characters in environment variables and command line arguments, the `separator` provides a mechanism for loading hierarchical values from these sources.
 
 ##### `disableDefaultAccessSeparator: {true|false}` (default: `false`)
 Disables the default access separator of `':'`, which is always available otherwise. This is mainly used to preserve legacy behavior. It can also be used to set keys that contain the default separator (e.g. `{ 'some:long:key' : 'some value' }`).
@@ -360,7 +360,7 @@ Allow values in the env store to be updated in the future. The default is to not
   // Or use all options
   //
   nconf.env({
-    inputSeparator: '__',
+    separator: '__',
     match: /^whatever_matches_this_will_be_whitelisted/
     whitelist: ['database__host', 'only', 'load', 'these', 'values', 'if', 'whatever_doesnt_match_but_is_whitelisted_gets_loaded_too'],
     lowerCase: true,
