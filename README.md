@@ -320,7 +320,7 @@ The input `obj` contains two properties passed in the following format:
 
 The transformation function may alter both the key and the value.
 
-The function may return either an object in the asme format as the input or a value that evaluates to false.
+The function may return either an object in the same format as the input or a value that evaluates to false.
 If the return value is falsey, the entry will be dropped from the store, otherwise it will replace the original key/value.
 
 *Note: If the return value doesn't adhere to the above rules, an exception will be thrown.*
