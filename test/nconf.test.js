@@ -22,6 +22,7 @@ describe('nconf, When using the nconf', () => {
     expect(typeof nconf.save).toBe('function');
     expect(typeof nconf.reset).toBe('function');
     expect(typeof nconf.required).toBe('function');
+    expect(typeof nconf.toString).toBe('function');
   });
   it("the use() method should instaniate the correct store", () => {
     nconf.use('memory');
@@ -102,6 +103,15 @@ describe('nconf, When using the nconf', () => {
           expect(store).toEqual({"foo": {"bar": {}}});
           done();
         });
+      })
+    })
+    describe("the toString() method", () => {
+      it("should respond with the exported store", () => {
+        nconf.use('memory');
+        nconf.load();
+        nconf.set('foo:bar:bazz', 'buzz');
+        const result = nconf.toString();
+        expect(result).toEqual('{"foo":{"bar":{"bazz":"buzz"}}}');
       })
     })
   })
