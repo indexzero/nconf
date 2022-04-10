@@ -121,5 +121,12 @@ vows.describe('nconf/stores/memory').addBatch({
         assert.equal(store.get('foo').bar.bazz, 'buzz');
       }
     }
+  },
+  "When attempting prototype pollution": {
+    topic: new nconf.Memory(),
+    "should not be able to pollute the prototype": function (store) {
+      store.set('__proto__:polluted', 'yes');
+      assert.equal({}.polluted, undefined);
+    }
   }
 }).export(module);
