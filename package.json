@@ -27,14 +27,14 @@
   "devDependencies": {
     "coveralls": "^3.1.0",
     "eslint": "^7.0.0",
-    "istanbul": "^0.4.5",
     "nconf-yaml": "^1.0.2",
+    "nyc": "^15.1.0",
     "vows": "^0.8.3"
   },
   "main": "./lib/nconf",
   "scripts": {
     "test": "vows test/*-test.js test/**/*-test.js --spec",
-    "cover": "istanbul cover vows -- test/*-test.js test/**/*-test.js  --spec",
+    "cover": "nyc --reporter=lcov npm test",
     "coveralls": "cat coverage/lcov.info | coveralls",
     "lint": "eslint ."
   },
