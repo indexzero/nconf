@@ -10,5 +10,6 @@ node_modules/
 node_modules/*
 npm-debug.log
 coverage
+.nyc_output/
 package-lock.json
 package-lock.json
