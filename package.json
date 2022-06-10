@@ -20,10 +20,10 @@
   ],
   "dependencies": {
     "ini": "^2.0.0",
-    "yargs": "^17.0.0"
+    "yargs": "^17.0.0",
+    "async": "^3.0.0"
   },
   "devDependencies": {
-    "async": "^3.0.0",
     "coveralls": "^3.0.2",
     "eslint": "^8.0.0",
     "istanbul": "^0.4.1",
