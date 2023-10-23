@@ -25,10 +25,12 @@
     "yargs": "^16.1.1"
   },
   "devDependencies": {
+    "@release-it/conventional-changelog": "^7.0.2",
     "coveralls": "^3.1.0",
     "eslint": "^7.0.0",
     "nconf-yaml": "^1.0.2",
     "nyc": "^15.1.0",
+    "release-it": "^16.2.1",
     "vows": "^0.8.3"
   },
   "main": "./lib/nconf",
@@ -36,7 +38,8 @@
     "test": "vows test/*-test.js test/**/*-test.js --spec",
     "cover": "nyc --reporter=lcov npm test",
     "coveralls": "cat coverage/lcov.info | coveralls",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "release": "release-it"
   },
   "engines": {
     "node": ">= 0.4.0"
