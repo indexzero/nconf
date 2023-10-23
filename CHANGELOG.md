@@ -1,4 +1,9 @@
 
+## [0.12.1](https://github.com/flatiron/nconf/compare/v0.12.0...v0.12.1) (2023-10-23)
+
+### Bug Fixes
+* avoid dynamic require ([#386](https://github.com/flatiron/nconf/issues/386)) ([#387](https://github.com/flatiron/nconf/issues/387)) ([#402](https://github.com/flatiron/nconf/issues/402)) ([4ee8a28](https://github.com/flatiron/nconf/commit/4ee8a28566a000e6f63a5a1ccfa49b4730c0c2f8))
+
 v0.11.0 / Mon, 23 Nov 2020
 ==========================
   * [4122731](https://github.com/projects/nconf/commit/4122731) 0.11.0 (`Matt Hamann`)
