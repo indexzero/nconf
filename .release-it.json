@@ -7,7 +7,8 @@
     "publish": true
   },
   "github": {
-    "release": true
+    "release": true,
+    "releaseName": "v${version}"
   },
   "plugins": {
     "@release-it/conventional-changelog": {
