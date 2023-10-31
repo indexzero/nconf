@@ -22,7 +22,7 @@
     "async": "^3.0.0",
     "ini": "^2.0.0",
     "secure-keys": "^1.0.0",
-    "yargs": "^16.1.1"
+    "yargs": "^17.4.1"
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^7.0.2",
