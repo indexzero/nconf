@@ -30,7 +30,7 @@
     "istanbul": "^0.4.1",
     "jest": "^27.0.0",
     "nconf-yaml": "^1.0.2",
-    "release-it": "^16.2.1"
+    "release-it": "^17.0.0"
   },
   "main": "./lib/nconf",
   "scripts": {
