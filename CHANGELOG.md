@@ -1,4 +1,12 @@
 
+
+# [0.13.0](https://github.com/flatiron/nconf/compare/v0.12.1...v0.13.0) (2025-04-14)
+
+
+### Features
+
+* add env prefix option ([#428](https://github.com/flatiron/nconf/issues/428)) ([c0c8787](https://github.com/flatiron/nconf/commit/c0c8787a3ba62cb21ceda568e2778caea6fe8e1f))
+
 ## [0.12.1](https://github.com/flatiron/nconf/compare/v0.12.0...v0.12.1) (2023-10-23)
 
 ### Bug Fixes
@@ -563,4 +571,3 @@ v0.1.1 / Sat, 2 Apr 2011
 
 v0.1.0 / Sat, 2 Apr 2011
 ========================
-
