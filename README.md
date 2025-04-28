@@ -240,10 +240,10 @@ If the return value is falsey, the entry will be dropped from the store, otherwi
   });
 ```
 
-It's also possible to pass a configured yargs instance
+It's also possible to pass a configured yargs instance and also include relevant nconf options.
 
 ``` js
-  nconf.argv(require('yargs')
+  let yargs = require('yargs')
     .version('1.2.3')
     .usage('My usage definition')
     .strict()
@@ -254,7 +254,11 @@ It's also possible to pass a configured yargs instance
         demand: true,
         default: 'some-value'
       }
-    }));
+    });
+
+  nconf.argv(yargs, {
+    parseValues: true
+  });
 ```
 
 ### Env
