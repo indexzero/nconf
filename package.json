@@ -20,7 +20,7 @@
   ],
   "dependencies": {
     "ini": "^2.0.0",
-    "yargs": "^17.0.0"
+    "yargs": "^18.0.0"
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^7.0.2",
