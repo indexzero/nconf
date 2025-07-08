@@ -23,7 +23,7 @@ var single = new nconf.Provider({
 var multiple = new nconf.Provider({
   stores: [
     { name: 'user', type: 'file', file: path.join(__dirname, 'user-config.json') },
-    { name: 'global', type: 'global', file: path.join(__dirname, 'global-config.json') }
+    { name: 'global', type: 'file', file: path.join(__dirname, 'global-config.json') }
   ]
 });
 
