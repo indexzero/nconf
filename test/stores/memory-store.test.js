@@ -96,6 +96,54 @@ describe('nconf/stores/memory', () => {
       });
     });
   });
+  describe("prototype pollution prevention", () => {
+    // merge() uses common.path() directly (no _normalizeKey), so __proto__ reaches
+    // the traversal loop as-is and must be blocked by isSafeKey().
+    const dangerousKeys = [
+      '__proto__:polluted',
+      'constructor:polluted',
+      'prototype:polluted',
+      'a:__proto__:polluted',
+      'a:constructor:polluted',
+      'a:prototype:polluted',
+    ];
+
+    it("merge() should return false and not pollute Object.prototype", () => {
+      const store = new nconf.Memory();
+      for (const key of dangerousKeys) {
+        expect(store.merge(key, { value: 'injected' })).toBe(false);
+      }
+      expect(({}).polluted).toBeUndefined();
+    });
+
+    it("nconf.merge() with __proto__ key should not pollute Object.prototype", () => {
+      nconf.merge('__proto__:polluted', { value: 'yes' });
+      expect(({}).polluted).toBeUndefined();
+    });
+
+    // set() runs _normalizeKey() first (which replaces '__' input separator),
+    // so __proto__ is transformed before traversal. Test that no pollution occurs
+    // regardless of normalisation behaviour.
+    it("set() should not pollute Object.prototype", () => {
+      const store = new nconf.Memory();
+      for (const key of dangerousKeys) {
+        store.set(key, { value: 'injected' });
+      }
+      expect(({}).polluted).toBeUndefined();
+    });
+
+    // With a custom separator config where '__' is NOT the input separator,
+    // '__proto__' passes through _normalizeKey unchanged and isSafeKey() is
+    // the only guard — it must return false.
+    it("set() should return false for dangerous keys when '__' is not the input separator", () => {
+      const store = new nconf.Memory({ inputSeparator: '-', disableDefaultAccessSeparator: true });
+      expect(store.set('__proto__:polluted', { value: 'injected' })).toBe(false);
+      expect(store.set('constructor:polluted', { value: 'injected' })).toBe(false);
+      expect(store.set('prototype:polluted', { value: 'injected' })).toBe(false);
+      expect(({}).polluted).toBeUndefined();
+    });
+  });
+
   describe("When using the nconf memory store with different logical separator", () => {
     var store = new nconf.Memory({ accessSeparator: '||', disableDefaultAccessSeparator: true });
 
